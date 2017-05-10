@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 [![Build Status](https://travis-ci.org/andela/gimli-cfh.svg?branch=chore%2F145026963%2Fintegrate-travisci-with-readme-badge)](https://travis-ci.org/andela/gimli-cfh)
+=======
+>>>>>>> 2f29b4436759c7d00ae04d232b440cb00f555542
 
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
