@@ -5,6 +5,12 @@ const gulp = require('gulp');
 const mocha = require('gulp-mocha');
 const nodemon = require('gulp-nodemon');
 const sass = require('gulp-sass');
+const coveralls = require('gulp-coveralls');
+ 
+gulp.task('coveralls', () => {
+  gulp.src('test/coverage/**/lcov.info')
+  .pipe(coveralls());
+});
 
 gulp.task('watch', () => {
   gulp.watch('app/views/**', browserSync.reload());

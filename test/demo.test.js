@@ -1,5 +1,8 @@
+
+
 describe('JavaScript addition operator', function () {
     it('adds two numbers together', function () {
-        expect(1 + 2).toEqual(3);
+    	let i = 1 + 2;
+        i.should.equal(3);
     });
 });
