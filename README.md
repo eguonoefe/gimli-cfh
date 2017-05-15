@@ -1,5 +1,6 @@
 
 [![Build Status](https://travis-ci.org/andela/gimli-cfh.svg?branch=chore%2F145026963%2Fintegrate-travisci-with-readme-badge)](https://travis-ci.org/andela/gimli-cfh)
+[![Coverage Status](https://coveralls.io/repos/github/andela/gimli-cfh/badge.svg?branch=staging)](https://coveralls.io/github/andela/gimli-cfh?branch=staging)
 
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
