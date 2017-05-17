@@ -11,6 +11,7 @@
   "scripts": {
     "start": "node node_modules/gulp/bin/gulp",
     "test": "node node_modules/.bin/istanbul cover node_modules/.bin/gulp test",
+    "coverall": "node_modules/.bin/gulp coveralls",
     "postinstall": "node node_modules/gulp/bin/gulp install"
   },
   "dependencies": {

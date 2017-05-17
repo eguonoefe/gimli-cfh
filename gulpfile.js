@@ -8,7 +8,7 @@ const sass = require('gulp-sass');
 const coveralls = require('gulp-coveralls');
  
 gulp.task('coveralls', () => {
-  gulp.src('test/coverage/**/lcov.info')
+  gulp.src('./coverage/lcov.info')
   .pipe(coveralls());
 });
 
