@@ -1,6 +1,6 @@
 
 [![Build Status](https://travis-ci.org/andela/gimli-cfh.svg?branch=staging)](https://travis-ci.org/andela/gimli-cfh/?branch=staging)
-[![Coverage Status](https://coveralls.io/repos/github/andela/gimli-cfh/badge.svg?branch=chore%2F145026971%2Fcoveralls-integration)](https://coveralls.io/github/andela/gimli-cfh?branch=chore%2F145026971%2Fcoveralls-integration)
+[![Coverage Status](https://coveralls.io/repos/github/andela/gimli-cfh/badge.svg?branch=staging)](https://coveralls.io/github/andela/gimli-cfh?branch=staging)
 
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
