@@ -86,6 +86,6 @@ gulp.task('mochaTest', () => {
 
 gulp.task('test', ['mochaTest']);
 gulp.task('install', ['bower']);
-gulp.task('default', ['nodemon', 'watch', 'sass', 
-  'copyBootstrap', 'copyAngularUtilsRoute', 'copyAngular', 
+gulp.task('default', ['nodemon', 'watch', 'sass',
+  'copyBootstrap', 'copyAngularUtilsRoute', 'copyAngular',
   'copyJquery', 'copyUnderscore', 'copyAngularBootstrap']);
