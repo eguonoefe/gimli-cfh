@@ -15,8 +15,30 @@ angular.module('mean.system')
       }
     };
 
+    $scope.signin = () => {
+      if (!$scope.email || !$scope.password) {
+        $scope.message = 'Please fill in your email and password';
+      } else {
+        const newuser = {
+          email: $scope.email,
+          password: $scope.password
+        };
+        $http.post('/api/auth/signin', newuser).then((response) => {
+          console.log(response);
+          if(response.data.signupStatus == 'success') {
+            console.log(response.data.token, 'token');
+            $window.localStorage.setItem('token', response.data.token);
+            $location.path('/#/');
+          } else {
+            $scope.message = response.data.message;
+          }
+        }, (err) => {
+          $scope.message = err;
+        });
+      }
+    };
+
     $scope.signup = () => {
-      console.log('came to controller');
       if (!$scope.name || !$scope.email || !$scope.password) {
         $scope.message = 'Please fill in your username, email and password';
       } else {
@@ -29,7 +51,6 @@ angular.module('mean.system')
         $http.post('/api/auth/signup', newuser).then((response) => {
           console.log(response);
           if(response.data.signupStatus == 'success') {
-            console.log(response.data.token, 'token');
             $window.localStorage.setItem('token', response.data.token);
             $location.path('/#/');
           } else {

@@ -49,8 +49,8 @@ exports.signin = function(req, res) {
   if (req.body.password && req.body.email) {
     User.findOne({
       email: req.body.email
-    }).exec(function(err,existingUser) {
-      if (existingUser) {
+    }).exec(function(err,user) {
+      if (user) {
           // create jwt payload
           var tokenData = {
             userMail: req.body.email
