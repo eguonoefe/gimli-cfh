@@ -7,6 +7,7 @@ module.exports = function(app, passport, auth) {
     app.get('/signup', users.signup);
     app.get('/chooseavatars', users.checkAvatar);
     app.get('/signout', users.signout);
+  
 
     //Setting up the users api
     app.post('/users', users.create);
@@ -88,6 +89,6 @@ module.exports = function(app, passport, auth) {
     //Home route
     var index = require('../app/controllers/index');
     app.get('/play', index.play);
-    app.get('/', index.render);
+    app.get('/',index.render);
 
 };
