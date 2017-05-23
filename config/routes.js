@@ -1,6 +1,10 @@
 var async = require('async');
 
 module.exports = function(app, passport, auth) {
+    //api authentication route
+    var authentication = require('../app/controllers/authentication');
+    app.post('/api/auth/signin', authentication.signin);
+    app.post('/api/auth/signup', authentication.signup);
     //User Routes
     var users = require('../app/controllers/users');
     app.get('/signin', users.signin);
@@ -90,5 +94,8 @@ module.exports = function(app, passport, auth) {
     var index = require('../app/controllers/index');
     app.get('/play', index.play);
     app.get('/',index.render);
+
+
+
 
 };
