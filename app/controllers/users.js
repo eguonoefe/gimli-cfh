@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+  jwt = require('jsonwebtoken'),
   User = mongoose.model('User');
 var avatars = require('./avatars').all();
 
@@ -72,7 +73,34 @@ exports.checkAvatar = function(req, res) {
   }
 
 };
-
+exports.createJWT = function(req, res) {
+  console.log('got here!');
+  if (req.body.name && req.body.password && req.body.email) {
+    User.findOne({
+      email: req.body.email
+    }).exec(function(err,existingUser) {
+      if (!existingUser) {
+        var user = new User(req.body);
+        // Switch the user's avatar index to an actual avatar url
+        user.avatar = avatars[user.avatar];
+        user.provider = 'local';
+        user.save(function(err) {
+          if (err) {
+            return res.render('/#!/signup?error=unknown', {
+              errors: err.errors,
+              user: user
+            });
+          }
+          return res.json({'token': 'I love you!'}); 
+        });
+      } else {
+        return res.redirect('/#!/signup?error=existinguser');
+      }
+    });
+  } else {
+    return res.redirect('/#!/signup?error=incomplete');
+  }
+}
 /**
  * Create user
  */
@@ -93,10 +121,7 @@ exports.create = function(req, res) {
               user: user
             });
           }
-          req.logIn(user, function(err) {
-            if (err) return next(err);
-            return res.redirect('/#!/');
-          });
+          a
         });
       } else {
         return res.redirect('/#!/signup?error=existinguser');

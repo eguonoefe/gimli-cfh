@@ -4,12 +4,15 @@ module.exports = function(app, passport, auth) {
     //User Routes
     var users = require('../app/controllers/users');
     app.get('/signin', users.signin);
+
     app.get('/signup', users.signup);
+
     app.get('/chooseavatars', users.checkAvatar);
     app.get('/signout', users.signout);
 
     //Setting up the users api
     app.post('/users', users.create);
+    app.post('/api/auth/signup', users.createJWT);
     app.post('/users/avatars', users.avatars);
 
     // Donation Routes
