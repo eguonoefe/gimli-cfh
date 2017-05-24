@@ -1,85 +1,111 @@
-<div>
-  <!-- Header section -->
- <div class="navbar-fixed">
-   <nav class="white" role="navigation">
-    <div class="nav-wrapper">
-      <a id="logo-container" href="#" class="brand-logo">Logo</a>
+<div id="page">
+  <!-- Banner -->
+  <div id="index-banner">
+    <div class="section no-pad-bot">
+      <div>
+        <a class="brand-logo">
+          <img src="/img/cfh.png" alt="">
+        </a>
+        <div class="row center">
+         <!--<h1 class="center">Cards for Humanity</h1>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- Header section -->
+ <div>
+   <nav class="main-header" role="navigation">
+    <div class="nav-wrapper container-fluid">
+      <div class="brand-logo">
+        <a class="hide">
+          <img src="/img/cfh-crop.png" alt="">
+        </a>
+        <a class="btn waves-effect waves-light orange darken-2">donate now</a>
+      </div>
       <ul class="right hide-on-med-and-down">
         <li><a href="#">Home</a></li>
         <li><a href="#how-to-play">How To Play</a></li>
         <li><a href="#charity">Charity</a></li>
         <li><a href="#team">Team</a></li>
-        <li><a href="#">Sign Up</a></li>
+        <li><a href="#/signin.html" class="waves-effect waves-light">Sign In</a></li>        
+        <li><a href="#!/signup" class="btn waves-effect waves-light blue lighten-1">
+          Sign Up</a></li>
       </ul>
 
       <!-- Mobile -->
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">How To Play</a></li>
-        <li><a href="#">Charity</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Sign Up</a></li>
+        <li><a href="#how-to-play">How To Play</a></li>
+        <li><a href="#charity">Charity</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#team">Sign In</a></li>        
+        <li><a href="#" class="btn waves-effect waves-light blue lighten-1">
+          Sign Up</a></li>
       </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      <a href="#" data-activates="nav-mobile" class="button-collapse right">
+        <i class="material-icons">menu</i></a>
     </div>
   </nav>
- </div>
+</div>
 
- <!-- Banner -->
-  <div id="index-banner">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br><br>
-        <div class="row center">
-         <h1 class="header center blue-text text-lighten-1">Cards for Humanity</h1>
-        </div>
-        <br><br>
-
-      </div>
-    </div>
-    <!--<div class="parallax"><img src="/img/cfh-2.jpg" alt="Cards for humanity"></div>-->
+<!--<div id="signin" class="modal">
+  <div class="modal-content">
+    <h4>Modal Header</h4>
+    <p>A bunch of text</p>
   </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>-->
 
   <!--   How-to-play section  -->
-  
-  <div class="container">
+  <div class="container-fluid">
     <div id="how-to-play" class="section scrollspy">
       <div class="row">
         <h3 class="header center blue-text text-lighten-1">How to Play</h3>        
-        <div class="col s12 m7">
+        <div class="col s12 m4">
           <div class="step">
             <h5 class="right-align">Choose an avatar</h5>
-              <a href="#"><i class="fa fa-user-circle"></i> </a>           
+              <a href="#one!"><i class="fa fa-user-circle"></i> </a>           
           </div>
           <div class="step">
             <h5 class="right-align">Invite your friends</h5>
-              <a href="#"><i class="fa fa-group"></i> </a>                       
+              <a href="#two!"><i class="fa fa-group"></i> </a>                       
           </div>
           <div class="step">
             <h5 class="right-align">Choose an answer</h5>
-              <a href="#"><i class="fa fa-search"></i> </a>           
+              <a href="#three!"><i class="fa fa-search"></i> </a>           
           </div>
           <div class="step">
             <h5 class="right-align">Expect your results</h5>
-              <a href="#"><i class="fa fa-envelope"></i> </a>                       
+              <a href="#four!"><i class="fa fa-envelope"></i> </a>                       
           </div>
         </div>
 
-        <div class="col s12 m5">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
-            <h5 class="center">Easy to work with</h5>
-
-            <p class="light">We have provided detailed documentation as well as 
-              specific code examples to help new users get started. We are also 
-              always open to feedback and can answer any questions a user may 
-              have about Materialize.</p>
+        <div class="col s12 m8">
+        <div class="container">
+          <div class="row">
+              <div class="col s12">
+              <div class="carousel carousel-slider">
+                  <a class="carousel-item" href="#one!">
+                    <img src="/img/cfh-1.jpg"></a>
+                  <a class="carousel-item" href="#two!">
+                    <img src="/img/cfh-2.jpg"></a>
+                  <a class="carousel-item" href="#three!">
+                    <img src="/img/cfh-2.jpg"></a>
+                  <a class="carousel-item" href="#four!">
+                    <img src="/img/cfh-2.jpg"></a>
+              </div>
+            </div>
+            </div>
           </div>
         </div>
+
       </div>
-
+        
     </div>
   </div>
+</div>
 
   <!--   Charity section  -->
   <div class="parallax-container valign-wrapper">
@@ -90,7 +116,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="/img/cfh-2.jpg" alt="Cards for humanity"></div>
+    <div class="parallax"><img src="/img/cfh-main.jpg" alt="Cards for humanity"></div>
   </div>
   <div class="container">
     <div class="section">
@@ -123,14 +149,14 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="/img/cfh-2.jpg" alt="Cards for humanity"></div>
+    <div class="parallax"><img src="/img/cfh-main.jpg" alt="Cards for humanity"></div>
   </div>
-    <div class="container">
+  <div class="container">
     <div class="section">
       <div class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Team Gimli</h4>
+          <h4>CFH Team</h4>
           <p class="left-align light">We are a team of awesome developers 
             passionate about doing some good in the society.</p>
         </div>
@@ -140,7 +166,7 @@
   </div>
 
 <!--Footer section-->
-  <footer class="page-footer teal">
+  <footer class="page-footer">
     <div>
       <div class="row">
         <div class="col l4 m4 s4 center">
@@ -183,16 +209,37 @@
       </div>
     </div>
   </footer>
-  <script type="text/javascript">
-    (function($){
-      $(function(){
+  
+  <script src='/js/materialize-init.js'></script>
+  <!--<script type="text/javascript" >
+    // (function($){
+    //   $(function(){
+    //     $('.carousel').carousel();
+    //     $('.button-collapse').sideNav();
+    //     $('.parallax').parallax();
+        
+    //     var page = $('#page'); 
+    //     var mainHeader = $('.main-header');
+    //     page.on('scroll', function(event){
+    //        if (this.scrollTop >= 430) {
+    //         mainHeader.addClass("fix-header");
+    //       } else {
+    //         mainHeader.removeClass("fix-header");
+    //       }
+    //     });
+    //     $('#how-to-play a:not(.carousel-item)')
+    //     .each(function(index){
+    //       $(this).click(function(event){
+    //         event.preventDefault();
+    //         $('.carousel').carousel('set', index + 1);
+    //       });
+    //     });
+    //     $('.scrollspy').scrollSpy({
+    //       scrollOffset: 100
+    //     });
+    //   }); 
+    // })(jQuery); 
 
-        $('.button-collapse').sideNav();
-        $('.parallax').parallax();
-        $('.scrollspy').scrollSpy({
-          scrollOffset: 100
-        });
-      }); 
-    })(jQuery); 
-  </script>
+    
+  </script>-->
 </div>
