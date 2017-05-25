@@ -106,11 +106,13 @@ nav .brand-logo img{
 }
 
 /* Signin */
-#sign-in ul li{
+#sign-in ul li,
+#sign-up ul li{
   display: inline-block;
   margin-right: 1rem;
 }
-#sign-in ul li:last-child{
+#sign-in ul li:last-child,
+#sign-up ul li:last-child{
   margin-right: 0;
 }
 
@@ -118,6 +120,9 @@ nav .brand-logo img{
 /* label color */
 .input-field input{
   border-bottom: 1px solid #fb8c00;
+}
+.input-field i{
+  color: #90a4ae;
 }
 
 /* label focus color */
@@ -163,19 +168,27 @@ ul.social-icons li{
 ul.social-icons li:last-child{
   margin-right: 0;
 }
-.social-icons .facebook, #sign-in .facebook{
+.social-icons .facebook, 
+#sign-in .facebook,
+#sign-up .facebook{
   background: #3b5998;
 }
-.social-icons .twitter, #sign-in .twitter{
+.social-icons .twitter, 
+#sign-in .twitter,
+#sign-up .twitter{
   background: #55acee;
 }
 .social-icons .instagram{
   background: #125688;
 }
-.social-icons .github, #sign-in .github{
+.social-icons .github, 
+#sign-in .github,
+#sign-up .github{
   background: #000000;
 }
-.social-icons .googleplus, #sign-in .googleplus{
+.social-icons .googleplus, 
+#sign-in .googleplus,
+#sign-up .googleplus{
   background:  #dd4b39;
 }
 
