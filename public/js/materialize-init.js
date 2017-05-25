@@ -7,17 +7,20 @@ $(document).ready(function(){
         $('.modal').modal();
         
         var page = $('#page'); 
-        var mainHeader = $('.main-header');
-        var logo = $('.main-header .brand-logo a:not(.btn)');
-        page.on('scroll', function(event){
-           if (this.scrollTop >= 430) {
-            mainHeader.addClass("fix-header");
-            logo.removeClass("hide");
-          } else {
-            mainHeader.removeClass("fix-header"); 
-            logo.addClass("hide");                      
-          }
-        });
+        var mainHeader = $('#main-header');
+        var logo = $('a#header-logo-container');
+       $(window).scroll(function(){
+        var scrollValue = $(this).scrollTop();
+        if (scrollValue > 400) {
+          mainHeader.addClass('fix-header');
+          logo.removeClass('hide');
+        }
+        else{
+          mainHeader.removeClass('fix-header');
+          logo.addClass('hide');
+        }
+        
+       });
         $('#how-to-play a:not(.carousel-item)')
         .each(function(index){
           $(this).click(function(event){
