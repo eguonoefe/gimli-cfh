@@ -124,7 +124,7 @@ module.exports = function(passport) {
     passport.use(new GitHubStrategy({
             clientID: process.env.GITHUB_CLIENT_ID || config.github.clientID,
             clientSecret: process.env.GITHUB_CLIENT_SECRET || config.github.clientSecret,
-            callbackURL: config.github.callbackURL
+            callbackURL: 'http://localhost:3000/auth/github/callback' || config.github.callbackURL
         },
         function(accessToken, refreshToken, profile, done) {
             User.findOne({
@@ -156,7 +156,7 @@ module.exports = function(passport) {
     passport.use(new GoogleStrategy({
             clientID: process.env.GOOGLE_CLIENT_ID || config.google.clientID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || config.google.clientSecret,
-            callbackURL: config.google.callbackURL
+            callbackURL:'http://localhost:3000/auth/google/callback' || config.google.callbackURL
         },
         function(accessToken, refreshToken, profile, done) {
             User.findOne({
