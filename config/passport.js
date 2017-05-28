@@ -58,7 +58,7 @@ module.exports = function(passport) {
     passport.use(new TwitterStrategy({
             consumerKey: process.env.TWITTER_CONSUMER_KEY || config.twitter.clientID,
             consumerSecret: process.env.TWITTER_CONSUMER_SECRET || config.twitter.clientSecret,
-            callbackURL: config.twitter.callbackURL
+            callbackURL: 'http://localhost:3000/auth/twitter/callback' || config.twitter.callbackURL
         },
         function(token, tokenSecret, profile, done) {
             User.findOne({
