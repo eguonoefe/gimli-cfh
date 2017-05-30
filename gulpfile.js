@@ -24,7 +24,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('lint', () => {
-  gulp.src(['gruntfile.js',
+  gulp.src(['gulpfile.js',
     'public/js/**/*.js',
     'app/**/*.js',
     'test/**/*.js'])
@@ -49,10 +49,38 @@ gulp.task('sass', () => {
     .pipe(gulp.dest('public/css/'));
 });
 
+gulp.task('copyBootstrap', () => {
+  gulp.src('bower_components/bootstrap/dist/**/*')
+  .pipe(gulp.dest('public/lib/bootstrap'));
+});
 
+gulp.task('copyAngularUtilsRoute', () => {
+  gulp.src('bower_components/angular-ui-utils/modules/route/route.js')
+  .pipe(gulp.dest('public/lib/angular-ui-utils/modules/'));
+});
+
+gulp.task('copyAngular', () => {
+  gulp.src('bower_components/angular/**/*')
+  .pipe(gulp.dest('public/lib/angular'));
+});
+
+gulp.task('copyAngularBootstrap', () => {
+  gulp.src('bower_components/angular-bootstrap/**/*')
+  .pipe(gulp.dest('public/lib/angular-bootstrap'));
+});
+
+gulp.task('copyJquery', () => {
+  gulp.src('bower_components/jquery/**/*')
+  .pipe(gulp.dest('public/lib/jquery'));
+});
+
+gulp.task('copyUnderscore', () => {
+  gulp.src('bower_components/underscore/**/*')
+  .pipe(gulp.dest('public/lib/underscore'));
+});
 
 gulp.task('bower', () => {
-  bower().pipe(gulp.dest('./public/lib'));
+  bower().pipe(gulp.dest('./bower_components'));
 });
 
 gulp.task('mochaTest', () => {
@@ -64,4 +92,6 @@ gulp.task('mochaTest', () => {
 
 gulp.task('test', ['mochaTest']);
 gulp.task('install', ['bower']);
-gulp.task('default', ['nodemon', 'watch', 'sass']);
+gulp.task('default', ['nodemon', 'watch', 'sass',
+  'copyBootstrap', 'copyAngularUtilsRoute', 'copyAngular',
+  'copyJquery', 'copyUnderscore', 'copyAngularBootstrap']);
