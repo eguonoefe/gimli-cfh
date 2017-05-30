@@ -5,15 +5,19 @@ module.exports = function(app, passport, auth) {
     var authentication = require('../app/controllers/authentication');
     app.post('/api/auth/signin', authentication.signin);
     app.post('/api/auth/signup', authentication.signup);
+    app.post('/api/auth/showJWT', authentication.verifyJWT);
     //User Routes
     var users = require('../app/controllers/users');
     app.get('/signin', users.signin);
     app.get('/signup', users.signup);
     app.get('/chooseavatars', users.checkAvatar);
     app.get('/signout', users.signout);
+    app.get("/secret", passport.authenticate('jwt', { session: false }), function(req, res){
+      res.json("Success! You can not see this without a token");
+    });
   
 
-    //Setting up the users api
+    //Setting up the users api  
     app.post('/users', users.create);
     app.post('/users/avatars', users.avatars);
 
@@ -94,6 +98,13 @@ module.exports = function(app, passport, auth) {
     var index = require('../app/controllers/index');
     app.get('/play', index.play);
     app.get('/',index.render);
+
+    // protected route
+    app.get("/secret", passport.authenticate('jwt', { session: false, successRedirect: '/',
+                                   failureRedirect: '/signin',
+                                   failureFlash: true } ), function(req, res){
+      res.json("Success! You can not see this without a token");
+    });
 
 
 

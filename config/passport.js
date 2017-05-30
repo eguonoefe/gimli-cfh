@@ -5,7 +5,12 @@ var mongoose = require('mongoose'),
     GitHubStrategy = require('passport-github').Strategy,
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     User = mongoose.model('User'),
-    config = require('./config');
+     _ = require("lodash"),
+    jwt = require('jsonwebtoken'),
+    config = require('./config'),
+    passportJWT = require("passport-jwt"),
+    ExtractJwt = passportJWT.ExtractJwt,
+    JwtStrategy = passportJWT.Strategy;
 
 
 module.exports = function(passport) {
@@ -24,6 +29,24 @@ module.exports = function(passport) {
             done(err, user);
         });
     });
+
+    // use jwt strategy
+    var jwtOptions = {}
+    jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeader();
+    jwtOptions.secretOrKey = process.env.TOKENSECRET;
+
+    passport.use(new JwtStrategy(jwtOptions, 
+        function(jwt_payload, next) {
+          console.log('payload received', jwt_payload);
+          // usually this would be a database call:
+          var user = User.findOne({email: jwt_payload.email});
+          if (user) {
+            next(null, user);
+          } else {
+            next(null, false);
+          }
+        }
+    ));
 
     //Use local strategy
     passport.use(new LocalStrategy({

@@ -9,6 +9,12 @@ var avatars = require('./avatars').all();
 /**
  * Show sign up form
  */
+
+exports.verifyJWT = function(req, res) {
+  console.log('came here',req);
+  var jwt = req.headers['authorization'];
+  return res.json({'jwt':jwt });
+}
 exports.signup = function(req, res) {
   if (req.body.name && req.body.password && req.body.email) {
     User.findOne({
