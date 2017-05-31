@@ -1,5 +1,7 @@
 angular.module('mean.system')
-.controller('IndexController', ['$scope', 'Global', '$location','$window', '$http', 'socket', 'game', 'AvatarService', function ($scope, Global, $location, $window, $http, socket, game, AvatarService) {
+.controller('IndexController',
+   ['$scope', 'Global', '$location','$window', '$http', 'socket', 'game', 'AvatarService',
+   function ($scope, Global, $location, $window, $http, socket, game, AvatarService) {
     $scope.global = Global;
 
     $scope.playAsGuest = function() {
@@ -28,6 +30,7 @@ angular.module('mean.system')
           if(response.data.signupStatus == 'success') {
             console.log(response.data.token, 'token');
             $window.localStorage.setItem('token', response.data.token);
+           // $cookie.put('jwt',response.data.token);
             $location.path('/#/');
           } else {
             $scope.message = response.data.message;
@@ -52,6 +55,7 @@ angular.module('mean.system')
           console.log(response);
           if(response.data.signupStatus == 'success') {
             $window.localStorage.setItem('token', response.data.token);
+            //$cookie.put('jwt',response.data.token);
             $location.path('/#/');
           } else {
             $scope.message = response.data.message;
@@ -60,6 +64,26 @@ angular.module('mean.system')
           $scope.message = err;
         });
       }
+    };
+
+    $scope.showJWt = () => {
+      var jwt = $window.localStorage.getItem('token');
+      var req = {
+         method: 'POST',
+         url: '/api/auth/showJWT',
+         headers: {
+           'Authorization': jwt
+         },
+         data: { test: 'test' }
+        }
+      $http(req)
+      .then(function(response){
+        console.log(response);
+      }, 
+      function(err){
+        console.log(err);
+      });
+      //  $cookie.get('jwt');
     };
 
     $scope.avatars = [];
