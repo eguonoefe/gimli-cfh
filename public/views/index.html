@@ -13,7 +13,7 @@ $(document).ready(function() {
   });
 </script>
 
-<div id="page">
+<div id="page" ng-controller="materializeInit">
   <!-- Banner -->
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
@@ -71,34 +71,42 @@ $(document).ready(function() {
   <div class="container-fluid">
     <div id="how-to-play" class="section scrollspy ">
       <div class="row">
-        <h3 class="header center blue-text text-lighten-1">How to Play</h3>        
+        <h3 class="header center blue-text text-lighten-1">How to Play</h3>      
+        <!-- Step1: choose an avatar -->
         <div class="col s12 m6">
           <div class="step">
             <h5 class="right-align">Choose an avatar</h5>
-              <a href="#one!"><i class="fa fa-user-circle"></i> </a> 
+              <a ng-click="slider($event, 1)" href="#one"><i class="fa fa-user-circle"></i> </a> 
               <p class="right-align">Each player begins with, and will always 
                 have, 10 white answer cards.</p>          
           </div>
+
+          <!-- Step2: invite your friends -->
           <div class="step">
             <h5 class="right-align">Invite your friends</h5>
-              <a href="#two!"><i class="fa fa-group"></i> </a>  
+              <a ng-click="slider($event, 2)" href="#two"><i class="fa fa-group"></i> </a>  
               <p class="right-align">For each round, one player is randomly 
                 chosen as the Card Czar.</p>                     
           </div>
+
+          <!-- Step3: choose your answer -->
           <div class="step">
             <h5 class="right-align">Choose an answer</h5>
-              <a href="#three!"><i class="fa fa-search"></i> </a>  
+              <a ng-click="slider($event, 3)" href="#three"><i class="fa fa-search"></i> </a>  
               <p class="right-align">Everyone else answers the black question 
-                card by clicking on the answer card they want to use.</p>         
+                card by clicking on the answer card they want to use.</p>       
           </div>
+
+          <!-- Step4: expect your results -->
           <div class="step">
             <h5 class="right-align">Expect your results</h5>
-              <a href="#four!"><i class="fa fa-envelope"></i> </a>
+              <a ng-click="slider($event, 4)" href="#four"><i class="fa fa-envelope"></i> </a>
               <p class="right-align">The Card Czar then picks a favorite answer,
-                and whoever played that answer wins the round.</p>                       
+                and whoever played that answer wins the round.</p>            
           </div>
         </div>
 
+        <!-- Carousel images -->
         <div class="col s12 m6">
           <div class="container">
             <div class="carousel carousel-slider">
@@ -321,6 +329,8 @@ $(document).ready(function() {
         </div>
         <div class="col l4 s12">
           <h5 class="white-text center">Connect With Us</h5>
+
+          <!-- Social icons -->
           <ul class="social-icons">
             <li class="facebook">
               <a class="white-text" href="#!">
@@ -346,11 +356,12 @@ $(document).ready(function() {
         </div>
       </div>
     </div>
+
+    <!-- Copyright -->
     <div class="footer-copyright center">
       <div class="container-fluid w-100">
         <p>Made by <a class="brown-text text-lighten-3">Gimli Team | Andela, Nigeria</a></p>
       </div>
     </div>
   </footer>
-  <script src='/js/materialize-init.js'></script>
 </div>
