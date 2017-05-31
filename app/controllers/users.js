@@ -130,7 +130,6 @@ exports.create = function(req, res) {
               user: user
             });
           }
-<<<<<<< HEAD
           // create jwt payload
           var tokenData = {
             userMail: user.email
@@ -141,9 +140,6 @@ exports.create = function(req, res) {
             res.header('Authorization', jwtToken);
             return res.redirect('/#!/');
           });
-=======
-          a
->>>>>>> chore/145026975/return-JWT-on-successful-signup
         });
       } else {
         return res.redirect('/#!/signup?error=existinguser');
