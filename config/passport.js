@@ -179,7 +179,11 @@ module.exports = function(passport) {
     passport.use(new GoogleStrategy({
             clientID: process.env.GOOGLE_CLIENT_ID || config.google.clientID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || config.google.clientSecret,
+<<<<<<< HEAD
             callbackURL: 'http://localhost:3000/auth/google/callback' || config.google.callbackURL
+=======
+            callbackURL:'http://localhost:3000/auth/google/callback' || config.google.callbackURL
+>>>>>>> chore/145026975/return-JWT-on-successful-signup
         },
         function(accessToken, refreshToken, profile, done) {
             User.findOne({

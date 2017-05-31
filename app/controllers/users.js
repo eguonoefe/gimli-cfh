@@ -82,7 +82,34 @@ exports.checkAvatar = function(req, res) {
   }
 
 };
-
+exports.createJWT = function(req, res) {
+  console.log('got here!');
+  if (req.body.name && req.body.password && req.body.email) {
+    User.findOne({
+      email: req.body.email
+    }).exec(function(err,existingUser) {
+      if (!existingUser) {
+        var user = new User(req.body);
+        // Switch the user's avatar index to an actual avatar url
+        user.avatar = avatars[user.avatar];
+        user.provider = 'local';
+        user.save(function(err) {
+          if (err) {
+            return res.render('/#!/signup?error=unknown', {
+              errors: err.errors,
+              user: user
+            });
+          }
+          return res.json({'token': 'I love you!'}); 
+        });
+      } else {
+        return res.redirect('/#!/signup?error=existinguser');
+      }
+    });
+  } else {
+    return res.redirect('/#!/signup?error=incomplete');
+  }
+}
 /**
  * Create user
  */
@@ -103,6 +130,7 @@ exports.create = function(req, res) {
               user: user
             });
           }
+<<<<<<< HEAD
           // create jwt payload
           var tokenData = {
             userMail: user.email
@@ -113,6 +141,9 @@ exports.create = function(req, res) {
             res.header('Authorization', jwtToken);
             return res.redirect('/#!/');
           });
+=======
+          a
+>>>>>>> chore/145026975/return-JWT-on-successful-signup
         });
       } else {
         return res.redirect('/#!/signup?error=existinguser');
