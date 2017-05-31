@@ -1,7 +1,9 @@
 {
-  "root": true,
-  "extends": "airbnb",
-  "env": {
+    "extends": "airbnb",
+    "plugins": [
+        "import"
+    ],
+    "env": {
     "node": true,
     "es6": true,
     "jasmine": true
