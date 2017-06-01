@@ -5,6 +5,7 @@ const mongoose = require('mongoose'),
   User = mongoose.model('User');
 const avatars = require('./avatars').all();
 const helper = require('sendgrid').mail;
+const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
 /**
  * Auth callback
@@ -252,8 +253,6 @@ exports.sendMail = (req, res) => {
   `;
   const content = new helper.Content('text/html', html);
   const mail = new helper.Mail(fromEmail, subject, toEmail, content);
-
-  const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
   const request = sg.emptyRequest({
     method: 'POST',
     path: '/v3/mail/send',

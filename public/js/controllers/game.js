@@ -1,5 +1,6 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$http',  ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog, $http) {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$http', ($scope, game, $timeout,
+$location, MakeAWishFactsService, $dialog, $http) => {
   $scope.hasPickedCards = false;
   $scope.winningCardPicked = false;
   $scope.showTable = false;
@@ -242,15 +243,17 @@ angular.module('mean.system')
         // reset the URL so they don't think they're in the requested room.
         $location.search({});
       } else if ($scope.isCustomGame() && !$location.search().game) {
-        // Once the game ID is set, update the URL if this is a game with friends,
+        // Once the game ID is set,
+        // update the URL if this is a game with friends,
         // where the link is meant to be shared.
         $location.search({game: game.gameID});
-        if(!$scope.modalShown){
+        if (!$scope.modalShown){
           setTimeout(() => {
             var txt = '<i class="material-icons">insert_chart</i>';
             $('#lobby-how-to-play').hide();
             $('#oh-el').hide();
-            $('#share-link').css({ 'text-align' : 'left', 'display' : 'block' });
+            $('#share-link')
+            .css({ 'text-align' : 'left', 'display' : 'block' });
             $('#copy-link').text(txt);
           }, 200);
           $scope.modalShown = true;
@@ -267,5 +270,4 @@ angular.module('mean.system')
   } else {
     game.joinGame();
   }
-
 }]);

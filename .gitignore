@@ -4,5 +4,6 @@ public/lib
 .sass-cache/
 .DS_store
 c4h_keys.txt
-.envsendgrid.env
-sendgrid.env
+.env
+coverage
+bower_components/
