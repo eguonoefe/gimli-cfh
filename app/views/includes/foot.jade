@@ -3,8 +3,10 @@ script.
       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
       g.src='//www.google-analytics.com/ga.js';
       s.parentNode.insertBefore(g,s)}(document,'script'));
-script(type='text/javascript', src='/lib/jquery/jquery.js')
+//- script(type='text/javascript', src='/lib/jquery/jquery.js')
+script(src='https://code.jquery.com/jquery-2.1.1.min.js')
 script(type='text/javascript', src='/lib/underscore/underscore-min.js')
+
 
 //Bootstrap
 script(type='text/javascript', src='/lib/bootstrap/js/bootstrap.js')
@@ -16,6 +18,9 @@ script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/mater
 script(type='text/javascript', src='https://code.angularjs.org/1.1.5/angular.js')
 script(type='text/javascript', src='https://code.angularjs.org/1.1.5/angular-resource.js')
 script(type='text/javascript', src='https://code.angularjs.org/1.1.5/angular-cookies.js')
+
+//Materialize-css
+script(type='text/javascript', src='/lib/materialize-css/js/materialize.js')
 
 //Angular UI
 script(type='text/javascript', src='/lib/angular-bootstrap/ui-bootstrap-tpls.js')
@@ -36,6 +41,7 @@ script(type='text/javascript', src='/js/services/game.js')
 script(type='text/javascript', src='/js/controllers/index.js')
 script(type='text/javascript', src='/js/controllers/header.js')
 script(type='text/javascript', src='/js/controllers/game.js')
+script(type='text/javascript', src='/js/controllers/materialize.init.js')
 script(type='text/javascript', src='/js/init.js')
 
 //Socket.io Client Library
