@@ -1255,3 +1255,34 @@
       margin: 0 0 0 4px;
    }
  }
+
+ #share-link {
+   display: none;
+ }
+
+ .clear {
+   clear: both;
+ }
+
+#modal1, #modal2 {
+  color: black;
+  padding: 0px;
+  background-color: transparent;
+}
+
+.modal-content {
+  padding: 10px 0 0 0 !important;
+}
+
+#modal-body {
+  height: 350px !important;
+  overflow: scroll;
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+.font-big {
+  font-size: 30px;
+}

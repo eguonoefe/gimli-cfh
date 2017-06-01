@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-node_modules
-bower_components/
-=======
 node_modules 
 bower_components
->>>>>>> 7921543eac6dda8db94b11491dcb057a232f8ed9
 public/lib
 .sass-cache/
 .DS_store
@@ -12,3 +7,4 @@ c4h_keys.txt
 .env
 coverage
 bower_components/
+sendgrid.env
