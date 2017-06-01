@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+  jwt = require('jsonwebtoken'),
   User = mongoose.model('User');
 var avatars = require('./avatars').all();
 
@@ -9,6 +10,7 @@ var avatars = require('./avatars').all();
  * Auth callback
  */
 exports.authCallback = function(req, res, next) {
+  console.log()
   res.redirect('/chooseavatars');
 };
 
@@ -16,12 +18,13 @@ exports.authCallback = function(req, res, next) {
  * Show login form
  */
 exports.signin = function(req, res) {
+  
   if (!req.user) {
     res.redirect('/#!/signin?error=invalid');
   } else {
     res.redirect('/#!/app');
   }
-};
+}; 
 
 /**
  * Show sign up form
@@ -46,6 +49,13 @@ exports.signout = function(req, res) {
  * Session
  */
 exports.session = function(req, res) {
+  // create jwt payload
+  var tokenData = {
+    userMail: req.body.email
+  };
+  var jwtToken = jwt.sign(tokenData, process.env.TOKENSECRET);
+  console.log('jwt',jwtToken);
+  res.header('Authorization', jwtToken);
   res.redirect('/');
 };
 
@@ -72,7 +82,34 @@ exports.checkAvatar = function(req, res) {
   }
 
 };
-
+exports.createJWT = function(req, res) {
+  console.log('got here!');
+  if (req.body.name && req.body.password && req.body.email) {
+    User.findOne({
+      email: req.body.email
+    }).exec(function(err,existingUser) {
+      if (!existingUser) {
+        var user = new User(req.body);
+        // Switch the user's avatar index to an actual avatar url
+        user.avatar = avatars[user.avatar];
+        user.provider = 'local';
+        user.save(function(err) {
+          if (err) {
+            return res.render('/#!/signup?error=unknown', {
+              errors: err.errors,
+              user: user
+            });
+          }
+          return res.json({'token': 'I love you!'}); 
+        });
+      } else {
+        return res.redirect('/#!/signup?error=existinguser');
+      }
+    });
+  } else {
+    return res.redirect('/#!/signup?error=incomplete');
+  }
+}
 /**
  * Create user
  */
@@ -93,8 +130,14 @@ exports.create = function(req, res) {
               user: user
             });
           }
+          // create jwt payload
+          var tokenData = {
+            userMail: user.email
+          };
+          var jwtToken = jwt.sign(tokenData, process.env.TOKENSECRET);
           req.logIn(user, function(err) {
             if (err) return next(err);
+            res.header('Authorization', jwtToken);
             return res.redirect('/#!/');
           });
         });
