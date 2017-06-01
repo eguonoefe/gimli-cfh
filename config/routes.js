@@ -1,15 +1,25 @@
 var async = require('async');
 
 module.exports = function(app, passport, auth) {
+
+  // api authentication route
+  const authentication = require('../app/controllers/authentication');
+    app.post('/api/auth/signin', authentication.signin);
+    app.post('/api/auth/signup', authentication.signup);
+
     //User Routes
     var users = require('../app/controllers/users');
     app.get('/signin', users.signin);
+    app.get('/api/search/users/', users.search);
+    app.get('/api/search/users/:username', users.searchUser);
+    app.get('/api/sendmail/:email', users.sendMail);
     app.get('/signup', users.signup);
     app.get('/chooseavatars', users.checkAvatar);
     app.get('/signout', users.signout);
 
     //Setting up the users api
     app.post('/users', users.create);
+    app.post('/api/auth/signup', users.createJWT);
     app.post('/users/avatars', users.avatars);
 
     // Donation Routes

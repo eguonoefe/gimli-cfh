@@ -1,5 +1,5 @@
 /**Cards for Humanity Stylesheet
-* Made by Gimli Team 
+* Made by Gimli Team
 */
 /*@import url('https://fonts.googleapis.com/css?family=Droid+Sans');*/
 /*@import url('https://fonts.googleapis.com/css?family=Open+Sans');*/
@@ -33,7 +33,7 @@ h1, h2, h3, h4, h6 {
 #index-banner{
   height: 91.5vh;
   background: linear-gradient(
-    rgba(20,20,20, .5), 
+    rgba(20,20,20, .5),
     rgba(20,20,20, .5))
 }
 #index-banner .brand-logo{
@@ -50,7 +50,7 @@ nav .brand-logo {
 }
 nav a#header-logo-container{
   margin-right: 25px;
-  margin-left: 13px;  
+  margin-left: 13px;
 }
 nav .brand-logo a.btn{
   margin-left: 15px;
@@ -168,12 +168,12 @@ ul.social-icons li{
 ul.social-icons li:last-child{
   margin-right: 0;
 }
-.social-icons .facebook, 
+.social-icons .facebook,
 #sign-in .facebook,
 #sign-up .facebook{
   background: #3b5998;
 }
-.social-icons .twitter, 
+.social-icons .twitter,
 #sign-in .twitter,
 #sign-up .twitter{
   background: #55acee;
@@ -181,12 +181,12 @@ ul.social-icons li:last-child{
 .social-icons .instagram{
   background: #125688;
 }
-.social-icons .github, 
+.social-icons .github,
 #sign-in .github,
 #sign-up .github{
   background: #000000;
 }
-.social-icons .googleplus, 
+.social-icons .googleplus,
 #sign-in .googleplus,
 #sign-up .googleplus{
   background:  #dd4b39;
@@ -234,4 +234,39 @@ footer h5{
   #index-banner .section {
     top: 0;
   }
+}
+   /*.row {
+      margin: 0 0 0 4px;
+   }
+ }*/
+
+ #share-link {
+   display: none;
+ }
+
+ .clear {
+   clear: both;
+ }
+
+#modal1, #modal2 {
+  color: black;
+  padding: 0px;
+  background-color: transparent;
+}
+
+.modal-content {
+  padding: 10px 0 0 0 !important;
+}
+
+#modal-body {
+  height: 350px !important;
+  overflow: scroll;
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+.font-big {
+  font-size: 30px;
 }

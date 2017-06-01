@@ -2,12 +2,14 @@
  * Module dependencies.
  */
 require('dotenv').config();
+
 var express = require('express'),
     fs = require('fs'),
+    path = require('path'),
     passport = require('passport'),
     logger = require('mean-logger'),
     io = require('socket.io');
-
+    
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
@@ -44,6 +46,10 @@ walk(models_path);
 require('./config/passport')(passport);
 
 var app = express();
+
+const sourcePath = path.join(__dirname, '/public/');
+app.use(express.static(sourcePath));
+
 
 app.use(function(req, res, next){
     next();
