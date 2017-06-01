@@ -1,7 +1,8 @@
 /**
  * Module dependencies.
  */
-const mongoose = require('mongoose'),
+var mongoose = require('mongoose'),
+  jwt = require('jsonwebtoken'),
   User = mongoose.model('User');
 const avatars = require('./avatars').all();
 const helper = require('sendgrid').mail;
@@ -23,7 +24,7 @@ exports.signin = (req, res) => {
   } else {
     res.redirect('/#!/app');
   }
-};
+}; 
 
 /**
  * Show sign up form
@@ -48,6 +49,12 @@ exports.signout = (req, res) => {
  * Session
  */
 exports.session = (req, res) => {
+  // create jwt payload
+  var tokenData = {
+    userMail: req.body.email
+  };
+  var jwtToken = jwt.sign(tokenData, process.env.TOKENSECRET);
+  res.header('Authorization', jwtToken);
   res.redirect('/');
 };
 
@@ -74,7 +81,34 @@ exports.checkAvatar = (req, res) => {
   }
 
 };
-
+exports.createJWT = function(req, res) {
+  console.log('got here!');
+  if (req.body.name && req.body.password && req.body.email) {
+    User.findOne({
+      email: req.body.email
+    }).exec(function(err,existingUser) {
+      if (!existingUser) {
+        var user = new User(req.body);
+        // Switch the user's avatar index to an actual avatar url
+        user.avatar = avatars[user.avatar];
+        user.provider = 'local';
+        user.save(function(err) {
+          if (err) {
+            return res.render('/#!/signup?error=unknown', {
+              errors: err.errors,
+              user: user
+            });
+          }
+          return res.json({'token': 'I love you!'}); 
+        });
+      } else {
+        return res.redirect('/#!/signup?error=existinguser');
+      }
+    });
+  } else {
+    return res.redirect('/#!/signup?error=incomplete');
+  }
+}
 /**
  * Create user
  */
@@ -95,8 +129,16 @@ exports.create = (req, res) => {
               user,
             });
           }
+          
+          // create jwt payload
+          var tokenData = {
+            userMail: user.email
+          };
+          var jwtToken = jwt.sign(tokenData, process.env.TOKENSECRET);
+
           req.logIn(user, (err) => {
             if (err) return next(err);
+            res.header('Authorization', jwtToken);
             return res.redirect('/#!/');
           });
         });
