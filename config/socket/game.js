@@ -5,7 +5,7 @@ var answers = require(__dirname + '/../../app/controllers/answers.js');
 var guestNames = [
   "Disco Potato",
   "Silver Blister",
-  "Insulated Mustard",
+  "Insulat Mustard",
   "Funeral Flapjack",
   "Toenail",
   "Urgent Drip",

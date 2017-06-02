@@ -82,6 +82,16 @@ gulp.task('bower', () => {
   bower().pipe(gulp.dest('./bower_components'));
 });
 
+gulp.task('copyMaterializeCss', () => {
+  gulp.src('bower_components/materialize/dist/css/materialize.min.css')
+  .pipe(gulp.dest('public/lib/materialize/css/'));
+});
+
+gulp.task('copyMaterializeJs', () => {
+  gulp.src('bower_components/materialize/dist/js/materialize.min.js')
+  .pipe(gulp.dest('public/lib/materialize/js/'));
+});
+
 gulp.task('mochaTest', () => {
   gulp.src(['test/**/*.js'])
     .pipe(mocha({
@@ -93,4 +103,5 @@ gulp.task('test', ['mochaTest']);
 gulp.task('install', ['bower']);
 gulp.task('default', ['nodemon', 'watch', 'sass',
   'copyBootstrap', 'copyAngularUtilsRoute', 'copyAngular',
-  'copyJquery', 'copyUnderscore', 'copyAngularBootstrap']);
+  'copyJquery', 'copyUnderscore', 'copyAngularBootstrap',
+  'copyMaterializeCss', 'copyMaterializeJs']);

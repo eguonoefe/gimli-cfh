@@ -12,6 +12,9 @@ $location, MakeAWishFactsService, $dialog, $http) => {
   const makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
   $('.tooltipped').tooltip({ delay: 50 });
+  $(() => {
+    $('.button-collapse').sideNav();
+  });
 
   $scope.pickCard = (card) => {
     if (!$scope.hasPickedCards) {

@@ -63,7 +63,7 @@ nav .brand-logo img{
 .button-collapse {
   color: #26a69a;
 }
-#main-header .nav-wrapper{
+#main-header .nav-wrapper, #timer-header, .players-count{
   background: rgb(37, 50, 69);
   color: #fff;
 }
@@ -270,3 +270,133 @@ footer h5{
 .font-big {
   font-size: 30px;
 }
+
+.main-bg {
+  background-image: url('../img/main.jpg');
+  background-size: cover;
+  background-position: top;
+  background-attachment: fixed;
+}
+
+.main-content {
+  min-height: 92vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Game */
+/* Timer */
+#inner-timer-container{
+  border: 1px solid rgb(37, 50, 69);  
+  background-color: #fff;  
+}
+#inner-timer-container .container{
+  text-align: center;
+}
+#inner-timer-container #time{
+  font-size: 100px;
+}
+#timer-header h3{
+  font-size: 16px;
+}
+#timer-header .icon{
+  text-align: center;
+  padding-bottom: 5px;
+}
+#timer-header .material-icons{
+  margin-top: 15px;
+}
+/*.timer-body {
+  background-color: #fff;
+}*/
+
+.pt-40 {
+  padding-top: 40px;
+}
+
+.clear {
+  clear: both;
+}
+
+#players{
+  height: 80vh;
+  overflow: scroll;
+  position: relative;
+}
+
+.player-cont { 
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.player-cont img{
+  height: 50px;
+  width: 50px;
+}
+.player-cont span{
+  display: block;
+}
+.player-cont #player-info span:nth-child(2){
+  font-size: 20px;
+}
+
+.players-count {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.players-count h5 {
+  line-height: 50px;
+  margin: 0;
+}
+.h-135 {
+  height: 135px;
+}
+
+.p-0 {
+  padding: 0px !important;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+.pb-0 {
+  padding-bottom: 0;
+}
+
+.mt-0 {
+  margin-top: 0px !important;
+}
+
+.pt-0 {
+  padding-top: 0px !important;
+}
+
+/* questions */
+.question-cont, .answers-cont{
+  background-color: rgba(37, 50, 69, 0.8);
+  color: white;
+  padding: 10px;
+}
+
+.question-cont {
+  height: 248px;
+}
+
+#questions {
+  font-size: 30px;
+}
+
+.col20 {
+  width: 20%;
+}
+
+#game-end-info {
+  font-size: 24px;
+}
+/*#startGame {
+  padding: 20px;
+}*/
