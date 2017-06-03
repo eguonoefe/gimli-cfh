@@ -67,6 +67,9 @@ nav .brand-logo img{
   background: rgb(37, 50, 69);
   color: #fff;
 }
+#main-header > nav .nav-wrapper i{
+  line-height: 34px;
+}
 .fix-header{
   position: fixed;
   top: 0;
@@ -168,24 +171,27 @@ ul.social-icons li{
 ul.social-icons li:last-child{
   margin-right: 0;
 }
-.social-icons .facebook,
+.facebook, .social-icons .facebook,
 #sign-in .facebook,
-#sign-up .facebook{
+#sign-up .facebook, .facebook:hover{
   background: #3b5998;
 }
-.social-icons .twitter,
+.twitter, .social-icons .twitter,
 #sign-in .twitter,
-#sign-up .twitter{
+#sign-up .twitter, .twitter:hover{
   background: #55acee;
 }
-.social-icons .instagram{
+.instagram, .social-icons .instagram,
+.instagram:hover{
   background: #125688;
 }
+.github, .github:hover,
 .social-icons .github,
 #sign-in .github,
 #sign-up .github{
   background: #000000;
 }
+.googleplus, .googleplus:hover,
 .social-icons .googleplus,
 #sign-in .googleplus,
 #sign-up .googleplus{
@@ -195,12 +201,12 @@ ul.social-icons li:last-child{
 /* Footer */
 #footer{
   font-family: 'Slabo 27px';
+  background: rgb(37, 50, 69);  
 }
-.page-footer{
-  background: rgb(37, 50, 69);
-}
+
 #footer.page-footer {
   margin: 0;
+  background: rgb(37, 50, 69);  
 }
 #footer.page-footer .footer-copyright{
   background: #1c2634;
