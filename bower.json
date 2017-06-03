@@ -7,7 +7,8 @@
     "angular-ui-utils": "0.0.4",
     "jquery": "~1.9.1",
     "underscore": "~1.5.2",
-    "angular-social-links": "^0.0.23"
+    "angular-social-links": "^0.0.23",
+    "materialize": "^0.98.2"
   },
   "exportsOverride": {
     "bootstrap": {
