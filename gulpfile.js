@@ -20,7 +20,6 @@ gulp.task('watch', () => {
   gulp.watch('public/css/common.scss', ['sass']);
   gulp.watch('public/css/views/articles.scss', ['sass']);
   gulp.watch('public/css/**', browserSync.reload());
-  
 });
 
 gulp.task('lint', () => {
@@ -28,7 +27,7 @@ gulp.task('lint', () => {
     'public/js/**/*.js',
     'app/**/*.js',
     'test/**/*.js'])
-    .pipe(eslint())
+    .pipe(eslint());
 });
 
 gulp.task('nodemon', () => {
@@ -47,6 +46,16 @@ gulp.task('sass', () => {
   gulp.src('public/css/common/scss')
     .pipe(sass())
     .pipe(gulp.dest('public/css/'));
+});
+
+gulp.task('copyMaterializeCss', () => {
+  gulp.src('bower_components/materialize/dist/css/materialize.min.css')
+  .pipe(gulp.dest('public/lib/materialize/css'));
+});
+
+gulp.task('copyMaterializeJs', () => {
+  gulp.src('bower_components/materialize/dist/js/materialize.min.js')
+  .pipe(gulp.dest('public/lib/materialize/js'));
 });
 
 gulp.task('copyBootstrap', () => {
@@ -94,4 +103,5 @@ gulp.task('test', ['mochaTest']);
 gulp.task('install', ['bower']);
 gulp.task('default', ['nodemon', 'watch', 'sass',
   'copyBootstrap', 'copyAngularUtilsRoute', 'copyAngular',
-  'copyJquery', 'copyUnderscore', 'copyAngularBootstrap']);
+  'copyJquery', 'copyUnderscore', 'copyAngularBootstrap',
+  'copyMaterializeCss', 'copyMaterializeJs']);
