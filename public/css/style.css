@@ -1,8 +1,7 @@
 /**Cards for Humanity Stylesheet
 * Made by Gimli Team
 */
-/*@import url('https://fonts.googleapis.com/css?family=Droid+Sans');*/
-/*@import url('https://fonts.googleapis.com/css?family=Open+Sans');*/
+
 @import url('https://fonts.googleapis.com/css?family=Slabo+27px');
 @import url('https://fonts.googleapis.com/css?family=Abel');
 
@@ -14,6 +13,15 @@ p {
 }
 h1, h2, h3, h4, h6 {
   font-family: 'Abel';
+}
+input[type="radio"]:checked+label:after,
+input[type="radio"].with-gap:checked+label:after {
+  background-color: #f57c00;  
+}
+input[type="radio"]:checked+label:after, 
+input[type="radio"].with-gap:checked+label:before, 
+input[type="radio"].with-gap:checked+label:after{
+  border: 2px solid #f57c00;    
 }
 
 /* Helper classes */
@@ -110,6 +118,13 @@ nav .brand-logo img{
 #sign-up ul li{
   display: inline-block;
   margin-right: 1rem;
+}
+#sign-up img{
+  height: 30px;
+  width: 30px;
+}
+#sign-up .input-field h6{
+  margin-left: 26px;  
 }
 #sign-in ul li:last-child,
 #sign-up ul li:last-child{
@@ -215,6 +230,29 @@ footer p{
 
 footer h5{
   font-size: 18px;
+}
+
+/* Avatars display */
+#avatars-container{
+  margin-top: 45px;
+}
+/*#avatars-container div input[type=radio]{
+  
+}*/
+#avatars-container form p{
+  margin-bottom: 10px; 
+}
+#avatars-container form label{
+  cursor: pointer;
+  height: 120px;
+  padding-top: 15px;
+}
+#avatars-container form input[type="radio"]:not(:checked) + label{
+  padding-left: 0px;
+  margin-left: -10px;
+}
+#avatars-container input[type="radio"]:checked + label {
+  padding-left: 0px;
 }
 
 @media only screen and (max-width : 992px) {

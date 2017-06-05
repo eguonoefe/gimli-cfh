@@ -1,61 +1,49 @@
-<div id="main-bod" ng-controller="IndexController">
-  <!-- Fixed Logo & Menu Bar Start -->
-  <div id="top-part">
-    <div class="wpb-top-bar">
-      <div class="mod-contain" id="navver">
-        <div class="row">
-          <!-- Logo -->
-          <div class="wpb-logo-container">
-            <div id="landing-logo"> 
-              <span id="first-word">Cards</span>
-              <span id="second-word"> for</span> 
-              <span id="third-word">Humanity</span> 
-            </div> 
-            <div class="col-md-9 wpb-menu-container">
-              <ul class="wpb-main-menu">
-                <li><a href="/">Home</a></li>
-              </ul>
-            </div>
-          </div>      
+<div ng-controller="IndexController">
+    <!-- Header -->
+  <div id="main-header" ng-controller="materializeInit">
+    <nav role="navigation">
+      <div class="nav-wrapper container-fluid">
+        <div class="brand-logo">
+          <a id="header-logo-container" class="hide" href="#" >
+            <img src="/img/cfh-crop.png" alt="">
+          </a>
+          <a class="btn waves-effect waves-light orange darken-2">donate now</a>
         </div>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/">Home</a></li>                    
+        </ul>
+
+        <!-- Mobile nav -->
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="#">Home</a></li> 
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse right">
+          <i class="material-icons">menu</i></a>
       </div>
-    </div>
+    </nav>
   </div>
-<!-- Fixed Logo & Menu Bar End -->
 
-<!-- Landing Start -->
-<div class="wpb-teaser parallax-background" id="homer">
-  <div class="background-opacity"></div> 
-  <div class="modified-container">
-    <div class="row" id="main-text"> 
-    <!-- Teaser Text Start -->
-    <div id="landing-logo">
-      <h2 id="slogan">Choose an Avatar!</h2>
-      <p id="create">You're almost there! Just pick an avatar from the options below!</p>
-
-      <div class="sign-body">
-        <div class="more-sign">
-          <form class="signup form-horizontal" action="/users/avatars" method="post">
-            <div id="contain-avatars">
-              <ul class="avatar-list">
-                <li ng-repeat="avatar in avatars" class="avatars ng-scope">
-                  <input name="avatar" type='radio' value="{{$index}}">
-                    <img ng-src="{{avatar}}">
-                  </input>
-                </li>
-              </ul>
-            </div>
-            <div class="form-actions">
-              <button id="sign-up-btn" type='submit'>Let's Go!</button>
-            </div>
-          </form>
+  <div class="container">
+    <h3>
+      Choose an avatar
+    </h3>
+    <h6>You are just on click away! Select your avatar below</h6>
+    <div id="avatars-container" class="container">
+      <form action="/users/avatars" method="post">
+        <div class="row">
+          <div ng-repeat="avatar in avatars" class="ng-scope">
+            <p class="col s2">
+              <input name="avatars" type="radio" id="{{avatar}}" value="{{$index}}" class="with-gap"/>
+              <label for="{{avatar}}">
+                <img ng-src="{{avatar}}">
+              </label>
+            </p>
+          </div>
         </div>
-      </div>
-    </div>
-    </div>
+        <div class="row center">
+          <button id="sign-up-btn" type='submit' class="waves-effect waves-light btn blue lighten-1">Let's Go!</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-
-
-
