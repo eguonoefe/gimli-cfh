@@ -3,7 +3,7 @@ angular.module('mean.system')
    ['$scope', 'Global', '$location','$window', '$http', 'socket', 'game', 'AvatarService',
    function ($scope, Global, $location, $window, $http, socket, game, AvatarService) {
     $scope.global = Global;
-
+  
     $scope.playAsGuest = function() {
       game.joinGame();
       $location.path('/app');
