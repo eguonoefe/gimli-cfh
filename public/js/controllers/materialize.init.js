@@ -4,7 +4,7 @@
  * @return {void}
  */
 
-angular.module('mean')
+angular.module('mean.system')
 .controller('materializeInit', ['$scope', ($scope) => {
   $(() => {
     $('.carousel.carousel-slider').carousel({ fullWidth: true });

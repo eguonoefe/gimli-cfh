@@ -6,7 +6,7 @@ const mocha = require('gulp-mocha');
 const nodemon = require('gulp-nodemon');
 const sass = require('gulp-sass');
 const coveralls = require('gulp-coveralls');
- 
+
 gulp.task('coveralls', () => {
   gulp.src('./coverage/lcov.info')
   .pipe(coveralls());
@@ -90,6 +90,16 @@ gulp.task('copyUnderscore', () => {
 
 gulp.task('bower', () => {
   bower().pipe(gulp.dest('./bower_components'));
+});
+
+gulp.task('copyMaterializeCss', () => {
+  gulp.src('bower_components/materialize/dist/css/materialize.min.css')
+  .pipe(gulp.dest('public/lib/materialize/css/'));
+});
+
+gulp.task('copyMaterializeJs', () => {
+  gulp.src('bower_components/materialize/dist/js/materialize.min.js')
+  .pipe(gulp.dest('public/lib/materialize/js/'));
 });
 
 gulp.task('mochaTest', () => {
