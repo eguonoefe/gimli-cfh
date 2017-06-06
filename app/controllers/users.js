@@ -20,6 +20,7 @@ exports.authCallback = (req, res) => {
  */
 exports.signin = (req, res) => {
   if (!req.user) {
+    console.log('came here');
     res.redirect('/#!/signin?error=invalid');
   } else {
     res.redirect('/#!/app');
@@ -30,6 +31,7 @@ exports.signin = (req, res) => {
  * Show sign up form
  */
 exports.signup = (req, res) => {
+  console.log('came here');
   if (!req.user) {
     res.redirect('/#!/signup');
   } else {
@@ -165,7 +167,7 @@ exports.avatars = (req, res) => {
       user.save();
     });
   }
-  return res.redirect('/#!/app');
+  return res.redirect('/#!/');
 };
 
 exports.addDonation = (req, res) => {

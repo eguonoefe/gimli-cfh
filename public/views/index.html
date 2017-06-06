@@ -27,6 +27,20 @@ $(document).ready(function() {
           <h5 class=" orange-text text-darken-3">A Game for Horrible People Desperately Trying to do Good</h5>
         </div>
       </div>
+            <!-- Add button to start game here -->
+      <div ng-hide="showOptions" id="start-game" class="container">
+        <div class="row center">
+          <h5>Play with</h5>
+          <p>
+            <a href="/play" class="btn-large waves-effect waves-light blue lighten-1" >
+              strangers
+            </a> or 
+            <a href="/play?custom" class="btn-large waves-effect waves-light blue lighten-1" >
+              friends
+            </a>
+          </p>
+        </div>
+      </div>
     </div>
     <div class="parallax"><img src="/img/main.jpg" alt="Unsplashed background img 1"></div>
   </div>
@@ -130,23 +144,6 @@ $(document).ready(function() {
                 <img src="/img/cfh-charity.jpg"></a>
               <a class="carousel-item" href="#four!">
                 <img src="/img/cfh-team.jpg"></a>
-            </div>
-          </div>
-
-          <!-- Add button to start game here -->
-          <div ng-hide="showOptions" id="start-game" class="container">
-            <div class="row center">
-              <h5>Play with:</h5>
-              <div class="col s6">
-                <a href="/play" class="btn waves-effect waves-light blue lighten-1" >
-                  strangers
-                </a>
-              </div>
-              <div class="col s6">
-                <a href="/play?custom" class="btn waves-effect waves-light blue lighten-1" >
-                  friends
-                </a>
-              </div>
             </div>
           </div>
         </div>

@@ -281,6 +281,15 @@ footer h5{
 #start-game h5{
   margin-bottom: 25px;
 }
+#start-game p > a{
+  width: 150px;
+}
+#start-game p > a:nth-child(1){
+  margin-right: 25px;
+}
+#start-game p > a:nth-child(2){
+  margin-left: 25px;
+}
 
 @media only screen and (max-width : 992px) {
   .parallax-container .section {
