@@ -9,6 +9,28 @@ angular.module('mean.system')
         $location.path('/app');
       };
 
+    $scope.signin = () => {
+      if (!$scope.email || !$scope.password) {
+        $scope.message = 'Please fill in your email and password';
+      } else {
+        const newuser = {
+          email: $scope.email,
+          password: $scope.password
+        };
+        $http.post('/api/auth/signin', newuser).then((response) => {
+          if (response.data.signupStatus === 'success') {
+            $window.localStorage.setItem('token', response.data.token);
+           // $cookie.put('jwt',response.data.token);
+            $location.path('/#/');
+          } else {
+            $scope.message = response.data.message;
+          }
+        }, (err) => {
+          $scope.message = err;
+        });
+      }
+    };
+
       $scope.showError = function () {
         if ($location.search().error) {
           return $location.search().error;
@@ -17,27 +39,6 @@ angular.module('mean.system')
         }
       };
 
-      $scope.signin = () => {
-        if (!$scope.email || !$scope.password) {
-          $scope.message = 'Please fill in your email and password';
-        } else {
-          const newuser = {
-            email: $scope.email,
-            password: $scope.password
-          };
-          $http.post('/api/auth/signin', newuser).then((response) => {
-            if (response.data.signupStatus == 'success') {
-              $window.localStorage.setItem('token', response.data.token);
-              // $cookie.put('jwt',response.data.token);
-              $location.path('/#/');
-            } else {
-              $scope.message = response.data.message;
-            }
-          }, (err) => {
-            $scope.message = err;
-          });
-        }
-      };
 
       $scope.signup = () => {
         if (!$scope.name || !$scope.email || !$scope.password) {
@@ -47,10 +48,20 @@ angular.module('mean.system')
           const avatars = document.getElementsByName('avatars');
           let selectedAvatar;
 
+        $http.post('/api/auth/signup', newuser).then((response) => {
+          console.log(response);
+          if (response.data.signupStatus === 'success') {
+            $window.localStorage.setItem('token', response.data.token);
+            //$cookie.put('jwt',response.data.token);
+            $location.path('/#/');
+          } else {
+            $scope.message = response.data.message;
+
           for (let i = 0; i < avatars.length; i++) {
             if (avatars[i].checked) {
               selectedAvatar = avatars[i].value;
             }
+
           }
 
           const newuser = {

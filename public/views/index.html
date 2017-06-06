@@ -39,7 +39,14 @@ $(document).ready(function() {
           <a id="header-logo-container" class="hide" href="#" >
             <img src="/img/cfh-crop.png" alt="">
           </a>
-          <a class="btn waves-effect waves-light orange darken-2">donate now</a>
+          <a id="donate-btn"
+            class="btn waves-effect waves-light orange darken-2"
+            href="http://www.crowdrise.com/cfhio/fundraiser/cards4humanity"
+            title="Fundraising Websites on Crowdrise"
+          >
+            donate now
+            <script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/121142/?callback=userDonationCb"></script>
+          </a>
         </div>
         <ul class="right hide-on-med-and-down">
           <li><a href="/">Home</a></li>
@@ -125,6 +132,21 @@ $(document).ready(function() {
                 <img src="/img/cfh-team.jpg"></a>
             </div>
           </div>
+          <div ng-hide="showOptions" id="start-game" class="container">
+            <div class="row center">
+              <h5>Play with:</h5>
+              <div class="col s6">
+                <a href="/play" class="btn waves-effect waves-light blue lighten-1" >
+                  strangers
+                </a>
+              </div>
+              <div class="col s6">
+                <a href="/play?custom" class="btn waves-effect waves-light blue lighten-1" >
+                  friends
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -148,17 +170,18 @@ $(document).ready(function() {
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
             <h4>Make a Donation Today</h4>
-          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur 
-            adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam 
-            pellentesque tristique arcu, non consequat magna fermentum ac. 
-            Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien 
-            id, viverra ultrices eros. Morbi sem neque, posuere et pretium 
-            eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin 
-            diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. 
-            Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. 
-            Nullam eget dignissim mauris, non tristique erat. Vestibulum ante 
-            ipsum primis in faucibus orci luctus et ultrices posuere cubilia 
-            Curae;</p>
+            <h6>
+              "If you don't give back, no one will like you&trade;" - <a href="http://www.crowdrise.com/cfhio/fundraiser/cards4humanity">crowdrise.com</a>
+            </h6>
+          <p class="left-align light">
+            We're quite sure you feel the same way, so we've integrated donation widgets (via <a href="http://www.crowdrise.com/cfhio/fundraiser/cards4humanity">crowdrise.com</a>), along with some not-so-subtle reminders throughout the game to give you the opportunity to donate. If you're signed in when you donate, we'll even upgrade your account and place a crown on your avatar's head (to remind other players how much better you 
+          </p>
+          <p>
+            All donations go to the Make-a-Wish Foundation and benefit children in need.
+          </p>
+          <p>
+            <a href="http://www.wish.org"><img src="img/make-a-wish-logo.png" id="wish"/></a>
+          </p>
         </div>
       </div>
     </div>
@@ -181,18 +204,16 @@ $(document).ready(function() {
       <div class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
-            <h4>CFH Team</h4>
-          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur 
-            adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam 
-            pellentesque tristique arcu, non consequat magna fermentum ac. 
-            Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien 
-            id, viverra ultrices eros. Morbi sem neque, posuere et pretium 
-            eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin 
-            diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. 
-            Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. 
-            Nullam eget dignissim mauris, non tristique erat. Vestibulum ante 
-            ipsum primis in faucibus orci luctus et ultrices posuere cubilia 
-            Curae;</p>
+            <h4>Meet the CFH Team</h4>
+          <div class="left-align light">
+            <p class="center">
+              Created with love and tenderness by: 
+              <a href="http://github.com/silversteez">Matt Silverstein</a>,
+              <a href="http://github.com/mrngoitall">Will Ngo</a>,              
+              <a href="http://github.com/tylermcginnis33">Tyler McGinnis</a>, and
+              <a href="http://github.com/davegonzalez">David Gonzalez</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -230,26 +251,26 @@ $(document).ready(function() {
 
           <!-- Signin with email and password -->
           <div class="row">
-            <form class="col s12" action="/users/session" method="post">
+            <form class="col s12">
               <div class="row">
                 <div class="sign-error" ng-show="showError() === 'invalid'">
                   Please check your username/password and try again.
                 </div>
                 <div class="input-field col s12">
                   <i class="fa fa-envelope prefix"></i>
-                  <input placeholder="Email" id="email" 
+                  <input placeholder="Email" id="email" ng-model="email"
                   type="text" name="email" required novalidate>
                   <label for="email"></label>
                 </div>
                 <div class="input-field col s12">
                   <i class="fa fa-lock prefix"></i>
-                  <input placeholder="Password" id="password" 
+                  <input placeholder="Password" id="password" ng-model="password"
                   type="password" name="password" required novalidate>
                   <label for="password"></label>
                 </div>
                 <div class="right">
                   <button id="sign-up-btn-other" 
-                  class="btn waves-effect waves-light blue lighten-1" type='submit'>
+                  class="btn waves-effect waves-light blue lighten-1" type='submit' ng-click="signin()">
                   Sign In</button>
                 </div>
               </div>
@@ -288,6 +309,8 @@ $(document).ready(function() {
 
           <!-- SignUp with email and password -->
           <div class="row">
+
+            <form class="col s12">
               <div class="row">
                 <div class="input-field col s12">
                   <i class="fa fa-user prefix"></i>
