@@ -83,6 +83,9 @@ nav .brand-logo img{
 #donate-btn{
   width: 150px;
 }
+#donate-btn, span.btn.orange{
+  color: #fff;  
+}
 .fix-header{
   position: fixed;
   top: 0;
@@ -121,7 +124,7 @@ nav .brand-logo img{
   background: #fff;
 }
 
-/* Signin */
+/* User signin and signup*/
 #sign-in ul li,
 #sign-up ul li{
   display: inline-block;
@@ -141,7 +144,7 @@ nav .brand-logo img{
 
 /* Form */
 /* label color */
-.input-field input{
+.input-field input, input[type=text]{
   border-bottom: 1px solid #fb8c00;
 }
 .input-field i{
@@ -150,22 +153,29 @@ nav .brand-logo img{
 
 /* label focus color */
 .input-field input[type=text]:focus + label,
-.input-field input[type=password]:focus + label{
+.input-field input[type=password]:focus + label,
+input[type=text]:focus,
+input[type=password]:focus{
   color: #ef6c00;
 }
 /* label underline focus color */
 .input-field input[type=text]:focus,
-.input-field input[type=password]:focus  {
+.input-field input[type=password]:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=text]:focus:not([readonly]){
   border-bottom: 1px solid #ef6c00;
   box-shadow: 0 1px 0 0 #ef6c00;
 }
 /* valid color */
-.input-field input[type=text].valid {
+.input-field input[type=text].valid,
+input[type=text].valid {
   border-bottom: 1px solid #ef6c00;
   box-shadow: 0 1px 0 0 #ef6c00;
 }
 /* invalid color */
-.input-field input[type=text].invalid {
+.input-field input[type=text].invalid,
+input[type=text].invalid{
   border-bottom: 1px solid #ef6c00;
   box-shadow: 0 1px 0 0 #ef6c00;
 }
@@ -301,13 +311,12 @@ footer h5{
 
 #modal1, #modal2, .modal-4, .modal-5 {
   color: black;
-  padding: 0px;
   background-color: transparent;
   border: none;
 }
 
 .modal-content {
-  padding: 10px 0 0 0 !important;
+  padding: 20px 20px 0 20px !important;
 }
 
 #modal-body {
@@ -518,6 +527,10 @@ footer h5{
   margin-bottom: 10px;
 }
 
+#share-link #click-tag{
+  margin-right: 10px;
+}
+
 /*Chat box*/
 
 .chat {
@@ -536,6 +549,10 @@ footer h5{
   color: #fff;
   font-size: 18px;
   cursor: pointer;
+}
+
+.chat-header p {
+  margin: 0px;
 }
 
 .chat-body {

@@ -224,40 +224,32 @@ $(document).ready(function() {
   <!-- Index page modals -->
   <div ng-controller="IndexController">
     <!-- Sign in -->
-    <div id="sign-in" class="modal">
+    <div id="sign-in" class="modal modal-4" ng-controller="IndexController">
       <div class="modal-content">
         <h4>Sign in with: </h4>
 
-
-  <!-- Sign in -->
-  <div id="sign-in" class="modal modal-5" ng-controller="IndexController">
-    <div class="modal-content">
-      <h4>Sign in with: </h4>
-
-        <!-- Sigin with facebook, twitter, github, or google -->
-        <div class="row">
-          <ul>
-            <li >
-              <a href="/auth/facebook" class="waves-effect waves-light btn facebook">
-                <i class="fa fa-facebook-f left"></i></a>
-            </li>
-            <li>
-              <a href="/auth/twitter" class="waves-effect waves-light btn twitter">
-                <i class="fa fa-twitter left"></i></a>
-            </li>
-            <li>
-              <a href="/auth/github" class="waves-effect waves-light btn github">
-                <i class="fa fa-github left"></i></a>
-            </li>
-            <li>
-              <a href="/auth/google" class="waves-effect waves-light btn googleplus">
-                <i class="fa fa-google-plus left"></i></a>
-            </li>
-          </ul>
-        </div>
+          <!-- Sigin with facebook, twitter, github, or google -->
+          <div class="row">
+            <ul>
+              <li >
+                <a href="/auth/facebook" class="waves-effect waves-light btn facebook">
+                  <i class="fa fa-facebook-f left"></i></a>
+              </li>
+              <li>
+                <a href="/auth/twitter" class="waves-effect waves-light btn twitter">
+                  <i class="fa fa-twitter left"></i></a>
+              </li>
+              <li>
+                <a href="/auth/github" class="waves-effect waves-light btn github">
+                  <i class="fa fa-github left"></i></a>
+              </li>
+              <li>
+                <a href="/auth/google" class="waves-effect waves-light btn googleplus">
+                  <i class="fa fa-google-plus left"></i></a>
+              </li>
+            </ul>
+          </div>
           <p id="create">Or log in below:</p>
-
-
           <!-- Signin with email and password -->
           <div class="row">
             <form class="col s12">
@@ -285,15 +277,14 @@ $(document).ready(function() {
               </div>
             </form>
           </div>
+        </div>
       </div>
-    </div>
 
-    <!-- SignUp -->
-    <div id="sign-up" class="modal">
-      <div class="modal-content">
-        <h4>Sign Up </h4>
-
-        <!-- SignUp with facebook, twitter, github, or google -->
+  <!-- SignUp -->
+  <div id="sign-up" class="modal modal-5">
+    <div class="modal-content">
+      <h4>Sign Up </h4>
+      <!-- SignUp with facebook, twitter, github, or google -->
         <div class="row">
           <ul>
             <li >
@@ -315,13 +306,6 @@ $(document).ready(function() {
           </ul>
         </div>
           <p id="create">Or create a username/password</p>
-
-
-  <!-- SignUp -->
-  <div id="sign-up" class="modal modal-4">
-    <div class="modal-content">
-      <h4>Sign Up </h4>
-
           <!-- SignUp with email and password -->
           <div class="row">
             <form class="col s12">
