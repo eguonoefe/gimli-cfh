@@ -64,6 +64,8 @@ Game.prototype.payload = function() {
       color: player.color
     });
   });
+
+  console.log(players);
   return {
     gameID: this.gameID,
     players: players,

@@ -11,9 +11,35 @@ $location, MakeAWishFactsService, $dialog, $http) => {
   $scope.enableSendGuestInvite = false;
   const makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
+
+  var windw = this;
+
+  $.fn.followTo = function ( pos ) {
+      var $this = this,
+          $window = $(windw);
+      
+      $window.scroll(function(e){
+          if ($window.scrollTop() > pos) {
+              $this.css({
+                  position: 'absolute',
+                  bottom: -20
+              });
+          } else {
+              $this.css({
+                  position: 'fixed',
+                  bottom: 10
+              });
+          }
+      });
+  };
   $('.tooltipped').tooltip({ delay: 50 });
   $(() => {
     $('.button-collapse').sideNav();
+    $('.chat-header').on('click', () => {
+      $('.chat-body').slideToggle();
+      $('span.right').find('i').toggleClass('fa-caret-down fa-caret-up');
+    });
+    $('.fixed-card').followTo(80);
   });
 
   $scope.pickCard = (card) => {

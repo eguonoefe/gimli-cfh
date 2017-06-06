@@ -204,11 +204,11 @@ ul.social-icons li:last-child{
   background: rgb(37, 50, 69);  
 }
 
-#footer.page-footer {
-  margin: 0;
+#footer .page-footer {
+  margin: 0px !important;
   background: rgb(37, 50, 69);  
 }
-#footer.page-footer .footer-copyright{
+#footer .page-footer .footer-copyright{
   background: #1c2634;
   text-align: center !important;
 }
@@ -246,18 +246,15 @@ footer h5{
    }
  }*/
 
- #share-link {
-   display: none;
- }
-
  .clear {
    clear: both;
  }
 
-#modal1, #modal2 {
+#modal1, #modal2, .modal-4, .modal-5 {
   color: black;
   padding: 0px;
   background-color: transparent;
+  border: none;
 }
 
 .modal-content {
@@ -269,9 +266,6 @@ footer h5{
   overflow: scroll;
 }
 
-.transparent {
-  background-color: transparent;
-}
 
 .font-big {
   font-size: 30px;
@@ -380,6 +374,9 @@ footer h5{
 .pt-0 {
   padding-top: 0px !important;
 }
+.mb-20 {
+  margin-bottom: 20px;
+}
 
 /* questions */
 .question-cont, .answers-cont{
@@ -389,7 +386,7 @@ footer h5{
 }
 
 .question-cont {
-  height: 248px;
+  min-height: 248px;
 }
 
 #questions {
@@ -398,6 +395,8 @@ footer h5{
 
 .col20 {
   width: 20%;
+  box-sizing: border-box;
+  float: left;
 }
 
 #game-end-info {
@@ -406,3 +405,152 @@ footer h5{
 /*#startGame {
   padding: 20px;
 }*/
+
+.cfh-card {
+  background-image: url('/img/card-2.jpg');
+  background-size: cover;
+  background-position:top;
+  background-repeat: no-repeat;
+  height: 190px;
+  color: black;
+  margin-bottom: 10px;
+  text-align: center !important;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.p-5 {
+  padding: 5px;
+}
+
+.fixed-card {
+    bottom: 20px;
+    position: fixed;
+    padding: 10px;
+    background-color: rgba(37, 50, 69, 0.9);
+    z-index: 1;
+    height: 200px;
+    max-width: 150px;
+    width: 150px;
+    border: thin solid #fb8c00;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+
+.fixed-card .img-holder {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.fixed-card .img-holder img {
+  height: 60px;
+  width: 60px;
+}
+
+.fixed-card span {
+  margin-top: 10px;
+}
+
+.waiting {
+  padding: 20px;
+  text-align: center;
+}
+
+.waiting img {
+  height: 200px;
+  width: 300px;
+}
+
+#share-link {
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/*Chat box*/
+
+.chat {
+  bottom: 20px;
+  height: auto !important;
+  max-width: 300px;
+  width: 300px;
+  position: fixed;
+  background-color: #fff;
+  border: thin solid #fb8c00;
+}
+
+.chat-header {
+  padding: 10px;
+  background-color: #fb8c00;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.chat-body {
+  display: none;
+}
+
+.right {
+  float: right;
+}
+
+.chat-holder {
+  padding: 10px;
+}
+
+.chat-holder ul {
+  display: inline-table;
+  width: 100%;
+}
+
+.chat-holder ul li {
+  display: block;
+  list-style: none;
+  padding: 5px 0px 0px 5px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.chat-holder ul li:nth-child(even) {
+  background-color: #fb8c00;
+}
+
+.chat-input {
+  padding: 5px;
+}
+.chat-input input {
+  height: 40px;
+  border: 2px solid rgb(37, 50, 69);
+  margin: 0px;
+  border-radius: 3px;
+  padding: 0px 5px;
+}
+
+#app-container {
+  margin: 0px !important;
+}
+
+#crDonateWidget_cfhio_cards4humanity {
+  margin: 0 auto !important;
+}
+
+.btn-new {
+  cursor: default;
+}
+
+.btn-help {
+  cursor: help;
+  background-color: #fb8c00;
+  color: white;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+.orange {
+  color: #fb8c00;
+}

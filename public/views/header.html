@@ -1,5 +1,5 @@
  <!-- Header -->
-  <div id="main-header" ng-controller="GameController">
+  <div landing id="main-header">
     <nav role="navigation">
       <div class="nav-wrapper container-fluid">
         <div class="brand-logo">
@@ -10,20 +10,15 @@
             class="btn waves-effect waves-light orange darken-2 hide"
           >donate now</a>
         </div>
-        <ul class="right hide-on-med-and-down">
-          <span data-ng-hide="global.authenticated">          
+        <ul class="right hide-on-med-and-down" ng-controller="IndexController">       
             <li><a href="/">Home</a></li>
-            <li><a href="#how-to-play">How to Play</a></li>
-            <li><a href="#charity">Charity</a></li>
-            <li><a href="#team">Team</a></li>
             <span ng-show="showOptions">
               <li><a href="#sign-in">SignIn</a></li>   
               <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1">
               SignUp</a></li> 
             </span>
-          </span>  
           <span ng-hide="showOptions">
-            <li>Sign Out</li>           
+            <li><a href="/signout" class="btn waves-effect waves-light blue lighten-1">Sign Out</a></li>           
           </span>
           <span>
             <li>
