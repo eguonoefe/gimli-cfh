@@ -54,7 +54,7 @@
       <li>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</li>
       <li>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</li>
     </ol>
-    <button>Get a tour</button>
+    <button onclick="startIntro();">Get a tour</button>
   </div>
 
   <!-- modal 1 -->
@@ -152,3 +152,25 @@
 
   </div>
 </div>
+<script type="text/javascript">
+      function startIntro(){
+        var intro = introJs();
+          intro.setOptions({
+            steps: [
+              { 
+                intro: "Hi, I'm Jade. I'll be giving you a tour the game. Click Next to get Started. You can end the tour anytime by clicking Skip."
+              },
+              {
+                element: document.querySelector('#info-container'),
+                intro: "This is a tooltip."
+              },
+              {
+                element: document.querySelectorAll('#step2')[0],
+                intro: "Ok, wasn't that fun?",
+                position: 'right'
+              }
+            ]
+          });
+          intro.start();
+      }
+    </script>
