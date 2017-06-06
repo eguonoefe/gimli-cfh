@@ -1,6 +1,7 @@
 node_modules
 bower_components
 .sass-cache/
+public/lib
 .DS_store
 c4h_keys.txt
 coverage
