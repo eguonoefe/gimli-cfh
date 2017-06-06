@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+let mongoose = require('mongoose'),
   jwt = require('jsonwebtoken'),
   User = mongoose.model('User');
 const avatars = require('./avatars').all();
@@ -24,7 +24,7 @@ exports.signin = (req, res) => {
   } else {
     res.redirect('/#!/app');
   }
-}; 
+};
 
 /**
  * Show sign up form
@@ -50,15 +50,15 @@ exports.signout = (req, res) => {
  */
 exports.session = (req, res) => {
   // create jwt payload
-  var tokenData = {
+  let tokenData = {
     userMail: req.body.email
   };
-  var jwtToken = jwt.sign(tokenData, process.env.TOKENSECRET);
+  let jwtToken = jwt.sign(tokenData, process.env.TOKENSECRET);
   res.header('Authorization', jwtToken);
   res.redirect('/');
 };
 
-/** 
+/**
  * Check avatar - Confirm if the user who logged in via passport
  * already has an avatar. If they don't have one, redirect them
  * to our Choose an Avatar page.
@@ -88,7 +88,7 @@ exports.createJWT = function(req, res) {
       email: req.body.email
     }).exec(function(err,existingUser) {
       if (!existingUser) {
-        var user = new User(req.body);
+        let user = new User(req.body);
         // Switch the user's avatar index to an actual avatar url
         user.avatar = avatars[user.avatar];
         user.provider = 'local';
@@ -99,7 +99,7 @@ exports.createJWT = function(req, res) {
               user: user
             });
           }
-          return res.json({'token': 'I love you!'}); 
+          return res.json({'token': 'I love you!'});
         });
       } else {
         return res.redirect('/#!/signup?error=existinguser');
@@ -129,12 +129,11 @@ exports.create = (req, res) => {
               user,
             });
           }
-          
           // create jwt payload
-          var tokenData = {
+          const tokenData = {
             userMail: user.email
           };
-          var jwtToken = jwt.sign(tokenData, process.env.TOKENSECRET);
+          const jwtToken = jwt.sign(tokenData, process.env.TOKENSECRET);
 
           req.logIn(user, (err) => {
             if (err) return next(err);

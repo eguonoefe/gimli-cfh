@@ -309,6 +309,7 @@ $(document).ready(function() {
 
           <!-- SignUp with email and password -->
           <div class="row">
+
             <form class="col s12">
               <div class="row">
                 <div class="input-field col s12">
@@ -333,20 +334,20 @@ $(document).ready(function() {
                   <h6>Choose an avatar</h6>                  
                   <div ng-repeat="avatar in avatars" class="ng-scope">
                     <p class="col s2">
-                      <input name="avatars" type="radio" id="{{avatar}}" value="{{$index}}" class="with-gap"/>
+                      <input name="avatars" type="radio" id="{{avatar}}" ng-model="playerAvatar" value="{{$index}}" class="with-gap"/>
                       <label for="{{avatar}}">
                         <img ng-src="{{avatar}}">
                       </label>
                     </p>
                   </div>
                 </div>
+
                 <div class="input-field right">
                   <button id="sign-up-btn-other" 
                   class="btn waves-effect waves-light blue lighten-1" type='submit' ng-click="signup()">
                   Sign Up</button>
                 </div>
               </div>
-            </form>
           </div>
       </div>
     </div>
