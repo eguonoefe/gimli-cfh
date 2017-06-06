@@ -26,9 +26,7 @@ angular.module('mean.system')
           password: $scope.password
         };
         $http.post('/api/auth/signin', newuser).then((response) => {
-          console.log(response);
-          if(response.data.signupStatus == 'success') {
-            console.log(response.data.token, 'token');
+          if (response.data.signupStatus === 'success') {
             $window.localStorage.setItem('token', response.data.token);
            // $cookie.put('jwt',response.data.token);
             $location.path('/#/');
@@ -53,7 +51,7 @@ angular.module('mean.system')
 
         $http.post('/api/auth/signup', newuser).then((response) => {
           console.log(response);
-          if(response.data.signupStatus == 'success') {
+          if (response.data.signupStatus === 'success') {
             $window.localStorage.setItem('token', response.data.token);
             //$cookie.put('jwt',response.data.token);
             $location.path('/#/');

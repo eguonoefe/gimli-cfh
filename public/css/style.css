@@ -75,6 +75,9 @@ nav .brand-logo img{
   background: rgb(37, 50, 69);
   color: #fff;
 }
+#donate-btn{
+  width: 150px;
+}
 .fix-header{
   position: fixed;
   top: 0;
@@ -253,6 +256,12 @@ footer h5{
 }
 #avatars-container input[type="radio"]:checked + label {
   padding-left: 0px;
+}
+#start-game{
+  margin-top: 40px;
+}
+#start-game h5{
+  margin-bottom: 25px;
 }
 
 @media only screen and (max-width : 992px) {
