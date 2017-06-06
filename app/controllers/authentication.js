@@ -22,6 +22,8 @@ exports.signup = function(req, res) {
     }).exec(function(err,existingUser) {
       if (!existingUser) {
         var user = new User(req.body);
+        console.log(user);
+          
         // Switch the user's avatar index to an actual avatar url
         user.avatar = avatars[user.avatar];
         user.provider = 'local';

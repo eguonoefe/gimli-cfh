@@ -45,12 +45,23 @@ angular.module('mean.system')
       if (!$scope.name || !$scope.email || !$scope.password) {
         $scope.message = 'Please fill in your username, email and password';
       } else {
+        // get selected avatar
+        const avatars = document.getElementsByName('avatars');
+        let selectedAvatar;
+
+        for (let i = 0; i < avatars.length; i++) {
+          if (avatars[i].checked) {
+            selectedAvatar = avatars[i].value;
+          }
+        }
+
         const newuser = {
           name: $scope.name,
           email: $scope.email,
-          password: $scope.password
+          password: $scope.password,
+          avatar: selectedAvatar
         };
-
+        console.log('user', newuser);
         $http.post('/api/auth/signup', newuser).then((response) => {
           console.log(response);
           if(response.data.signupStatus == 'success') {
