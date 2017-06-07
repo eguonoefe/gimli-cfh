@@ -82,7 +82,6 @@ exports.checkAvatar = (req, res) => {
 
 };
 exports.createJWT = function(req, res) {
-  console.log('got here!');
   if (req.body.name && req.body.password && req.body.email) {
     User.findOne({
       email: req.body.email
@@ -165,7 +164,7 @@ exports.avatars = (req, res) => {
       user.save();
     });
   }
-  return res.redirect('/#!/app');
+  return res.redirect('/#!/');
 };
 
 exports.addDonation = (req, res) => {

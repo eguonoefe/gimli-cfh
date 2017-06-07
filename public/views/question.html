@@ -1,25 +1,55 @@
-<div id="question-container-inner">
-  <div class="card longBlack">
+<div class="row">
+  <div class="col s12 valign-wrapper" id="questions">
     <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
+  </div>
 
-    <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
-
-    <div id="startGame" ng-show="game.state === 'awaiting players'">
-      <div id="finding-players">Finding Players</div>
-      <div id="player-count-container">
-        <div id="player-count">{{game.players.length}} / 12 </div>
-        <div id="the-word-players"> Players </div>
-      </div>
+  <div id="startGame" class="center" ng-show="game.state === 'awaiting players'">
       <div id="loading-container">
-        <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
+        <div id="loading-gif"><img height="150" width="200" ng-src="../img/loading.gif"/></div>
       </div>
+      <div id="finding-players">
+        <h5>Finding Players</h5>
+      </div>
+      <!-- Share link -->
+      <div id="share-link" ng-show="game.state === 'awaiting players'">
+        <a id="click-tag"
+          ng-click="showModal1()"
+          class="btn-floating waves-effect waves-light btn tooltipped blue lighten-1"
+          data-position="bottom" data-delay="50" data-tooltip="Send Invites to CFH users"
+        >
+          <i class="material-icons">group_add</i>
+        </a>
+        <a id="click-tag"
+          ng-click="showModal2()"
+          class="btn-floating waves-effect waves-light btn tooltipped blue lighten-1"
+          data-position="bottom" data-delay="50" data-tooltip="Send Invites to Guests"
+        >
+          <i class="material-icons">mood</i>
+        </a>
+      </div>
+
+
       <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
-        <div id='start-game-button'>
-          Start Game</br>with {{game.players.length}} players
-        </div>
+        <span class="btn">
+          Start Game with {{game.players.length}} players
+        </span>
+        <div class="clear"></div>
       </div>
+       <div id="start-game-container" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length < game.playerMinLimit">
+        
+        <span class="btn">
+         Invite at least  {{game.playerMinLimit - game.players.length }} 
+         more {{ (game.playerMinLimit - game.players.length) < 2 ? 'person' : 'people'}} to start the game
+        </span>
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
     </div>
-    <!-- Game Over Stuff -->
+    
+
+    <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}
+    </div>
+
     <div id="game-end-info">
       <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
         <div class="game-end-headline">What the!? The game ended because too many people left! </div>
@@ -32,7 +62,51 @@
         <div class="game-end-headline">Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!</div>
         That makes you a loser, unfortunately.
       </div>
+      <div class="clear"></div>
     </div>
-  </div>
+    <div class="clear"></div>
 </div>
 
+<!-- modal 1 -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h5>Search for users to send invites to</h5>
+      <div id="modal-body">
+        <input type="text" ng-keyup="searchUser()" ng-model="searchString"/>
+        <li ng-repeat="user in users" >
+          <p>
+            <input type="checkbox" id="{{ user.name }}" ng-model="user.selected" ng-click="countCheckedBox()" ng-disabled="checkedBoxCount > 10" />
+            <label for="{{ user.name }}">{{ user.name }}</label>
+          </p>
+        </li>
+      </div>
+    <div class="modal-footer">
+      <a href="" ng-click="emailUsers()" class="modal-action modal-close waves-effect waves-green btn-flat"
+        ng-disabled="checkedBoxCount < 2"
+        >Send</a>
+    </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+  <!-- modal 2 -->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h5> Send Invites To Guests </h5>
+      <div id="modal-body">
+        Email: <input type="text" ng-keyup="checkEmail()" ng-model="guestEmail"/>
+      </div>
+    <div class="modal-footer">
+      <a 
+        href=""
+        class="modal-action modal-close waves-effect waves-green btn-flat"
+        ng-disabled="!enableSendGuestInvite"
+        ng-click="emailGuests()"
+      >Send</a>
+    </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+  <div class="clear"></div>
+</div>

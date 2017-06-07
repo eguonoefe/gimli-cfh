@@ -5,7 +5,7 @@ var answers = require(__dirname + '/../../app/controllers/answers.js');
 var guestNames = [
   "Disco Potato",
   "Silver Blister",
-  "Insulated Mustard",
+  "Insulat Mustard",
   "Funeral Flapjack",
   "Toenail",
   "Urgent Drip",
@@ -61,9 +61,11 @@ Game.prototype.payload = function() {
       avatar: player.avatar,
       premium: player.premium,
       socketID: player.socket.id,
-      color: player.color
+      color: player.color,
+      userID: player.userID,
     });
   });
+
   return {
     gameID: this.gameID,
     players: players,

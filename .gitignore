@@ -1,0 +1,12 @@
+node_modules
+bower_components
+bower_components/
+.sass-cache/
+.DS_store
+c4h_keys.txt
+coverage
+bower_components
+sendgrid.env
+.env
+.env.example
+.gitignore

@@ -1,4 +1,4 @@
-<div id="player-container" ng-repeat="player in game.players" style="background-color:{{colors[player.color]}}">
+<!--<div id="player-container" ng-repeat="player in game.players" style="background-color:{{colors[player.color]}}">
   <div id ="above-czar-container">
     <div id="avatar_">
       <span ng-show="isPremium($index)">
@@ -17,5 +17,40 @@
   <div id="czar-container" ng-show="currentCzar($index)">
     <span id='the-czar'>CZAR</span>
   </div>
+</div>-->
+<!--<div class="row mb-0 mt-0 pt-0">
+  <div class="col s12 mb-0 pt-0" id="player-count">
+    <div class="row players-count center p-0 mb-0 mt-0 pt-0">
+      <h5>{{game.players.length}} / 12 Players Available</h5>
+    </div>
+  </div>
+</div>-->
+<div class="col s12 pt-0 mt-0">
+  <div class="center players-count">
+    <h5>{{game.players.length}} / 12 Players Available</h5>
+  </div>
+</div>
+<div id="players" class="col s12 p-0">
+  <div class="col s6" ng-repeat="player in game.players" >
+    <div class="player-cont h-135" style="background-color:{{colors[player.color]}}">
+    <div class="row center">
+      <div id="avatar_">
+        <span ng-show="isPremium($index)">
+          <img ng-src="img/king.png" id="king">
+        </span>
+        <img ng-src="{{player.avatar}}"/>
+      </div>
+      <div id="player-info">
+        <span>{{player.username | upperFirstLetter}}</span>
+        <span>{{player.points}}/{{game.pointLimit}}</span>
+        <span id='the-czar' ng-show="currentCzar($index)">CZAR</span>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  </div>
+<div class="clear"></div>
 </div>
 
+<div>{{ players | json }}</div>

@@ -1,6 +1,24 @@
-<div id = "inner-timer-container">
+<!--<div id = "inner-timer-container">
   <span id="timer-status-round" ng-hide="game.state === 'winner has been chosen' || game.state === 'waiting for czar to decide'"> Time Remaining</span>
   <span id="timer-status-czar-choosing" ng-show="game.state === 'winner has been chosen'"> Next Round In</span>
   <span id="timer-status-czar-choosing" ng-show="game.state === 'waiting for czar to decide'"> Czar Choosing</span>
   <div id="time" ng-bind="game.time"></div>
+</div>-->
+
+<div id = "inner-timer-container">
+  <div class="row timer-body">
+    <header id="timer-header" class="row">
+        <div class="col s9">
+          <h3 id="timer-status-round" ng-hide="game.state === 'winner has been chosen' || game.state === 'waiting for czar to decide'"> Time Remaining</h3>
+          <h3 id="timer-status-czar-choosing" ng-show="game.state === 'winner has been chosen'"> Next Round In</h3>
+          <h3 id="timer-status-czar-choosing" ng-show="game.state === 'waiting for czar to decide'"> Czar Choosing</h3>
+        </div>
+        <div class="col s3 icon blue">
+          <i class="small material-icons">alarm_on</i>
+        </div>
+    </header>
+    <div class="container">
+      <div id="time" ng-bind="game.time"></div>
+    </div>
+  </div>
 </div>
