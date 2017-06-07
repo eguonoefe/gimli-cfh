@@ -4,13 +4,12 @@
  * @return {void}
  */
 
-angular.module('mean')
+angular.module('mean.system')
 .controller('materializeInit', ['$scope', ($scope) => {
   $(() => {
     $('.carousel.carousel-slider').carousel({ fullWidth: true });
     $('.button-collapse').sideNav();
     $('.parallax').parallax();
-    $('.modal').modal();
 
     const mainHeader = $('#main-header');
     const logo = $('a#header-logo-container');
@@ -31,6 +30,12 @@ angular.module('mean')
     $scope.slider = (event, index) => {
       event.preventDefault();
       $('.carousel').carousel('set', index + 1);
+    };
+
+    // Display modals on index page
+    $scope.showModal = (event) => {
+      event.preventDefault();
+      $('.modal').modal();
     };
 
     // Adds a scroll effect to page when a navlink is clicked
