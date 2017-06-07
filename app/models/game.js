@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 
 /**
- * Question Schema
+ * create Question Schema
  */
 const GameSchema = new Schema({
   gameID: String,
