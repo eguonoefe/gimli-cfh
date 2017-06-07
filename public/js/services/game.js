@@ -1,5 +1,6 @@
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', function (socket, $timeout) {
+  .factory('game', ['socket', '$timeout', '$window', '$http',
+  function (socket, $timeout, $window, $http) {
 
   var game = {
     id: null, // This player's socket ID, so we know who this player is
@@ -142,7 +143,7 @@ angular.module('mean.system')
       game.czar = data.czar;
       game.curQuestion = data.curQuestion;
       // Extending the underscore within the question
-      game.curQuestion.text = data.curQuestion.text.replace(/_/g,'<u></u>');
+      game.curQuestion.text = data.curQuestion.text.replace(/_/g, '<u></u>');
 
       // Set notifications only when entering state
       if (newState) {
@@ -168,8 +169,72 @@ angular.module('mean.system')
         game.joinOverride = true;
       }, 15000);
     } else if (data.state === 'game dissolved' || data.state === 'game ended') {
+
+      // empty game hands
       game.players[game.playerIndex].hand = [];
       game.time = 0;
+
+      // when game ends
+      if (data.state === 'game ended') {
+        // create an array of game participants
+        let playersScore = [];
+
+        // and partcipant to playersScore
+        game.players.forEach((player) => {
+          playersScore.push({
+            name: player.username,
+            points: player.points,
+            userID: player.userID
+          });
+        });
+
+        // create game owner object
+        const gameOwner = {
+          name: game.players[0].username,
+          userID: game.players[0].userID
+        };
+
+        // create game winner object
+        const gameWinner = {
+          name: game.players[game.gameWinner].username,
+          userID: game.players[game.gameWinner].userID
+        };
+
+        const gameId = game.gameID;
+
+        // create game details
+        const gameDetails = {
+          gameID: gameId,
+          owner: gameOwner,
+          dateplayed: new Date(),
+          winner: gameWinner,
+          players: playersScore
+        };
+        // run only on owner console, to avoid dupicate insert
+        if (gameDetails.owner.userID ===  user._id) {
+          const jwt = $window.localStorage.getItem('token');
+
+          // create req object
+          const req = {
+            method: 'POST',
+            url: `/api/games/${game.gameID}/start`,
+            headers: {
+              'Authorization': jwt
+            },
+            data: gameDetails
+          };
+
+
+          // make api call to store game session
+          $http(req)
+          .then((response) => {
+            console.log(response);
+          },
+          (err) => {
+            console.log(err);
+          });
+        }
+      }
     }
   });
 
