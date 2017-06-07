@@ -22,7 +22,7 @@ exports.signin = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signin?error=invalid');
   } else {
-    res.redirect('/#!/app');
+    res.redirect('/#!/');
   }
 };
 
@@ -33,7 +33,7 @@ exports.signup = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signup');
   } else {
-    res.redirect('/#!/app');
+    res.redirect('/#!/');
   }
 };
 
