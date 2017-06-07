@@ -73,7 +73,7 @@ $(document).ready(function() {
               SignUp</a></li> 
           </span>   
           <span ng-hide="showOptions" class="btn waves-effect waves-light blue lighten-1">
-            <li><a href="/signout">Sign Out</a></li>
+            <li><a ng-click="signout()">Sign Out</a></li>
           </span>                  
         </ul>
 
@@ -251,9 +251,7 @@ $(document).ready(function() {
           <div class="row">
             <form class="col s12">
               <div class="row">
-                <div class="sign-error" ng-show="showError() === 'invalid'">
-                  Please check your username/password and try again.
-                </div>
+                <span>{{ message }}</span>
                 <div class="input-field col s12">
                   <i class="fa fa-envelope prefix"></i>
                   <input placeholder="Email" id="email" ng-model="email"
@@ -302,6 +300,7 @@ $(document).ready(function() {
             </li>
           </ul>
         </div>
+          {{ message }}
           <p id="create">Or create a username/password</p>
           <!-- SignUp with email and password -->
           <div class="row">

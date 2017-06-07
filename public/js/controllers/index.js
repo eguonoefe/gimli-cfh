@@ -1,10 +1,10 @@
 angular.module('mean.system')
   .controller('IndexController',
-  ['$scope', 'Global', '$location', '$window', '$http', 'socket', 'game', 'AvatarService',
-    function ($scope, Global, $location, $window, $http, socket, game, AvatarService) {
+  ['$scope', 'Global', '$location', '$route', '$window', '$http', 'socket', 'game', 'AvatarService',
+    function ($scope, Global, $location, $route, $window, $http, socket, game, AvatarService) {
       $scope.global = Global;
 
-      $scope.playAsGuest = function () {
+      $scope.playAsGuest = () => {
         game.joinGame();
         $location.path('/app');
       };
@@ -18,20 +18,23 @@ angular.module('mean.system')
           password: $scope.password
         };
         $http.post('/api/auth/signin', newuser).then((response) => {
-          if (response.data.signupStatus === 'success') {
+          if (response.data.signinStatus === 'success') {
             $window.localStorage.setItem('token', response.data.token);
            // $cookie.put('jwt',response.data.token);
             $location.path('/#/');
+            $window.location.reload();
           } else {
             $scope.message = response.data.message;
+            console.log(response.data);
           }
         }, (err) => {
           $scope.message = err;
+          console.log('error', err);
         });
       }
     };
 
-      $scope.showError = function () {
+      $scope.showError = () => {
         if ($location.search().error) {
           return $location.search().error;
         } else {
@@ -47,7 +50,7 @@ angular.module('mean.system')
           // get selected avatar
           const avatars = document.getElementsByName('avatars');
           let selectedAvatar;
-          for (let i = 0; i < avatars.length; i++) {
+          for (let i = 0; i < avatars.length; i += 1) {
             if (avatars[i].checked) {
               selectedAvatar = avatars[i].value;
             }
@@ -60,10 +63,12 @@ angular.module('mean.system')
             avatar: selectedAvatar
           };
           $http.post('/api/auth/signup', newuser).then((response) => {
-            if (response.data.signupStatus == 'success') {
+            console.log(response.data);
+            if (response.data.signupStatus === 'success') {
               $window.localStorage.setItem('token', response.data.token);
               // $cookie.put('jwt',response.data.token);
-              $location.path('/#/');
+               $location.path('/#/');
+              $window.location.reload();
             } else {
               $scope.message = response.data.message;
             }
@@ -74,8 +79,8 @@ angular.module('mean.system')
       };
 
       $scope.showJWt = () => {
-        var jwt = $window.localStorage.getItem('token');
-        var req = {
+        const jwt = $window.localStorage.getItem('token');
+        const req = {
           method: 'POST',
           url: '/api/auth/showJWT',
           headers: {
@@ -84,16 +89,16 @@ angular.module('mean.system')
           data: { test: 'test' }
         }
         $http(req)
-          .then(function (response) {
+          .then((response) => {
           },
-          function (err) {
+           (err) => {
           });
         //  $cookie.get('jwt');
       };
 
       $scope.avatars = [];
       AvatarService.getAvatars()
-        .then(function (data) {
+        .then((data) => {
           $scope.avatars = data;
         });
 

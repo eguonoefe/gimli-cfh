@@ -20,7 +20,6 @@ exports.authCallback = (req, res) => {
  */
 exports.signin = (req, res) => {
   if (!req.user) {
-    console.log('came here');
     res.redirect('/#!/signin?error=invalid');
   } else {
     res.redirect('/#!/app');
@@ -31,7 +30,6 @@ exports.signin = (req, res) => {
  * Show sign up form
  */
 exports.signup = (req, res) => {
-  console.log('came here');
   if (!req.user) {
     res.redirect('/#!/signup');
   } else {
@@ -84,7 +82,6 @@ exports.checkAvatar = (req, res) => {
 
 };
 exports.createJWT = function(req, res) {
-  console.log('got here!');
   if (req.body.name && req.body.password && req.body.email) {
     User.findOne({
       email: req.body.email

@@ -5,7 +5,8 @@
  */
 
 angular.module('mean.system')
-.controller('materializeInit', ['$scope', ($scope) => {
+.controller('materializeInit', ['$scope', '$window', '$location',
+  ($scope, $window, $location) => {
   $(() => {
     $('.carousel.carousel-slider').carousel({ fullWidth: true });
     $('.button-collapse').sideNav();
@@ -38,6 +39,11 @@ angular.module('mean.system')
       $('.modal').modal();
     };
 
+    $scope.signout = () => {
+      $window.localStorage.removeItem('token');
+      $window.location = '/signout';
+    };
+    
     // Adds a scroll effect to page when a navlink is clicked
     $('.scrollspy').scrollSpy({
       scrollOffset: 100
