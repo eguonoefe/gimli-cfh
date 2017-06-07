@@ -1,7 +1,9 @@
 angular.module('mean.system')
   .controller('IndexController',
-  ['$scope', 'Global', '$location', '$route', '$window', '$http', 'socket', 'game', 'AvatarService',
-    function ($scope, Global, $location, $route, $window, $http, socket, game, AvatarService) {
+  ['$scope', 'Global', '$location', '$route',
+    '$window', '$http', 'socket', 'game', 'AvatarService',
+    function ($scope, Global, $location, $route, $window,
+      $http, socket, game, AvatarService) {
       $scope.global = Global;
 
       $scope.playAsGuest = () => {
@@ -9,37 +11,34 @@ angular.module('mean.system')
         $location.path('/app');
       };
 
-    $scope.signin = () => {
-      if (!$scope.email || !$scope.password) {
-        $scope.message = 'Please fill in your email and password';
-      } else {
-        const newuser = {
-          email: $scope.email,
-          password: $scope.password
-        };
-        $http.post('/api/auth/signin', newuser).then((response) => {
-          if (response.data.signinStatus === 'success') {
-            $window.localStorage.setItem('token', response.data.token);
+      $scope.signin = () => {
+        if (!$scope.email || !$scope.password) {
+          $scope.message = 'Please fill in your email and password';
+        } else {
+          const newuser = {
+            email: $scope.email,
+            password: $scope.password
+          };
+          $http.post('/api/auth/signin', newuser).then((response) => {
+            if (response.data.signinStatus === 'success') {
+              $window.localStorage.setItem('token', response.data.token);
            // $cookie.put('jwt',response.data.token);
-            $location.path('/#/');
-            $window.location.reload();
-          } else {
-            $scope.message = response.data.message;
-            console.log(response.data);
-          }
-        }, (err) => {
-          $scope.message = err;
-          console.log('error', err);
-        });
-      }
-    };
+              $location.path('/#/');
+              $window.location.reload();
+            } else {
+              $scope.message = response.data.message;
+            }
+          }, (err) => {
+            $scope.message = err;
+          });
+        }
+      };
 
       $scope.showError = () => {
         if ($location.search().error) {
           return $location.search().error;
-        } else {
-          return false;
         }
+        return false;
       };
 
 
@@ -63,11 +62,10 @@ angular.module('mean.system')
             avatar: selectedAvatar
           };
           $http.post('/api/auth/signup', newuser).then((response) => {
-            console.log(response.data);
             if (response.data.signupStatus === 'success') {
               $window.localStorage.setItem('token', response.data.token);
               // $cookie.put('jwt',response.data.token);
-               $location.path('/#/');
+              $location.path('/#/');
               $window.location.reload();
             } else {
               $scope.message = response.data.message;
@@ -78,28 +76,9 @@ angular.module('mean.system')
         }
       };
 
-      $scope.showJWt = () => {
-        const jwt = $window.localStorage.getItem('token');
-        const req = {
-          method: 'POST',
-          url: '/api/auth/showJWT',
-          headers: {
-            'Authorization': jwt
-          },
-          data: { test: 'test' }
-        }
-        $http(req)
-          .then((response) => {
-          },
-           (err) => {
-          });
-        //  $cookie.get('jwt');
-      };
-
       $scope.avatars = [];
       AvatarService.getAvatars()
         .then((data) => {
           $scope.avatars = data;
         });
-
     }]);
