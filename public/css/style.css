@@ -550,6 +550,8 @@ footer h5{
 
 .chat-body {
   display: none;
+  height: 30vh;
+  overflow: scroll;
 }
 
 .right {
@@ -559,33 +561,46 @@ footer h5{
 .chat-holder {
   padding: 10px;
 }
-
-.chat-holder ul {
-  display: inline-table;
-  width: 100%;
+.self{
+  /*background-color: rgba(100, 181, 246, 0.1);*/
+  background-color: rgba(153, 153, 153, 0.1);
 }
-
-.chat-holder ul li {
-  display: block;
-  list-style: none;
-  padding: 5px 0px 0px 5px;
-  margin-bottom: 5px;
-  width: 100%;
+.other{
+  /*background-color: rgba(251, 140, 0, 0.1)*/
+  background-color: rgba(102, 102, 102, 0.2);
+  
 }
-
-.chat-holder ul li:nth-child(even) {
-  background-color: #fb8c00;
+.chat ul li {
+  width: inherit;
+  word-wrap: break-word;
 }
-
+.chat ul li p{
+  line-height: 1.5em;
+}
+.chat ul > ul.row {
+  padding-top: 0.8em;
+}
+.chat ul > ul div p {
+  display: inline;
+  margin-right: 110px;
+  font-weight: 800;
+}
+.chat ul > ul div span {
+  font-size: 10px;
+  color: #fb8c00;
+}
 .chat-input {
-  padding: 5px;
+  margin: 0px 10px;
 }
 .chat-input input {
-  height: 40px;
-  border: 2px solid rgb(37, 50, 69);
-  margin: 0px;
-  border-radius: 3px;
-  padding: 0px 5px;
+  width: 100%;
+}
+.chat-holder ul > ul li img{
+  height:30px;
+  width: 30px;
+}
+#chat-status {
+  color: rgba(153, 153, 153, 0.8);
 }
 
 #app-container {

@@ -52,16 +52,13 @@
             </div>
             <div class="chat-body">
               <div class="chat-holder">
-                <ul>
-                  <li>Hello</li>
-                  <li>How are you</li>
-                  <li>I'm fine</li>
-                  <li>Great to know</li>
+                <ul class="messages">
                 </ul>
                 <div class="clear"></div>
               </div>
-              <div class="chat-input">
-                <input type="text" name="chats" placeholder="Type your message and hit enter" />
+              <div class="input-field chat-input">
+                <input type="text" class="inputMessage" name="chats" placeholder="Type your message and hit enter" ng-keyup="startGameChat()"/>
+                <p id="chat-status">{{chatStatus}}</p>
               </div>
               <div class="clear"></div>
             </div>

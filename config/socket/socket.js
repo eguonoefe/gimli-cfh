@@ -73,6 +73,10 @@ module.exports = function(io) {
       console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
       exitGame(socket);
     });
+
+    socket.on('new message', (data) => {
+      socket.broadcast.emit('add message', { data });
+    });
   });
 
   var joinGame = function(socket,data) {
