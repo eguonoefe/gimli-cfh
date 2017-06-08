@@ -39,7 +39,7 @@ input[type="radio"].with-gap:checked+label:after{
 
 /* Banner */
 #index-banner{
-  height: 91.5vh;
+  height: 95vh;
   background: linear-gradient(
     rgba(20,20,20, .5),
     rgba(20,20,20, .5))
@@ -48,7 +48,7 @@ input[type="radio"].with-gap:checked+label:after{
   margin-left: -35px;
 }
 #index-banner h1{
-  margin-top: 12rem;
+  margin-top: 4rem;
 }
 
 /* Header */
@@ -56,17 +56,9 @@ nav ul a,
 nav .brand-logo {
   color: #fff;
 }
-nav a#header-logo-container{
-  margin-right: 25px;
-  margin-left: 13px;
-}
-nav .brand-logo a.btn{
-  margin-left: 15px;
-}
-
 nav .brand-logo img{
   height: 55px;
-  margin-bottom: -20px;
+  margin-bottom: 0px;
 }
 .button-collapse {
   color: #26a69a;
@@ -82,6 +74,7 @@ nav .brand-logo img{
 
 #donate-btn{
   width: 150px;
+  margin-left: 20px;
 }
 #donate-btn, span.btn.orange{
   color: #fff;  
@@ -124,11 +117,19 @@ nav .brand-logo img{
   background: #fff;
 }
 
-/* User signin and signup*/
+/* User signin and signup */  
 #sign-in ul li,
 #sign-up ul li{
   display: inline-block;
   margin-right: 1rem;
+}
+#sign-in ul li a,
+#sign-up ul li a{
+  padding: 0px;
+}
+#sign-in .modal-content li a.btn, 
+#sign-up .modal-content li a.btn{
+  width: 62px;
 }
 #sign-up img{
   height: 30px;
@@ -186,12 +187,12 @@ input[type=text].invalid{
 
 /* Social icons */
 ul.social-icons{
-  padding: 0em 2em 2em 2em;
   text-align: center;
 }
 ul.social-icons li{
   display: inline-block;
-  margin-left: 1rem;
+  margin-left: 0.25rem;
+  /*margin-bottom: 10px;*/
   text-align: center;
   width: 28px;
   height: 28px;
@@ -233,7 +234,24 @@ ul.social-icons li:last-child{
   font-family: 'Slabo 27px';
   background: rgb(37, 50, 69);  
 }
-
+#footer div.col{
+  margin-bottom: 30px;
+}
+#footer div.col:last-child{
+  margin-bottom: 0px;
+}
+#footer div.col:nth-child(1){
+  padding-left: 2.5em;
+}
+footer div.col:nth-child(1) h5{
+  width: 50px;
+}
+#footer div.col:nth-child(2){
+  padding-top: 15px;
+}
+#footer div.col:nth-child(2) img{
+  height: 80px;
+}
 #footer .page-footer {
   margin: 0px !important;
   background: rgb(37, 50, 69);  
@@ -246,20 +264,15 @@ ul.social-icons li:last-child{
 footer p{
    line-height: 1rem;
    color: #fff;
-   font-size: 14px;
+   font-size: 1em;
 }
-
 footer h5{
-  font-size: 18px;
+  font-size: 1.2em;  
 }
-
 /* Avatars display */
 #avatars-container{
   margin-top: 45px;
 }
-/*#avatars-container div input[type=radio]{
-  
-}*/
 #avatars-container form p{
   margin-bottom: 10px; 
 }
@@ -276,13 +289,13 @@ footer h5{
   padding-left: 0px;
 }
 #start-game{
-  margin-top: 40px;
+  margin-top: 20px;
 }
 #start-game h5{
   margin-bottom: 25px;
 }
 #start-game p > a{
-  width: 150px;
+  width: 120px;
 }
 #start-game p > a:nth-child(1){
   margin-right: 25px;
@@ -290,29 +303,6 @@ footer h5{
 #start-game p > a:nth-child(2){
   margin-left: 25px;
 }
-
-@media only screen and (max-width : 992px) {
-  .parallax-container .section {
-    position: absolute;
-    top: 40%;
-  }
-  #index-banner{
-    height: 92.5vh;
-  }
-  #index-banner .section {
-    top: 10%;
-  }
-}
-
-@media only screen and (max-width : 600px) {
-  #index-banner .section {
-    top: 0;
-  }
-}
-   /*.row {
-      margin: 0 0 0 4px;
-   }
- }*/
 
  .clear {
    clear: both;
@@ -372,9 +362,6 @@ footer h5{
 #timer-header .material-icons{
   margin-top: 15px;
 }
-/*.timer-body {
-  background-color: #fff;
-}*/
 
 .pt-40 {
   padding-top: 40px;
@@ -469,9 +456,6 @@ footer h5{
 #game-end-info {
   font-size: 24px;
 }
-/*#startGame {
-  padding: 20px;
-}*/
 
 .cfh-card {
   background-image: url('/img/card-2.jpg');
