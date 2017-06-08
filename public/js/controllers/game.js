@@ -225,16 +225,29 @@ $location, MakeAWishFactsService, $dialog, $http) => {
     $location.path('/');
   };
 
+  // SHUFFLE CARD ANIMATION
+  $scope.shuffleCards = () => {
+      const card = $(`#${event.target.id}`);
+      card.addClass('animated flipOutY');
+      setTimeout(() => {
+        $scope.startNextRound();
+        card.removeClass('animated flipOutY');
+        $('#shuffleModal').modal('close');
+      }, 500);
+    };
+
+    $scope.startNextRound = () => {
+      if ($scope.isCzar()) {
+        game.startNextRound();
+      }
+    };
+
   // Catches changes to round to update when no players pick card
   // (because game.state remains the same)
   $scope.$watch('game.round', () => {
     $scope.hasPickedCards = false;
     $scope.showTable = false;
     $scope.winningCardPicked = false;
-    $scope.makeAWishFact = makeAWishFacts.pop();
-    if (!makeAWishFacts.length) {
-      makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
-    }
     $scope.pickedCards = [];
   });
 
@@ -243,6 +256,28 @@ $location, MakeAWishFactsService, $dialog, $http) => {
     if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
       $scope.showTable = true;
     }
+    // AUDAX EDITTED HERE
+    if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
+             $('#shuffleModal').modal({
+               dismissible: false
+             });
+             $('#shuffleModal').modal('open');
+             // displayMessage('', '#card-modal');
+           }
+           if (game.state === 'game dissolved') {
+             $('#shuffleModal').modal('close');
+           }
+           if ($scope.isCzar() === false && game.state === 'czar pick card'
+             && game.state !== 'game dissolved'
+             && game.state !== 'awaiting players' && game.table.length === 0) {
+             $scope.czarHasDrawn = 'Wait! Czar is drawing Card';
+           }
+           if (game.state !== 'czar pick card'
+             && game.state !== 'awaiting players'
+             && game.state !== 'game dissolve') {
+             $scope.czarHasDrawn = '';
+           }
+
   });
 
   /**
