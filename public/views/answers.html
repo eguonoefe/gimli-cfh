@@ -21,11 +21,11 @@
             <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
         </div>
     </span>
-    <div class="clear"></div>
+
   </div>
 </div>
 
-<div class="waiting" ng-show="game.state === 'awaiting players'">
+<div class="waiting" id="questions-bg" ng-show="game.state === 'awaiting players'">
   <img src="img/p-cards.png" alt="" />
   <p>Cards will appear here when game starts</p>
 </div>
@@ -79,4 +79,6 @@
     </div>
 
   </div>
+
+</div>
 </div>

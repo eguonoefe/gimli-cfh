@@ -308,6 +308,25 @@ footer h5{
   margin-left: 25px;
 }
 
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner{
+    height: 92.5vh;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+#start-game p > a:nth-child(1){
+  margin-right: 25px;
+}
+#start-game p > a:nth-child(2){
+  margin-left: 25px;
+}
+
  .clear {
    clear: both;
  }
