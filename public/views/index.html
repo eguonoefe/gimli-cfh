@@ -19,7 +19,7 @@ $(document).ready(function() {
     <div class="section no-pad-bot">
       <div class="container-fluid">
         <br><br>
-        <a class="brand-logo">
+        <a class="brand-logo" href="/">
           <img src="/img/cfh.png" alt="">
         </a>
         <h1 class="header center blue-text text-lighten-1">Cards for Humanity</h1>
@@ -50,7 +50,7 @@ $(document).ready(function() {
     <nav role="navigation">
       <div class="nav-wrapper container-fluid">
         <div class="brand-logo">
-          <a id="header-logo-container" class="hide" href="#" >
+          <a id="header-logo-container" class="hide" href="/" >
             <img src="/img/cfh-crop.png" alt="">
           </a>
           <a id="donate-btn"
@@ -79,13 +79,18 @@ $(document).ready(function() {
 
         <!-- Mobile nav -->
         <ul id="nav-mobile" class="side-nav">
-          <li><a href="#">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="#how-to-play">How to Play</a></li>
           <li><a href="#charity">Charity</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#sign-in">SignIn</a></li>   
-          <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1">
-            SignUp</a></li>  
+          <li><a href="#team">Team</a></li> 
+          <span ng-show="showOptions">
+            <li><a href="#sign-in" ng-click="showModal($event)">SignIn</a></li> 
+            <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1" ng-click="showModal($event)">
+              SignUp</a></li> 
+          </span>   
+          <span ng-hide="showOptions" class="btn waves-effect waves-light blue lighten-1">
+            <li><a ng-click="signout()">Sign Out</a></li>
+          </span>    
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse right">
           <i class="material-icons">menu</i></a>
@@ -191,7 +196,7 @@ $(document).ready(function() {
     <div id="team" class="section scrollspy no-pad-bot">
       <div class="container">
         <div class="row center">
-          <h1 class="header col s12 blue-text text-lighten-1">Meet the Team</h1>
+          <h1 class="header col s12 blue-text text-lighten-1">The CFH Team</h1>
         </div>
       </div>
     </div>
@@ -203,14 +208,24 @@ $(document).ready(function() {
       <div class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
-            <h4>Meet the CFH Team</h4>
+            <h4>Cards for Humanity was: </h4>
           <div class="left-align light">
             <p class="center">
-              Created with love and tenderness by: 
+              Originally created by: 
               <a href="http://github.com/silversteez">Matt Silverstein</a>,
               <a href="http://github.com/mrngoitall">Will Ngo</a>,              
               <a href="http://github.com/tylermcginnis33">Tyler McGinnis</a>, and
               <a href="http://github.com/davegonzalez">David Gonzalez</a>
+            </p>
+            <p class="center">
+              And redesigned with love and tenderness by:
+              <a href="http://github.com/sandela-dbamidele">Daniel Bamidele</a>,
+              <a href="http://github.com/andela-ookoro">Okwudiri Okoro</a>,
+              <a href="http://github.com/andela-dhaniabelega">Dhani Abelega</a>,
+              <a href="http://github.com/andela-mugochukwu">Mazi Ugochukwu</a>,
+              <a href="http://github.com/andela-efalayi">Esther Falayi</a>,
+              <a href="http://github.com/andela-aanchirinah">Audax Anchirinah</a>, and 
+              <a href="http://github.com/andela-moe">Mark Edomwande</a>
             </p>
           </div>
         </div>
@@ -230,19 +245,19 @@ $(document).ready(function() {
             <ul>
               <li >
                 <a href="/auth/facebook" class="waves-effect waves-light btn facebook">
-                  <i class="fa fa-facebook-f left"></i></a>
+                  <i class="fa fa-facebook-f"></i></a>
               </li>
               <li>
                 <a href="/auth/twitter" class="waves-effect waves-light btn twitter">
-                  <i class="fa fa-twitter left"></i></a>
+                  <i class="fa fa-twitter"></i></a>
               </li>
               <li>
                 <a href="/auth/github" class="waves-effect waves-light btn github">
-                  <i class="fa fa-github left"></i></a>
+                  <i class="fa fa-github"></i></a>
               </li>
               <li>
                 <a href="/auth/google" class="waves-effect waves-light btn googleplus">
-                  <i class="fa fa-google-plus left"></i></a>
+                  <i class="fa fa-google-plus"></i></a>
               </li>
             </ul>
           </div>
@@ -284,19 +299,19 @@ $(document).ready(function() {
           <ul>
             <li >
               <a href="/auth/facebook" class="waves-effect waves-light btn facebook">
-                <i class="fa fa-facebook-f left"></i></a>
+                <i class="fa fa-facebook-f"></i></a>
             </li>
             <li>
               <a href="/auth/twitter" class="waves-effect waves-light btn twitter">
-                <i class="fa fa-twitter left"></i></a>
+                <i class="fa fa-twitter"></i></a>
             </li>
             <li>
               <a href="/auth/github" class="waves-effect waves-light btn github">
-                <i class="fa fa-github left"></i></a>
+                <i class="fa fa-github"></i></a>
             </li>
             <li>
               <a href="/auth/google" class="waves-effect waves-light btn googleplus">
-                <i class="fa fa-google-plus left"></i></a>
+                <i class="fa fa-google-plus "></i></a>
             </li>
           </ul>
         </div>
@@ -351,16 +366,16 @@ $(document).ready(function() {
   <footer id="footer" class="page-footer">
     <div class="container-fluid">
       <div class="row ">
-        <div class="col l4 s12">
+        <div class="col l4 m4 s6">
           <h5 class="white-text">Cards for Humanity</h5>
           <p class="grey-text text-lighten-4">&copy; 2017</p>
         </div>
-        <div class="col l4 s12">
-           <div class="center">
-             <img src="/img/cfh.png" alt="">
+        <div class="col l4 m4 s6">
+           <div>
+             <img src="/img/cfh.png" alt="cfh-logo">
            </div>
         </div>
-        <div class="col l4 s12">
+        <div class="col l4 m4 s12">
           <h5 class="white-text center">Connect With Us</h5>
 
           <!-- Social icons -->
@@ -371,7 +386,7 @@ $(document).ready(function() {
               </a>
             </li>
             <li class="twitter">
-              <a class="white-text" href="#!">
+              <a class="white-text" href="https://twitter.com/cfh_app">
                 <i class="fa fa-twitter"></i> 
               </a>
             </li>
