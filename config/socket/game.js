@@ -68,7 +68,7 @@ Game.prototype.payload = function () {
 
   return {
     gameID: this.gameID,
-    players: players,
+    players,
     czar: this.czar,
     state: this.state,
     round: this.round,

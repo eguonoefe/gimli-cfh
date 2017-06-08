@@ -139,11 +139,12 @@ module.exports = function(io) {
           game.prepareGame();
         }
       } else {
-        // TODO: Send an error message back to this user saying the game has already started
+        // Send an error message back to this user saying the game has already started
+        socket.to(socket.id).emit('kickout', 'Aww!');
       }
     } else {
       // Put players into the general queue
-      console.log('Redirecting player',socket.id,'to general queue');
+      console.log('Redirecting player', socket.id, 'to general queue');
       if (createPrivate) {
         createGameWithFriends(player,socket);
       } else {

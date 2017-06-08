@@ -182,6 +182,7 @@ $scope.checkCookie = () => {
         email: $scope.guestEmail,
         url: `${encodeURIComponent(window.location.href)}` });
     $http.get(`http://localhost:3000/api/sendmail/${details}`);
+    $scope.guestEmail = '';
   };
   /**
    * Send bulk invite emails to users
@@ -199,6 +200,8 @@ $scope.checkCookie = () => {
           url: `${encodeURIComponent(window.location.href)}` });
       $http.get(`http://localhost:3000/api/sendmail/${details}`);
     });
+    $scope.searchString = '';
+    $scope.users = '';
   };
   $scope.sendPickedCards = () => {
     game.pickCards($scope.pickedCards);

@@ -1,6 +1,6 @@
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', '$window', '$http',
-  function (socket, $timeout, $window, $http) {
+  .factory('game', ['socket', '$timeout', '$window', '$http', '$location',
+  function (socket, $timeout, $window, $http, $location) {
 
     var game = {
       id: null, // This player's socket ID, so we know who this player is
@@ -13,6 +13,7 @@ angular.module('mean.system')
       table: [],
       czar: null,
       playerMinLimit: 3,
+      playerMaxLimit: 12,
       playerMaxLimit: 6,
       pointLimit: null,
       state: null,
@@ -186,6 +187,15 @@ angular.module('mean.system')
 
     socket.on('notification', function (data) {
       addToNotificationQueue(data.notification);
+    });
+
+    socket.on('kickout', () => {
+    $('.modal').modal({
+      complete: () => {
+        $location.path('/#/');
+      }
+    });
+      $('#kickout-modal').modal('open');
     });
 
     game.joinGame = function (mode, room, createPrivate) {

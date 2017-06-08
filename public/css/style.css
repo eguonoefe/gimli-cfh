@@ -331,7 +331,7 @@ footer h5{
    clear: both;
  }
 
-#modal1, #modal2, .modal-4, .modal-5, .modal-6 {
+#modal1, #modal2, .modal-4, .modal-5, .modal-6, #kickout-modal {
   color: black;
   background-color: transparent;
   border: none;
@@ -636,3 +636,8 @@ footer h5{
 .orange {
   color: #fb8c00;
 }
+
+#kickout-modal p {
+  font-size: 18px;
+}
+
