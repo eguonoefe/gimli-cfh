@@ -14,14 +14,14 @@
       <div id="share-link" ng-show="game.state === 'awaiting players'">
         <a id="click-tag"
           ng-click="showModal1()"
-          class="btn-floating waves-effect waves-light btn-large tooltipped"
+          class="btn-floating waves-effect waves-light btn tooltipped blue lighten-1"
           data-position="bottom" data-delay="50" data-tooltip="Send Invites to CFH users"
         >
           <i class="material-icons">group_add</i>
         </a>
-        <a id="click-tag"
+        <a id="click-tag2"
           ng-click="showModal2()"
-          class="btn-floating waves-effect waves-light btn-large tooltipped"
+          class="btn-floating waves-effect waves-light btn tooltipped blue lighten-1"
           data-position="bottom" data-delay="50" data-tooltip="Send Invites to Guests"
         >
           <i class="material-icons">mood</i>
@@ -35,9 +35,17 @@
         </span>
         <div class="clear"></div>
       </div>
+       <div id="start-game-container" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length < game.playerMinLimit">
+        
+        <span class="btn">
+         Invite at least  {{game.playerMinLimit - game.players.length }} 
+         more {{ (game.playerMinLimit - game.players.length) < 2 ? 'person' : 'people'}} to start the game
+        </span>
+        <div class="clear"></div>
+      </div>
       <div class="clear"></div>
     </div>
-
+    
 
     <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}
     </div>
@@ -56,6 +64,7 @@
       </div>
       <div class="clear"></div>
     </div>
+
     <div class="clear"></div>
 </div>
 
@@ -65,7 +74,7 @@
       <h5>Search for users to send invites to</h5>
       <div id="modal-body">
         <input type="text" ng-keyup="searchUser()" ng-model="searchString"/>
-        <li ng-repeat="user in users" >
+        <li id="users" ng-repeat="user in users" >
           <p>
             <input type="checkbox" id="{{ user.name }}" ng-model="user.selected" ng-click="countCheckedBox()" ng-disabled="checkedBoxCount > 10" />
             <label for="{{ user.name }}">{{ user.name }}</label>
@@ -89,7 +98,7 @@
         Email: <input type="text" ng-keyup="checkEmail()" ng-model="guestEmail"/>
       </div>
     <div class="modal-footer">
-      <a 
+      <a
         href=""
         class="modal-action modal-close waves-effect waves-green btn-flat"
         ng-disabled="!enableSendGuestInvite"
@@ -99,6 +108,51 @@
     </div>
     <div class="clear"></div>
   </div>
+
+<<<<<<< HEAD
+  <!-- Kickout modal -->
+  <div id="kickout-modal" class="modal">
+    <div class="modal-content center">
+      <h3>Oh Damn it! You are too slow!</h3>
+      <div id="modal-body">
+        <img src="/img/crying.png" alt="sorry dude" width="100" height="100">
+        <p>The game has already started!</p>
+        <p>I think you should take less pie</p>
+        <div class="row center">
+          <h5>What would you like to do?</h5>
+          <h5>
+            <a href="/play" class="btn-large waves-effect waves-light blue lighten-1" >
+              Join General Room
+            </a>
+            <a href="/play?custom" class="btn-large waves-effect waves-light blue lighten-1" >
+              Create a Custom Game
+            </a>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+=======
+>>>>>>> d61572a5ef8930655228b4f915bfbb658a6907eb
+  <!-- MODAL TO ASK THE CZAR TO PICK A CARD  -->
+   <div id="shuffleModal" class="modal modal-6" role="dialog">
+       <div class="modal-content">
+            <h4 id="shuffleText">As our new Czar, pick a card to continue...</h4>
+            <div class="center">
+              <div ng-click="shuffleCards()" ng-style="{'cursor':'pointer'}" style='margin: auto;'>
+                <img src='../img/black-card.png' style='width: 100px;' class='animated flipInX' id='shufflecard1' />
+                <img src='../img/black-card.png' style='width: 100px;' class='animated flipInX' id='shufflecard2' />
+                <img src='../img/black-card.png' style='width: 100px;' class='animated flipInX' id='shufflecard3' />
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn" id="close" data-dismiss="modal" style="display:none; ">Close</button>
+           </div>
+     </div>
+   <!-- MODAL ENDS HERE  -->
+
 
   <div class="clear"></div>
 </div>

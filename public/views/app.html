@@ -1,5 +1,5 @@
 </script>
-<div id="app-container" ng-controller="GameController">
+<div id="app-container" ng-controller="GameController" ng-init="checkCookie()">
   <ng-include src="'./views/header.html'"></ng-include>
   <div class="main-bg">
     <div class="main-content">
@@ -10,14 +10,14 @@
             <timer></timer>
           </div>
           <div class="row">
-            <div class="fixed-card">
+            <div class="fixed-card" id="card-bg">
               <div class="img-holder">
                 <img src="img/cfh-2.png" alt="">
               </div>
               <span>
                 Help in our mission to save the world!
               </span>
-              <span class="btn ">Donate</span>
+              <span class="btn waves-effect waves-light orange darken-2 ">Donate</span>
             </div>
           </div>
           <div class="clear"></div>
