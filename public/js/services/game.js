@@ -14,6 +14,7 @@ angular.module('mean.system')
       czar: null,
       playerMinLimit: 3,
       playerMaxLimit: 12,
+      playerMaxLimit: 6,
       pointLimit: null,
       state: null,
       round: 0,
