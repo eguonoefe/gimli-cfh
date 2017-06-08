@@ -27,6 +27,20 @@ $(document).ready(function() {
           <h5 class=" orange-text text-darken-3">A Game for Horrible People Desperately Trying to do Good</h5>
         </div>
       </div>
+            <!-- Add button to start game here -->
+      <div ng-hide="showOptions" id="start-game" class="container">
+        <div class="row center">
+          <h5>Play with</h5>
+          <p>
+            <a href="/play" class="btn-large waves-effect waves-light blue lighten-1" >
+              strangers
+            </a> or 
+            <a href="/play?custom" class="btn-large waves-effect waves-light blue lighten-1" >
+              friends
+            </a>
+          </p>
+        </div>
+      </div>
     </div>
     <div class="parallax"><img src="/img/main.jpg" alt="Unsplashed background img 1"></div>
   </div>
@@ -59,7 +73,7 @@ $(document).ready(function() {
               SignUp</a></li> 
           </span>   
           <span ng-hide="showOptions" class="btn waves-effect waves-light blue lighten-1">
-            <li><a href="/signout">Sign Out</a></li>
+            <li><a ng-click="signout()">Sign Out</a></li>
           </span>                  
         </ul>
 
@@ -130,23 +144,6 @@ $(document).ready(function() {
                 <img src="/img/cfh-charity.jpg"></a>
               <a class="carousel-item" href="#four!">
                 <img src="/img/cfh-team.jpg"></a>
-            </div>
-          </div>
-
-          <!-- Add button to start game here -->
-          <div ng-hide="showOptions" id="start-game" class="container">
-            <div class="row center">
-              <h5>Play with:</h5>
-              <div class="col s6">
-                <a href="/play" class="btn waves-effect waves-light blue lighten-1" >
-                  strangers
-                </a>
-              </div>
-              <div class="col s6">
-                <a href="/play?custom" class="btn waves-effect waves-light blue lighten-1" >
-                  friends
-                </a>
-              </div>
             </div>
           </div>
         </div>
@@ -254,9 +251,7 @@ $(document).ready(function() {
           <div class="row">
             <form class="col s12">
               <div class="row">
-                <div class="sign-error" ng-show="showError() === 'invalid'">
-                  Please check your username/password and try again.
-                </div>
+                <span>{{ message }}</span>
                 <div class="input-field col s12">
                   <i class="fa fa-envelope prefix"></i>
                   <input placeholder="Email" id="email" ng-model="email"
@@ -305,6 +300,7 @@ $(document).ready(function() {
             </li>
           </ul>
         </div>
+          {{ message }}
           <p id="create">Or create a username/password</p>
           <!-- SignUp with email and password -->
           <div class="row">
