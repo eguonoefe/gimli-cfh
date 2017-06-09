@@ -481,9 +481,9 @@ footer h5{
 }
 
 .cfh-card {
-  background-image: url('/img/card-2.jpg');
+  background-image: url('/img/card.jpeg');
   background-size: cover;
-  background-position:top;
+  background-position:center;
   background-repeat: no-repeat;
   height: 190px;
   color: black;
@@ -495,6 +495,10 @@ footer h5{
 
 .p-5 {
   padding: 5px;
+}
+
+.p-2 {
+  padding: 2px;
 }
 
 .fixed-card {
@@ -641,3 +645,22 @@ footer h5{
   font-size: 18px;
 }
 
+.m-center {
+  margin: 0 auto;
+}
+
+.czar-waiting {
+  display: block;
+  text-align: center;
+  height: auto !important;
+}
+
+.czar-waiting img {
+  display: block !important;
+  margin: 0 auto;
+}
+
+.czar-waiting h5 {
+  margin-top: 5px;
+  display: block !important;;
+}

@@ -1,6 +1,11 @@
 <div class="row">
   <div class="col s12 valign-wrapper" id="questions">
-    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
+    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players' || game.state === 'czar pick card'"></span>
+  </div>
+
+  <div ng-show="game.state === 'czar pick card' && !isCzar()" class="czar-waiting valign-wrapper">
+    <h5>Waiting for CZAR to pick a card..</h5>
+    <div class="clear"></div>
   </div>
 
   <div id="startGame" class="center" ng-show="game.state === 'awaiting players'">
