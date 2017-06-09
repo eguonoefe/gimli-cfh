@@ -1,6 +1,11 @@
 <div class="row">
   <div class="col s12 valign-wrapper" id="questions">
-    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
+    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players' || game.state === 'czar pick card'"></span>
+  </div>
+
+  <div ng-show="game.state === 'czar pick card' && !isCzar()" class="czar-waiting valign-wrapper">
+    <h5>Waiting for CZAR to pick a card..</h5>
+    <div class="clear"></div>
   </div>
 
   <div id="startGame" class="center" ng-show="game.state === 'awaiting players'">
@@ -74,7 +79,7 @@
       <h5>Search for users to send invites to</h5>
       <div id="modal-body">
         <input type="text" ng-keyup="searchUser()" ng-model="searchString"/>
-        <li ng-repeat="user in users" >
+        <li id="users" ng-repeat="user in users" >
           <p>
             <input type="checkbox" id="{{ user.name }}" ng-model="user.selected" ng-click="countCheckedBox()" ng-disabled="checkedBoxCount > 10" />
             <label for="{{ user.name }}">{{ user.name }}</label>
@@ -109,6 +114,29 @@
     <div class="clear"></div>
   </div>
 
+  <!-- Kickout modal -->
+  <div id="kickout-modal" class="modal">
+    <div class="modal-content center">
+      <h3>Oh Damn it! You are too slow!</h3>
+      <div id="modal-body">
+        <img src="/img/crying.png" alt="sorry dude" width="100" height="100">
+        <p>The game has already started!</p>
+        <p>I think you should take less pie</p>
+        <div class="row center">
+          <h5>What would you like to do?</h5>
+          <h5>
+            <a href="/play" class="btn-large waves-effect waves-light blue lighten-1" >
+              Join General Room
+            </a>
+            <a href="/play?custom" class="btn-large waves-effect waves-light blue lighten-1" >
+              Create a Custom Game
+            </a>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
   <!-- MODAL TO ASK THE CZAR TO PICK A CARD  -->
    <div id="shuffleModal" class="modal modal-6" role="dialog">
        <div class="modal-content">

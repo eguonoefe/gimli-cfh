@@ -27,7 +27,7 @@ function Game(gameID, io) {
   this.winnerAutopicked = false;
   this.czar = -1; // Index in this.players
   this.playerMinLimit = 3;
-  this.playerMaxLimit = 6;
+  this.playerMaxLimit = 12;
   this.pointLimit = 5;
   this.state = "awaiting players";
   this.round = 0;
@@ -68,7 +68,7 @@ Game.prototype.payload = function () {
 
   return {
     gameID: this.gameID,
-    players: players,
+    players,
     czar: this.czar,
     state: this.state,
     round: this.round,
