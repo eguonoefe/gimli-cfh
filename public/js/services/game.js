@@ -210,7 +210,8 @@ angular.module('mean.system')
 
     game.sendChatMessage = (user, message, timeSent, senderName) => {
       // tell server to execute ‘new message’ and send user's avatar and message
-      socket.emit('new message', { user, message, timeSent, senderName });
+      const gameID = game.gameID;
+      socket.emit('new message', { user, message, timeSent, senderName, gameID });
     };
 
     decrementTime();

@@ -17,34 +17,23 @@ angular.module('mean.system')
     const windw = this;
 
   // get the chat input tag from the DOM
-    const $inputMessage = $('.inputMessage');
+    $scope.inputMessage = $('.inputMessage');
 
   // displays chat messages on client side
     const displayChatMessage = (senderName, senderAvatar,
-  chatMessage, timeSent, self) => {
+    chatMessage, timeSent, self) => {
+      const chatHtml = $.parseHTML(chatMessage);
       if (chatMessage === '') {
         return null;
-      } else if (self) {
-        $('ul.messages').append(
-        $('<ul class="row self">').append(
-          $('<li class="col s2">').append(
-            $('<img>').attr('src', `${senderAvatar}`)
-          )
-        ).append(
-          $('<li class="col s10">').append(
-            $('<div>').append(
-              $('<p>').text('You')
-            ).append(
-              $('<span>').text(timeSent)
-            )
-          ).append(
-            $('<p>').text(chatMessage)
-          )
-        )
-      );
+      }
+      let chatbox;
+      if (self) {
+        chatbox = 'row self';
       } else {
-        $('ul.messages').append(
-        $('<ul class="row other">').append(
+        chatbox = 'row other';
+      }
+      $('ul.messages').append(
+        $(`<ul class="${chatbox}">`).append(
           $('<li class="col s2">').append(
             $('<img>').attr('src', `${senderAvatar}`)
           )
@@ -56,18 +45,17 @@ angular.module('mean.system')
               $('<span>').text(timeSent)
             )
           ).append(
-            $('<p>').text(chatMessage)
+            $('<p>').append(chatHtml)
           )
         )
       );
-      }
     };
 
     $.fn.followTo = function (pos) {
       const $this = this,
         $window = $(windw);
 
-      $window.scroll((e) =>  {
+      $window.scroll((e) => {
         if ($window.scrollTop() > pos) {
           $this.css({
             position: 'absolute',
@@ -89,6 +77,37 @@ angular.module('mean.system')
         $('span.right').find('i').toggleClass('fa-caret-down fa-caret-up');
       });
       $('.fixed-card').followTo(80);
+
+      // Initialise emojis on chat input element
+      $scope.inputMessage.emojioneArea({
+        hideSource: true,
+        events: {
+          keyup(editor, event) {
+            const keyCode = event.keyCode;
+            const el = event.target;
+            const message = el.innerHTML;
+            if (keyCode === 13 && message.length >= 1) {
+              const timeSent = new Date(new Date().getTime())
+              .toLocaleTimeString();
+              const sender = game.players[game.playerIndex];
+              const senderAvatar = sender.avatar;
+              const senderName = sender.username;
+              el.innerHTML = '';
+              $scope.chatStatus = '';
+              game.sendChatMessage(senderAvatar, message, timeSent, senderName);
+              displayChatMessage(senderName, senderAvatar, message,
+              timeSent, true);
+            } else if ((keyCode === 13 && message.length === 0)
+              || message.length === 0) {
+              $scope.chatStatus = '';
+            } else {
+              const userName = game.players[game.playerIndex].username;
+              $scope.chatStatus = 'You are typing...';
+              game.sendChatMessage(userName, 'is typing...');
+            }
+          },
+        }
+      });
     });
 
     $scope.pickCard = (card) => {
@@ -111,7 +130,8 @@ angular.module('mean.system')
     };
 
     $scope.pointerCursorStyle = () => {
-      if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
+      if ($scope.isCzar() &&
+      $scope.game.state === 'waiting for czar to decide') {
         return { cursor: 'pointer' };
       }
       return {};
@@ -308,28 +328,6 @@ angular.module('mean.system')
         }
       }
     });
-
-  // start game chat when user starts typing
-    $scope.startGameChat = () => {
-      const keyCode = event.keyCode;
-      const message = $inputMessage.val();
-      if (keyCode === 13 && message.length >= 1) {
-        const timeSent = new Date(new Date().getTime()).toLocaleTimeString();
-        const sender = game.players[game.playerIndex];
-        const senderAvatar = sender.avatar;
-        const senderName = sender.username;
-        $scope.chatStatus = '';
-        $('.inputMessage').val('');
-        game.sendChatMessage(senderAvatar, message, timeSent, senderName);
-        displayChatMessage(senderName, senderAvatar, message, timeSent, true);
-      } else if (message.length >= 1) {
-        const userName = game.players[game.playerIndex].username;
-        $scope.chatStatus = 'You are typing...';
-        game.sendChatMessage(userName, 'is typing...');
-      } else if (keyCode === 13 && message.length < 1) {
-        $scope.chatStatus = '';
-      }
-    };
 
   /**
    * Opens modal when share button is clicked

@@ -146,7 +146,7 @@ nav .brand-logo img{
 /* Form */
 /* label color */
 .input-field input, input[type=text]{
-  border-bottom: 1px solid #fb8c00;
+  border-bottom: 1px solid #fb8c00 !important;
 }
 .input-field i{
   color: #90a4ae;
@@ -164,7 +164,9 @@ input[type=password]:focus{
 .input-field input[type=password]:focus,
 input[type=text]:focus,
 input[type=password]:focus,
-input[type=text]:focus:not([readonly]){
+input[type=search]:focus,
+input[type=text]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]){
   border-bottom: 1px solid #ef6c00;
   box-shadow: 0 1px 0 0 #ef6c00;
 }
@@ -548,27 +550,20 @@ footer h5{
   margin: 0px;
 }
 
-.chat-body {
-  display: none;
-  height: 30vh;
-  overflow: scroll;
-}
-
 .right {
   float: right;
 }
 
 .chat-holder {
   padding: 10px;
+  height: 30vh;
+  overflow: scroll;
 }
 .self{
-  /*background-color: rgba(100, 181, 246, 0.1);*/
   background-color: rgba(153, 153, 153, 0.1);
 }
 .other{
-  /*background-color: rgba(251, 140, 0, 0.1)*/
   background-color: rgba(102, 102, 102, 0.2);
-  
 }
 .chat ul li {
   width: inherit;
@@ -582,12 +577,12 @@ footer h5{
 }
 .chat ul > ul div p {
   display: inline;
-  margin-right: 110px;
   font-weight: 800;
 }
 .chat ul > ul div span {
   font-size: 10px;
   color: #fb8c00;
+  margin-left: 90px;
 }
 .chat-input {
   margin: 0px 10px;
@@ -599,10 +594,24 @@ footer h5{
   height:30px;
   width: 30px;
 }
+.chat-holder ul > ul li p > img{
+  height:20px;
+  width: 20px;
+}
 #chat-status {
   color: rgba(153, 153, 153, 0.8);
+  z-index: 1000;
 }
-
+.emojionearea-picker img{
+  width: 15px !important;
+  height: 15px !important;
+  margin: 0px !important;
+}
+.emojionearea .emojionearea-picker .emojionearea-scroll-area .emojibtn{
+  width: 20px !important;
+  height: 20px !important;
+  padding: 0px !important;
+}
 #app-container {
   margin: 0px !important;
 }

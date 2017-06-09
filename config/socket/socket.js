@@ -75,7 +75,7 @@ module.exports = function(io) {
     });
 
     socket.on('new message', (data) => {
-      socket.broadcast.emit('add message', { data });
+      socket.broadcast.to(data.gameID).emit('add message', { data });
     });
   });
 
