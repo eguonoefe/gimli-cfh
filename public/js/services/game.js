@@ -1,5 +1,4 @@
 angular.module('mean.system')
-
   .factory('game', ['socket', '$timeout', '$window', '$http', '$location',
   function (socket, $timeout, $window, $http, $location) {
 
@@ -24,7 +23,6 @@ angular.module('mean.system')
       timeLimits: {},
       joinOverride: false,
       chat: {}
-
     };
 
     var notificationQueue = [];
@@ -32,38 +30,38 @@ angular.module('mean.system')
     var self = this;
     var joinOverrideTimeout = 0;
 
-    var addToNotificationQueue = function(msg) {
+    var addToNotificationQueue = function (msg) {
       notificationQueue.push(msg);
       if (!timeout) { // Start a cycle if there isn't one
-      setNotification();
-    }
+        setNotification();
+      }
     };
-    var setNotification = function() {
+    var setNotification = function () {
       if (notificationQueue.length === 0) { // If notificationQueue is empty, stop
-      clearInterval(timeout);
-      timeout = false;
-      game.notification = '';
-    } else {
-      game.notification = notificationQueue.shift(); // Show a notification and check again in a bit
-      timeout = $timeout(setNotification, 1300);
-    }
+        clearInterval(timeout);
+        timeout = false;
+        game.notification = '';
+      } else {
+        game.notification = notificationQueue.shift(); // Show a notification and check again in a bit
+        timeout = $timeout(setNotification, 1300);
+      }
     };
 
     var timeSetViaUpdate = false;
-    var decrementTime = function() {
+    var decrementTime = function () {
       if (game.time > 0 && !timeSetViaUpdate) {
-      game.time--;
-    } else {
-      timeSetViaUpdate = false;
-    }
+        game.time--;
+      } else {
+        timeSetViaUpdate = false;
+      }
       $timeout(decrementTime, 950);
     };
 
-    socket.on('id', function(data) {
+    socket.on('id', function (data) {
       game.id = data.id;
     });
 
-    socket.on('prepareGame', function(data) {
+    socket.on('prepareGame', function (data) {
       game.playerMinLimit = data.playerMinLimit;
       game.playerMaxLimit = data.playerMaxLimit;
       game.pointLimit = data.pointLimit;
@@ -71,13 +69,12 @@ angular.module('mean.system')
     });
 
     socket.on('add message', (data) => {
-      // console.log(data);
       game.chat = data;
     });
+    socket.on('gameUpdate', function (data) {
 
-    socket.on('gameUpdate', (data) => {
-    // Update gameID field only if it changed.
-    // That way, we don't trigger the $scope.$watch too often
+      // Update gameID field only if it changed.
+      // That way, we don't trigger the $scope.$watch too often
       if (game.gameID !== data.gameID) {
         game.gameID = data.gameID;
       }
@@ -86,12 +83,12 @@ angular.module('mean.system')
       clearTimeout(game.joinOverrideTimeout);
 
       var i;
-    // Cache the index of the player in the players array
+      // Cache the index of the player in the players array
       for (i = 0; i < data.players.length; i++) {
-      if (game.id === data.players[i].socketID) {
-        game.playerIndex = i;
+        if (game.id === data.players[i].socketID) {
+          game.playerIndex = i;
+        }
       }
-    }
 
       var newState = (data.state !== game.state);
 
@@ -139,18 +136,8 @@ angular.module('mean.system')
       }
 
       if (game.state !== 'waiting for players to pick' || game.players.length !== data.players.length) {
-      game.players = data.players;
-    }
-
-      if (newState || game.curQuestion !== data.curQuestion) {
-      game.state = data.state;
-    }
-
-      if (data.state === 'waiting for players to pick') {
-      game.czar = data.czar;
-      game.curQuestion = data.curQuestion;
-      // Extending the underscore within the question
-      game.curQuestion.text = data.curQuestion.text.replace(/_/g,'<u></u>');
+        game.players = data.players;
+      }
 
 
       if (newState || game.curQuestion !== data.curQuestion) {
@@ -226,22 +213,22 @@ angular.module('mean.system')
       socket.emit('startGame');
     };
 
-    game.leaveGame = function() {
+    game.leaveGame = function () {
       game.players = [];
       game.time = 0;
       socket.emit('leaveGame');
     };
 
-    game.pickCards = function(cards) {
-      socket.emit('pickCards',{ cards: cards });
+    game.pickCards = function (cards) {
+      socket.emit('pickCards', { cards: cards });
     };
 
-    game.pickWinning = function(card) {
+    game.pickWinning = function (card) {
       socket.emit('pickWinning', { card: card.id });
     };
 
     game.sendChatMessage = (user, message, timeSent, senderName) => {
-      // tell server to execute ‘new message’ and send user's avatar and message
+      // tell server to execute ‘new message’ and send user’s avatar and message
       const gameID = game.gameID;
       socket.emit('new message', { user, message, timeSent, senderName, gameID });
     };
@@ -249,6 +236,7 @@ angular.module('mean.system')
     game.startNextRound = () => {
       socket.emit('czarCardSelected');
     };
+
     decrementTime();
 
     return game;
