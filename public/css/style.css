@@ -16,12 +16,12 @@ h1, h2, h3, h4, h6 {
 }
 input[type="radio"]:checked+label:after,
 input[type="radio"].with-gap:checked+label:after {
-  background-color: #f57c00;  
+  background-color: #f57c00;
 }
-input[type="radio"]:checked+label:after, 
-input[type="radio"].with-gap:checked+label:before, 
+input[type="radio"]:checked+label:after,
+input[type="radio"].with-gap:checked+label:before,
 input[type="radio"].with-gap:checked+label:after{
-  border: 2px solid #f57c00;    
+  border: 2px solid #f57c00;
 }
 
 /* Helper classes */
@@ -77,7 +77,7 @@ nav .brand-logo img{
   margin-left: 20px;
 }
 #donate-btn, span.btn.orange{
-  color: #fff;  
+  color: #fff;
 }
 .fix-header{
   position: fixed;
@@ -117,7 +117,7 @@ nav .brand-logo img{
   background: #fff;
 }
 
-/* User signin and signup */  
+/* User signin and signup */
 #sign-in ul li,
 #sign-up ul li{
   display: inline-block;
@@ -127,7 +127,7 @@ nav .brand-logo img{
 #sign-up ul li a{
   padding: 0px;
 }
-#sign-in .modal-content li a.btn, 
+#sign-in .modal-content li a.btn,
 #sign-up .modal-content li a.btn{
   width: 62px;
 }
@@ -136,7 +136,7 @@ nav .brand-logo img{
   width: 30px;
 }
 #sign-up .input-field h6{
-  margin-left: 26px;  
+  margin-left: 26px;
 }
 #sign-in ul li:last-child,
 #sign-up ul li:last-child{
@@ -234,7 +234,7 @@ ul.social-icons li:last-child{
 /* Footer */
 #footer{
   font-family: 'Slabo 27px';
-  background: rgb(37, 50, 69);  
+  background: rgb(37, 50, 69);
 }
 #footer div.col{
   margin-bottom: 30px;
@@ -256,7 +256,7 @@ footer div.col:nth-child(1) h5{
 }
 #footer .page-footer {
   margin: 0px !important;
-  background: rgb(37, 50, 69);  
+  background: rgb(37, 50, 69);
 }
 #footer .page-footer .footer-copyright{
   background: #1c2634;
@@ -269,14 +269,18 @@ footer p{
    font-size: 1em;
 }
 footer h5{
-  font-size: 1.2em;  
+  font-size: 1.2em;
 }
 /* Avatars display */
 #avatars-container{
   margin-top: 45px;
 }
+/*#avatars-container div input[type=radio]{
+
+}*/
+
 #avatars-container form p{
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 #avatars-container form label{
   cursor: pointer;
@@ -306,11 +310,30 @@ footer h5{
   margin-left: 25px;
 }
 
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner{
+    height: 92.5vh;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+#start-game p > a:nth-child(1){
+  margin-right: 25px;
+}
+#start-game p > a:nth-child(2){
+  margin-left: 25px;
+}
+
  .clear {
    clear: both;
  }
 
-#modal1, #modal2, .modal-4, .modal-5 {
+#modal1, #modal2, .modal-4, .modal-5, .modal-6, #kickout-modal {
   color: black;
   background-color: transparent;
   border: none;
@@ -345,8 +368,8 @@ footer h5{
 /* Game */
 /* Timer */
 #inner-timer-container{
-  border: 1px solid rgb(37, 50, 69);  
-  background-color: #fff;  
+  border: 1px solid rgb(37, 50, 69);
+  background-color: #fff;
 }
 #inner-timer-container .container{
   text-align: center;
@@ -379,7 +402,7 @@ footer h5{
   position: relative;
 }
 
-.player-cont { 
+.player-cont {
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -460,9 +483,9 @@ footer h5{
 }
 
 .cfh-card {
-  background-image: url('/img/card-2.jpg');
+  background-image: url('/img/card.jpeg');
   background-size: cover;
-  background-position:top;
+  background-position:center;
   background-repeat: no-repeat;
   height: 190px;
   color: black;
@@ -474,6 +497,10 @@ footer h5{
 
 .p-5 {
   padding: 5px;
+}
+
+.p-2 {
+  padding: 2px;
 }
 
 .fixed-card {
@@ -636,4 +663,28 @@ footer h5{
 
 .orange {
   color: #fb8c00;
+}
+
+#kickout-modal p {
+  font-size: 18px;
+}
+
+.m-center {
+  margin: 0 auto;
+}
+
+.czar-waiting {
+  display: block;
+  text-align: center;
+  height: auto !important;
+}
+
+.czar-waiting img {
+  display: block !important;
+  margin: 0 auto;
+}
+
+.czar-waiting h5 {
+  margin-top: 5px;
+  display: block !important;;
 }

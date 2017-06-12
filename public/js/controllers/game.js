@@ -109,7 +109,75 @@ angular.module('mean.system')
         }
       });
     });
+      $scope.setCookie = (cname, cvalue, exdays) => {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
 
+$scope.getCookie = (cname) => {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+  }
+
+$scope.checkCookie = () => {
+  var user = $scope.getCookie("username");
+      if (user === '') {
+          $scope.setCookie("username", 'user', 365);
+          setTimeout(function(){
+            var intro = introJs();
+          intro.setOptions({
+            steps: [
+              {
+                intro: "Hi, I'm Jade. I'm super excited to be onboarding you to this game. Click Next to get Started. You can end the tour anytime by clicking Skip."
+              },
+              {
+                element: document.querySelector('#startGame'),
+                intro: "Questions will appear here"
+              },
+              {
+                element: document.querySelector('#questions-bg'),
+                intro: "Answer cards will appear here. Choose the best answer for the given question",
+                position: 'top'
+              },
+              {
+                element: document.querySelector('#time-wrap'),
+                intro: "You'll have 20 seconds per question. Your time will appear here."
+              },
+              {
+                element: document.querySelector('#click-tag'),
+                intro: "Use this link to invite users who HAVE CFH accounts"
+              },
+              {
+                element: document.querySelector('#click-tag2'),
+                intro: "Use this link to invite users who DO NOT HAVE CFH accounts"
+              },
+              {
+                element: document.querySelector('#player-bg'),
+                intro: "This panel shows you the players in the game and the number of questions answered by each player. A player who answers 5 questions correctly WINS."
+              },
+              {
+                element: document.querySelectorAll('#step2')[0],
+                intro: "Ready? Get Started by inviting at least 3 players. Maximum number of players is 12",
+                position: 'right'
+              }
+            ]
+          });
+          intro.start();
+        }, 1000);
+      } 
+  }
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
         if ($scope.pickedCards.indexOf(card.id) < 0) {
@@ -118,6 +186,7 @@ angular.module('mean.system')
             $scope.sendPickedCards();
             $scope.hasPickedCards = true;
           } else if (game.curQuestion.numAnswers === 2 &&
+
           $scope.pickedCards.length === 2) {
           // delay and send
             $scope.hasPickedCards = true;
@@ -137,6 +206,7 @@ angular.module('mean.system')
       return {};
     };
 
+
   /**
    * Search through a list of uers based on the input of the user
    * @function searchUser
@@ -149,7 +219,6 @@ angular.module('mean.system')
       $scope.users = response;
     });
     };
-
   /**
    * Counts the number of box checked by the user and
    * and returns the length
@@ -179,13 +248,15 @@ angular.module('mean.system')
    * @function emailGuests
    * @returns {any} - Sends email
    */
-    $scope.emailGuests = () => {
-      const details = JSON.stringify(
-        { name: 'Guest',
-          email: $scope.guestEmail,
-          url: `${encodeURIComponent(window.location.href)}` });
-      $http.get(`http://localhost:3000/api/sendmail/${details}`);
-    };
+
+  $scope.emailGuests = () => {
+    const details = JSON.stringify(
+      { name: 'Guest',
+        email: $scope.guestEmail,
+        url: `${encodeURIComponent(window.location.href)}` });
+    $http.get(`http://localhost:3000/api/sendmail/${details}`);
+    $scope.guestEmail = '';
+  };
 
   /**
    * Send bulk invite emails to users
@@ -293,6 +364,23 @@ angular.module('mean.system')
       $location.path('/');
     };
 
+  // SHUFFLE CARD ANIMATION
+  $scope.shuffleCards = () => {
+      const card = $(`#${event.target.id}`);
+      card.addClass('animated flipOutY');
+      setTimeout(() => {
+        $scope.startNextRound();
+        card.removeClass('animated flipOutY');
+        $('#shuffleModal').modal('close');
+      }, 500);
+    };
+
+    $scope.startNextRound = () => {
+      if ($scope.isCzar()) {
+        game.startNextRound();
+      }
+    };
+
   // Catches changes to round to update when no players pick card
   // (because game.state remains the same)
     $scope.$watch('game.round', () => {
@@ -311,6 +399,27 @@ angular.module('mean.system')
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
         $scope.showTable = true;
       }
+      // AUDAX EDITTED HERE
+    if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
+             $('#shuffleModal').modal({
+               dismissible: false
+             });
+             $('#shuffleModal').modal('open');
+             // displayMessage('', '#card-modal');
+           }
+           if (game.state === 'game dissolved') {
+             $('#shuffleModal').modal('close');
+           }
+           if ($scope.isCzar() === false && game.state === 'czar pick card'
+             && game.state !== 'game dissolved'
+             && game.state !== 'awaiting players' && game.table.length === 0) {
+             $scope.czarHasDrawn = 'Wait! Czar is drawing Card';
+           }
+           if (game.state !== 'czar pick card'
+             && game.state !== 'awaiting players'
+             && game.state !== 'game dissolve') {
+             $scope.czarHasDrawn = '';
+           }
     });
 
   // Set watch on chat data from users on different sockets
@@ -329,6 +438,8 @@ angular.module('mean.system')
       }
     });
 
+
+  });
   /**
    * Opens modal when share button is clicked
    * @function showModal1
@@ -338,6 +449,7 @@ angular.module('mean.system')
       $('.modal').modal();
       $('#modal1').modal('open');
     };
+
 
    /**
    * Opens modal when share button is clicked
@@ -352,6 +464,7 @@ angular.module('mean.system')
     $scope.$watch('game.gameID', () => {
       if (game.gameID && game.state === 'awaiting players') {
         if (!$scope.isCustomGame() && $location.search().game) {
+
         // If the player didn't successfully enter the request room,
         // reset the URL so they don't think they're in the requested room.
           $location.search({});
