@@ -73,9 +73,14 @@ module.exports = function(io) {
       console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
       exitGame(socket);
     });
+
+    socket.on('new message', (data) => {
+      socket.broadcast.to(data.gameID).emit('add message', { data });
+    });
     // changed this to handle czar picking a card
     socket.on('czarCardSelected', () => {
       allGames[socket.gameID].startNextRound(allGames[socket.gameID]);
+
     });
   });
 

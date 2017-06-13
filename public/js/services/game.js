@@ -21,7 +21,8 @@ angular.module('mean.system')
       curQuestion: null,
       notification: null,
       timeLimits: {},
-      joinOverride: false
+      joinOverride: false,
+      chat: {}
     };
 
     var notificationQueue = [];
@@ -67,6 +68,9 @@ angular.module('mean.system')
       game.timeLimits = data.timeLimits;
     });
 
+    socket.on('add message', (data) => {
+      game.chat = data;
+    });
     socket.on('gameUpdate', function (data) {
 
       // Update gameID field only if it changed.
@@ -223,9 +227,16 @@ angular.module('mean.system')
       socket.emit('pickWinning', { card: card.id });
     };
 
+    game.sendChatMessage = (user, message, timeSent, senderName) => {
+      // tell server to execute ‘new message’ and send user’s avatar and message
+      const gameID = game.gameID;
+      socket.emit('new message', { user, message, timeSent, senderName, gameID });
+    };
+
     game.startNextRound = () => {
       socket.emit('czarCardSelected');
     };
+
     decrementTime();
 
     return game;
