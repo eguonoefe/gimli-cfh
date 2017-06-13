@@ -183,8 +183,75 @@ angular.module('mean.system')
           game.joinOverride = true;
         }, 15000);
       } else if (data.state === 'game dissolved' || data.state === 'game ended') {
+        // cele: todo: call server here
         game.players[game.playerIndex].hand = [];
         game.time = 0;
+
+        // when game ends
+         if(data.state === 'game ended') {
+          // create an array of game participants
+          const playersScore = [];
+
+          // get the user's jwt
+          const jwt = $window.localStorage.getItem('token');
+          // Audax starts here
+          let currentPlayerScore = {};
+          let playerWon = false;
+          let currentPlayer = {};
+          let curRequest = {};
+
+          game.players.forEach(function(player){
+            currentPlayer = player;
+
+            // add current user log to the playersScore array
+            playersScore.push({
+              name: currentPlayer.username,
+              points: currentPlayer.points,
+              userID: currentPlayer.userID
+            });
+        });
+          // create game owner object
+          const gameOwner = {
+            name: game.players[0].username,
+            userID: game.players[0].userID
+          };
+          // create game winner object
+          const gameWinner = {
+            name: game.players[game.gameWinner].username,
+            userID: game.players[game.gameWinner].userID
+          };
+          const gameId = game.gameID;
+          // create game details
+          const gameDetails = {
+            gameID: gameId,
+            owner: gameOwner,
+            dateplayed: new Date(),
+            winner: gameWinner,
+            players: playersScore
+          }
+          console.log(gameDetails.owner.userID, user._id );
+
+
+          // run only on owner console, to avoid dupicate insert
+          if(gameDetails.owner.userID === user._id) {
+            var req = {
+              method: 'POST',
+              url: '/api/games/' + game.gameID +'/start',
+              headers: {
+                'Authorization': jwt
+              },
+              data: gameDetails
+            };
+             console.log(req);
+            $http(req)
+            .then((response) => {
+              console.log(response);
+            },
+            (err) => {
+              console.log(err);
+            });
+          }
+         }
       }
     });
 

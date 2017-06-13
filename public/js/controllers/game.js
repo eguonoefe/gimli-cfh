@@ -1,4 +1,38 @@
 angular.module('mean.system')
+<<<<<<< HEAD
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$http', ($scope, game, $timeout,
+$location, MakeAWishFactsService, $dialog, $http) => {
+  $scope.hasPickedCards = false;
+  $scope.winningCardPicked = false;
+  $scope.showTable = false;
+  $scope.modalShown = false;
+  $scope.game = game;
+  $scope.pickedCards = [];
+  $scope.checkedBoxCount = 0;
+  $scope.enableSendGuestInvite = false;
+  const makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+  $scope.makeAWishFact = makeAWishFacts.pop();
+  var windw = this;
+  $.fn.followTo = function ( pos ) {
+      var $this = this,
+          $window = $(windw);
+
+      $window.scroll(function(e){
+          if ($window.scrollTop() > pos) {
+              $this.css({
+                  position: 'absolute',
+                  bottom: -20
+              });
+          } else {
+              $this.css({
+                  position: 'fixed',
+                  bottom: 10
+              });
+          }
+      });
+  };
+  $('.tooltipped').tooltip({ delay: 50 });
+=======
 .controller('GameController', ['$scope', 'game', '$timeout',
   '$location', 'MakeAWishFactsService', '$dialog', '$http',
   ($scope, game, $timeout, $location, MakeAWishFactsService,
@@ -13,6 +47,7 @@ angular.module('mean.system')
     $scope.enableSendGuestInvite = false;
     const makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
+>>>>>>> 2c84cc2760dbff2d52dbce55d24d3c84489a9a8f
 
     const windw = this;
 
@@ -176,7 +211,12 @@ angular.module('mean.system')
             });
           intro.start();
         }, 1000);
-      } 
+<<<<<<< HEAD
+      }
+  }
+
+=======
+      }
     };
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
@@ -186,6 +226,7 @@ angular.module('mean.system')
             $scope.sendPickedCards();
             $scope.hasPickedCards = true;
           } else if (game.curQuestion.numAnswers === 2 &&
+>>>>>>> 2c84cc2760dbff2d52dbce55d24d3c84489a9a8f
 
           $scope.pickedCards.length === 2) {
           // delay and send
