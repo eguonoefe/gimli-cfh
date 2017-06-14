@@ -1,6 +1,6 @@
 var async = require('async'),
-mongoose = require('mongoose'),
-Game = mongoose.model('Game');
+mongoose = require('mongoose');
+
 
 module.exports = function(app, passport, auth) {
 
@@ -8,6 +8,7 @@ module.exports = function(app, passport, auth) {
   const authentication = require('../app/controllers/authentication');
     app.post('/api/auth/signin', authentication.signin);
     app.post('/api/auth/signup', authentication.signup);
+
 
     //User Routes
     var users = require('../app/controllers/users');
@@ -19,26 +20,22 @@ module.exports = function(app, passport, auth) {
     app.get('/chooseavatars', users.checkAvatar);
     app.get('/signout', users.signout);
 
+    // route to save game details , add jwt passport
+    app.post('/api/games/:id/start', users.saveGameDetails);
+
+    // api endpoint for game wins
+    app.get('/api/leaderboard', users.fetchLeaderBoard);
+    app.get('/api/games/history', users.fetchGameHistory);
+
     //Setting up the users api
     app.post('/users', users.create);
     app.post('/api/auth/signup', users.createJWT);
     app.post('/users/avatars', users.avatars);
 
-     // route to save game details , add jwt passport
-    app.post('/api/games/:id/start', (req, res) => {
-      // create new game object
-      const newGame = new Game(req.body);
-      newGame.save()
-      .then(game =>
-        res.json({ status: 'success', game })
-      )
-      .catch(err =>
-        res.json({ status: 'fail', message: err })
-      );
-    });
 
     // Donation Routes
     app.post('/donations', users.addDonation);
+    app.get('/api/donations', users.fetchDonations);
 
     app.post('/users/session', passport.authenticate('local', {
         failureRedirect: '/signin',
