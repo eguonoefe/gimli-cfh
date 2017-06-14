@@ -6,10 +6,14 @@
     "env": {
     "node": true,
     "es6": true,
-    "jasmine": true
+    "jasmine": true,
+    "browser": true,
+    "commonjs": true,
+    "jquery": true
   },
   "rules": {
     "max-len": [2, 80],
+    "jsx-a11y/img-has-alt": [0],
     "one-var": 0,
     "one-var-declaration-per-line": 0,
     "new-cap": 0,

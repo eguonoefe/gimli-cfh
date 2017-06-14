@@ -23,7 +23,10 @@ var UserSchema = new Schema({
     facebook: {},
     twitter: {},
     github: {},
-    google: {}
+    google: {},
+    gamesPlayed: { type: Number, default: 0 },
+    gamesWon: { type: Number, default: 0 },
+    totalGamePoints: { type: Number, default: 0 }
 });
 
 /**

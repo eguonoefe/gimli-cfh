@@ -6,7 +6,13 @@
     "angular-bootstrap": "~0.4.0",
     "angular-ui-utils": "0.0.4",
     "jquery": "~1.9.1",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "angular-social-links": "^0.0.23",
+    "materialize": "^0.98.2",
+    "emojionearea": "3.1.7"
+  },
+  "resolutions": {
+    "jquery": "~1.9.1"
   },
   "exportsOverride": {
     "bootstrap": {

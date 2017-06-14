@@ -73,6 +73,15 @@ module.exports = function(io) {
       console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
       exitGame(socket);
     });
+
+    socket.on('new message', (data) => {
+      socket.broadcast.to(data.gameID).emit('add message', { data });
+    });
+    // changed this to handle czar picking a card
+    socket.on('czarCardSelected', () => {
+      allGames[socket.gameID].startNextRound(allGames[socket.gameID]);
+
+    });
   });
 
   var joinGame = function(socket,data) {
@@ -135,11 +144,12 @@ module.exports = function(io) {
           game.prepareGame();
         }
       } else {
-        // TODO: Send an error message back to this user saying the game has already started
+        // Send an error message back to this user saying the game has already started
+        socket.to(socket.id).emit('kickout', 'Aww!');
       }
     } else {
       // Put players into the general queue
-      console.log('Redirecting player',socket.id,'to general queue');
+      console.log('Redirecting player', socket.id, 'to general queue');
       if (createPrivate) {
         createGameWithFriends(player,socket);
       } else {
