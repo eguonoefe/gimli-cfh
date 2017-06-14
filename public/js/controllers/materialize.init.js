@@ -6,15 +6,24 @@
 
 angular.module('mean.system')
 .controller('materializeInit', ['$scope', '$window', '$location',
-  ($scope, $window) => {
+  ($scope, $window, $location) => {
     $(() => {
       $('.carousel.carousel-slider').carousel({ fullWidth: true });
       $('.button-collapse').sideNav();
       $('.parallax').parallax();
-
       const mainHeader = $('#main-header');
       const logo = $('a#header-logo-container');
+      const location = $location.path();
 
+      if (location === '/') {
+        $scope.isLandingPage = true;
+      } else if (location === '/app') {
+        $scope.isLandingPage = false;
+        $scope.isAppPage = true;
+      } else {
+        $scope.isLandingPage = false;
+        $scope.isAppPage = false;
+      }
     // Makes header position static when window is scrolled to 400
       $(window).scroll(() => {
         const scrollValue = $(this).scrollTop();
@@ -30,7 +39,7 @@ angular.module('mean.system')
     // Switches carousel image when an how-to-play step is clicked
       $scope.slider = (event, index) => {
         event.preventDefault();
-        $('.carousel').carousel('set', index + 1);
+        $('.carousel').carousel('set', index);
       };
 
     // Display modals on index page
@@ -49,4 +58,5 @@ angular.module('mean.system')
         scrollOffset: 100
       });
     });
+    $scope.username = window.user ? window.user.name : '';
   }]);
