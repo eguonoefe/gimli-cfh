@@ -1,42 +1,8 @@
 angular.module('mean.system')
-<<<<<<< HEAD
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$http', ($scope, game, $timeout,
-$location, MakeAWishFactsService, $dialog, $http) => {
-  $scope.hasPickedCards = false;
-  $scope.winningCardPicked = false;
-  $scope.showTable = false;
-  $scope.modalShown = false;
-  $scope.game = game;
-  $scope.pickedCards = [];
-  $scope.checkedBoxCount = 0;
-  $scope.enableSendGuestInvite = false;
-  const makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
-  $scope.makeAWishFact = makeAWishFacts.pop();
-  var windw = this;
-  $.fn.followTo = function ( pos ) {
-      var $this = this,
-          $window = $(windw);
-
-      $window.scroll(function(e){
-          if ($window.scrollTop() > pos) {
-              $this.css({
-                  position: 'absolute',
-                  bottom: -20
-              });
-          } else {
-              $this.css({
-                  position: 'fixed',
-                  bottom: 10
-              });
-          }
-      });
-  };
-  $('.tooltipped').tooltip({ delay: 50 });
-=======
 .controller('GameController', ['$scope', 'game', '$timeout',
   '$location', 'MakeAWishFactsService', '$dialog', '$http',
-  ($scope, game, $timeout, $location, MakeAWishFactsService,
-      $dialog, $http) => {
+  ($scope, game, $timeout,
+$location, MakeAWishFactsService, $dialog, $http) => {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -45,11 +11,28 @@ $location, MakeAWishFactsService, $dialog, $http) => {
     $scope.pickedCards = [];
     $scope.checkedBoxCount = 0;
     $scope.enableSendGuestInvite = false;
-    const makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+    let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
->>>>>>> 2c84cc2760dbff2d52dbce55d24d3c84489a9a8f
-
     const windw = this;
+    $.fn.followTo = (pos) => {
+      const $this = this,
+        $window = $(windw);
+
+      $window.scroll(() => {
+        if ($window.scrollTop() > pos) {
+          $this.css({
+            position: 'absolute',
+            bottom: -20
+          });
+        } else {
+          $this.css({
+            position: 'fixed',
+            bottom: 10
+          });
+        }
+      });
+    };
+    $('.tooltipped').tooltip({ delay: 50 });
 
   // get the chat input tag from the DOM
     $scope.inputMessage = $('.inputMessage');
@@ -86,25 +69,6 @@ $location, MakeAWishFactsService, $dialog, $http) => {
       );
     };
 
-    $.fn.followTo = function (pos) {
-      const $this = this,
-        $window = $(windw);
-
-      $window.scroll((e) => {
-        if ($window.scrollTop() > pos) {
-          $this.css({
-            position: 'absolute',
-            bottom: -20
-          });
-        } else {
-          $this.css({
-            position: 'fixed',
-            bottom: 10
-          });
-        }
-      });
-    };
-    $('.tooltipped').tooltip({ delay: 50 });
     $(() => {
       $('.button-collapse').sideNav();
       $('.chat-header').on('click', () => {
@@ -145,79 +109,83 @@ $location, MakeAWishFactsService, $dialog, $http) => {
       });
     });
     $scope.setCookie = (cname, cvalue, exdays) => {
-      var d = new Date();
+      const d = new Date();
       d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-      var expires = "expires="+d.toUTCString();
-      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      const expires = `expires=${d.toUTCString()}`;
+      document.cookie = `${cname}=${cvalue};${expires};path=/`;
     };
 
     $scope.getCookie = (cname) => {
-      var name = cname + "=";
-      var ca = document.cookie.split(';');
-      for(var i = 0; i < ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == ' ') {
-              c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-              return c.substring(name.length, c.length);
-          }
+      const name = `${cname}=`;
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i += 1) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length);
+        }
       }
-      return "";
+      return '';
     };
 
-  $scope.checkCookie = () => {
-    var user = $scope.getCookie("username");
+    $scope.checkCookie = () => {
+      const user = $scope.getCookie('username');
       if (user === '') {
-        $scope.setCookie("username", 'user', 365);
-          setTimeout(function(){
-            var intro = introJs();
-            intro.setOptions({
-              steps: [
-                {
-                  intro: "Hi, I'm Jade. I'm super excited to be onboarding you to this game. Click Next to get Started. You can end the tour anytime by clicking Skip."
-                },
-                {
-                  element: document.querySelector('#startGame'),
-                  intro: "Questions will appear here"
-                },
-                {
-                  element: document.querySelector('#questions-bg'),
-                  intro: "Answer cards will appear here. Choose the best answer for the given question",
-                  position: 'top'
-                },
-                {
-                  element: document.querySelector('#time-wrap'),
-                  intro: "You'll have 20 seconds per question. Your time will appear here."
-                },
-                {
-                  element: document.querySelector('#click-tag'),
-                  intro: "Use this link to invite users who HAVE CFH accounts"
-                },
-                {
-                  element: document.querySelector('#click-tag2'),
-                  intro: "Use this link to invite users who DO NOT HAVE CFH accounts"
-                },
-                {
-                  element: document.querySelector('#player-bg'),
-                  intro: "This panel shows you the players in the game and the number of questions answered by each player. A player who answers 5 questions correctly WINS."
-                },
-                {
-                  element: document.querySelectorAll('#step2')[0],
-                  intro: "Ready? Get Started by inviting at least 3 players. Maximum number of players is 12",
-                  position: 'right'
-                }
-              ]
-            });
+        $scope.setCookie('username', 'user', 365);
+        setTimeout(() => {
+          const intro = introJs();
+          intro.setOptions({
+            steps: [
+              {
+                intro: 'Hi, I\'m Jade. I\'m super excited to be onboarding' +
+                'you to this game. Click Next to get Started. You can ' +
+                'end the tour anytime by clicking Skip.'
+              },
+              {
+                element: document.querySelector('#startGame'),
+                intro: 'Questions will appear here'
+              },
+              {
+                element: document.querySelector('#questions-bg'),
+                intro: 'Answer cards will appear here. Choose the best ' +
+                 'answer for the given question',
+                position: 'top'
+              },
+              {
+                element: document.querySelector('#time-wrap'),
+                intro: 'You\'ll have 20 seconds per question. ' +
+                'Your time will appear here.'
+              },
+              {
+                element: document.querySelector('#click-tag'),
+                intro: 'Use this link to invite users who HAVE CFH accounts'
+              },
+              {
+                element: document.querySelector('#click-tag2'),
+                intro: 'Use this link to invite users ' +
+                'who DO NOT HAVE CFH accounts'
+              },
+              {
+                element: document.querySelector('#player-bg'),
+                intro: 'This panel shows you the players in the game and ' +
+                'the number of questions answered by each player. ' +
+                'A player who answers 5 questions correctly WINS.'
+              },
+              {
+                element: document.querySelectorAll('#step2')[0],
+                intro: 'Ready? Get Started by inviting at least 3 ' +
+                'players.  Maximum number of players is 12',
+                position: 'right'
+              }
+            ]
+          });
           intro.start();
         }, 1000);
-<<<<<<< HEAD
-      }
-  }
-
-=======
       }
     };
+
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
         if ($scope.pickedCards.indexOf(card.id) < 0) {
@@ -226,8 +194,6 @@ $location, MakeAWishFactsService, $dialog, $http) => {
             $scope.sendPickedCards();
             $scope.hasPickedCards = true;
           } else if (game.curQuestion.numAnswers === 2 &&
->>>>>>> 2c84cc2760dbff2d52dbce55d24d3c84489a9a8f
-
           $scope.pickedCards.length === 2) {
           // delay and send
             $scope.hasPickedCards = true;
@@ -277,7 +243,7 @@ $location, MakeAWishFactsService, $dialog, $http) => {
    * Check the typed email of guest to see if
    * it is valid
    * @function checkEmail
-   * @returns {boolean}
+   * @returns {boolean} result
    */
     $scope.checkEmail = () => {
       const filter = /^[\w\-.+]+@[a-zA-Z0-9.-]+\.[a-zA-z0-9]{2,4}$/;
@@ -290,14 +256,14 @@ $location, MakeAWishFactsService, $dialog, $http) => {
    * @returns {any} - Sends email
    */
 
-  $scope.emailGuests = () => {
-    const details = JSON.stringify(
-      { name: 'Guest',
-        email: $scope.guestEmail,
-        url: `${encodeURIComponent(window.location.href)}` });
-    $http.get(`http://localhost:3000/api/sendmail/${details}`);
-    $scope.guestEmail = '';
-  };
+    $scope.emailGuests = () => {
+      const details = JSON.stringify(
+        { name: 'Guest',
+          email: $scope.guestEmail,
+          url: `${encodeURIComponent(window.location.href)}` });
+      $http.get(`http://localhost:3000/api/sendmail/${details}`);
+      $scope.guestEmail = '';
+    };
 
   /**
    * Send bulk invite emails to users
@@ -407,14 +373,14 @@ $location, MakeAWishFactsService, $dialog, $http) => {
 
     // SHUFFLE CARD ANIMATION
     $scope.shuffleCards = () => {
-        const card = $(`#${event.target.id}`);
-        card.addClass('animated flipOutY');
-        setTimeout(() => {
-          $scope.startNextRound();
-          card.removeClass('animated flipOutY');
-          $('#shuffleModal').modal('close');
-        }, 500);
-      };
+      const card = $(`#${event.target.id}`);
+      card.addClass('animated flipOutY');
+      setTimeout(() => {
+        $scope.startNextRound();
+        card.removeClass('animated flipOutY');
+        $('#shuffleModal').modal('close');
+      }, 500);
+    };
 
     $scope.startNextRound = () => {
       if ($scope.isCzar()) {
@@ -437,30 +403,32 @@ $location, MakeAWishFactsService, $dialog, $http) => {
 
   // In case player doesn't pick a card in time, show the table
     $scope.$watch('game.state', () => {
-      if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
+      if (game.state === 'waiting for czar to decide' &&
+      $scope.showTable === false) {
         $scope.showTable = true;
       }
       // AUDAX EDITTED HERE
-    if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
-             $('#shuffleModal').modal({
-               dismissible: false
-             });
-             $('#shuffleModal').modal('open');
+      if ($scope.isCzar() && game.state === 'czar pick card'
+      && game.table.length === 0) {
+        $('#shuffleModal').modal({
+          dismissible: false
+        });
+        $('#shuffleModal').modal('open');
              // displayMessage('', '#card-modal');
-           }
-           if (game.state === 'game dissolved') {
-             $('#shuffleModal').modal('close');
-           }
-           if ($scope.isCzar() === false && game.state === 'czar pick card'
+      }
+      if (game.state === 'game dissolved') {
+        $('#shuffleModal').modal('close');
+      }
+      if ($scope.isCzar() === false && game.state === 'czar pick card'
              && game.state !== 'game dissolved'
              && game.state !== 'awaiting players' && game.table.length === 0) {
-             $scope.czarHasDrawn = 'Wait! Czar is drawing Card';
-           }
-           if (game.state !== 'czar pick card'
+        $scope.czarHasDrawn = 'Wait! Czar is drawing Card';
+      }
+      if (game.state !== 'czar pick card'
              && game.state !== 'awaiting players'
              && game.state !== 'game dissolve') {
-             $scope.czarHasDrawn = '';
-           }
+        $scope.czarHasDrawn = '';
+      }
     });
 
   // Set watch on chat data from users on different sockets

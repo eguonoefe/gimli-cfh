@@ -68,15 +68,16 @@ nav .brand-logo img{
   color: #fff;
 }
 
-#main-header > nav .nav-wrapper i{
-  line-height: 34px;
+#main-header > nav .nav-wrapper i.fa-twitter{
+  line-height: 47px;
+  margin-right: 5px;
 }
 
 #donate-btn{
   width: 150px;
   margin-left: 20px;
 }
-#donate-btn, span.btn.orange{
+#donate-btn, span.btn.orange, .fixed-card .btn.orange{
   color: #fff;
 }
 .fix-header{
@@ -116,6 +117,14 @@ nav .brand-logo img{
   z-index: 100;
   background: #fff;
 }
+#slider-container{
+  margin-top: 80px;
+}
+.slider-container {
+  border: 4px ridge #42A5F5;
+  padding-left: 0px;
+  padding-right: 0px;
+}
 
 /* User signin and signup */
 #sign-in ul li,
@@ -142,7 +151,15 @@ nav .brand-logo img{
 #sign-up ul li:last-child{
   margin-right: 0;
 }
-
+#signout a{
+  text-transform: capitalize !important;
+  padding: 0px 8px;
+}
+#signout i.fa-sign-out {
+  line-height: 0px;
+  margin-left: 8px;
+  color: red;
+}
 /* Form */
 /* label color */
 .input-field input, input[type=text]{
@@ -275,9 +292,6 @@ footer h5{
 #avatars-container{
   margin-top: 45px;
 }
-/*#avatars-container div input[type=radio]{
-
-}*/
 
 #avatars-container form p{
   margin-bottom: 10px;
@@ -300,33 +314,27 @@ footer h5{
 #start-game h5{
   margin-bottom: 25px;
 }
-#start-game p > a{
+#start-game ul li{
+  display: inline;
+  margin-right: 2em;
+}
+#start-game ul li:last-child{
+  margin-right: 0px;
+}
+#start-game ul li a{
   width: 120px;
-}
-#start-game p > a:nth-child(1){
-  margin-right: 25px;
-}
-#start-game p > a:nth-child(2){
-  margin-left: 25px;
+  padding: 0px;
 }
 
-@media only screen and (max-width : 992px) {
-  .parallax-container .section {
-    position: absolute;
-    top: 40%;
-  }
-  #index-banner{
-    height: 92.5vh;
-  }
-  #index-banner .section {
-    top: 10%;
-  }
+#start-game-container .btn{
+  white-space: normal;
+  height: auto;
+  line-height: 18px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
-#start-game p > a:nth-child(1){
-  margin-right: 25px;
-}
-#start-game p > a:nth-child(2){
-  margin-left: 25px;
+#finding-players{
+  margin-bottom: 20px;
 }
 
  .clear {
@@ -419,7 +427,7 @@ footer h5{
 }
 
 .players-count {
-  height: 50px;
+  min-height: 50px;
   margin-bottom: 10px;
 }
 
@@ -494,15 +502,12 @@ footer h5{
   font-size: 18px;
   font-weight: bold;
 }
-
 .p-5 {
   padding: 5px;
 }
-
 .p-2 {
   padding: 2px;
 }
-
 .fixed-card {
     bottom: 20px;
     position: fixed;
@@ -517,7 +522,10 @@ footer h5{
     text-align: center;
     color: white;
 }
-
+.fixed-card .btn.orange {
+  width: 100px;
+  padding: 0px;
+}
 .fixed-card .img-holder {
   background-color: #fff;
   padding: 10px;
@@ -561,6 +569,8 @@ footer h5{
   max-width: 300px;
   width: 300px;
   position: fixed;
+  right: 0px;
+  z-index: 1000;
   background-color: #fff;
   border: thin solid #fb8c00;
 }
