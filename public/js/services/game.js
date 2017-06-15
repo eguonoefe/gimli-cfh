@@ -201,7 +201,6 @@ angular.module('mean.system')
         };
 
         const gameId = game.gameID;
-        window.gameLink = game.gameID;
 
         // create game details
         const gameDetails = {

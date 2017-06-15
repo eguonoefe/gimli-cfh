@@ -78,7 +78,7 @@
           <input type="checkbox" id="{{ user.name }}" ng-model="user.selected" ng-click="countCheckedBox()" ng-disabled="checkedBoxCount > 10"
           />
           <label for="{{ user.name }}">{{ user.name }}</label>
-          <button class="pull-right" ng-click="addFriend({userId: user._id, userName: user.name}, $event)">Add {{ user.name }} as friend</button>
+          <button class="pull-right btn btn-success" ng-click="addFriend({userId: user._id, userName: user.name}, $event)">AddFriend</button>
         </p>
       </li>
     </div>
@@ -111,8 +111,9 @@
       <input type="text" ng-keyup="getFriends()" ng-model="searchText" />
       <li ng-repeat="friend in userFriends">
         <p>
-          <label for="{{ friend.name }}">{{ friend.userName }}</label>
-          <button class="pull-right" ng-click="sendInvite(friend.userId, $event)">Invite friend</button>
+          <strong for="{{ friend.userName }}">{{ friend.userName }}</strong>
+          <button class="pull-right btn btn-default" ng-click="sendInvite(friend.userId, $event)">Invite friend</button>
+          <button class="pull-right btn" style="margin-right: 2px;" ng-click="deleteFriend(friend, $event)">Delete friend</button>
         </p>
       </li>
     </div>

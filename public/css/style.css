@@ -318,7 +318,16 @@ footer h5{
    clear: both;
  }
 
-
+.liststyle{
+  list-style-type: none; 
+}
+.notice{
+  cursor:pointer;
+}
+.liststyle li {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: inline;
+}
 #modal1, #modal2, .modal-4, .modal-5, #modal3 {
   color: black;
   background-color: transparent;

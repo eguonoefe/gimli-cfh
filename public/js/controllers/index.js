@@ -77,9 +77,25 @@ angular.module('mean.system')
         }
       };
 
-      $scope.showInvites = () => {
+      $scope.showInvites = (event) => {
+        event.preventDefault();
+        // $http.get('/invites', { params: { userId: window.user._id } }).success((response) => {
+        //   $scope.invites = response;
+        // });
+      };
+
+      $scope.goToGame = (noticeId, event) => {
+        event.preventDefault();
+        $http.get('/invite/delete', { params: { noticeId } }).success((response) => {
+          $window.location.href = response;
+          $window.location.reload();
+        });
+      };
+
+      $scope.init = () => {
         $http.get('/invites', { params: { userId: window.user._id } }).success((response) => {
           $scope.invites = response;
+          $scope.notificationCounter = $scope.invites.length === 0 ? null : $scope.invites.length;
         });
       };
 

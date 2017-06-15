@@ -8,7 +8,7 @@
           </a>
         <a class="btn waves-effect waves-light orange darken-2 hide">donate now</a>
       </div>
-      <ul class="right hide-on-med-and-down" ng-controller="IndexController">
+      <ul class="right hide-on-med-and-down" ng-controller="IndexController" ng-init="init()">
         <li><a href="/">Home</a></li>
         <span ng-show="showOptions">
               <li><a href="#sign-in">SignIn</a></li>   
@@ -16,10 +16,13 @@
               SignUp</a></li> 
             </span>
         <span ng-hide="showOptions">
-            <li ><span class="{{hasNotification}}" ng-click="showInvites()">
-              <i class="material-icons">notifications</i>{{notificationCounter}}</span>
-              <ul>
-                <li ng-repeat="invite in invites"><a href="{{invite.link}}">Play with {{invite.senderName}}</a></li>
+            <li class="notice">
+              <a href="/" ng-click="showInvites($event)">
+              <i class="material-icons red-text notice">notifications</i>
+              <span>{{notificationCounter}}</span>
+              </a>
+              <ul class="liststyle">
+                <li ng-repeat="invite in invites" ><a ng-href="/" ng-click="goToGame(invite._id, $event)">Play with {{invite.senderName}}</a></li>
               </ul>
             </li>
 

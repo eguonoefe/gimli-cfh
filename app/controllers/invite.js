@@ -4,45 +4,28 @@ const mongoose = require('mongoose'),
 
 exports.addFriend = (req, res) => {
   const friend = req.body.friend,
-    userId = req.body.userId,
-    button = req.body.checkButton;
-  if (button === 'Addfriend') {
-    User.findOneAndUpdate(
-      { _id: userId },
-      { $push: { friends: friend } },
-      { safe: true, upsert: true },
-      (err) => {
-        if (!err) {
-          res.json(
-            {
-              succ: 'Successful',
-              action: 'addfriend',
-              friendId: req.body.friendId
-            });
-        }
-      });
-  } else {
-    User.update(
-      { _id: userId },
-      { $pullAll: { friends: [friendId] } },
-      (err) => {
-        if (!err) {
-          res.json(
-            {
-              succ: 'Successful',
-              action: 'unfriend',
-              friendId
-            });
-        }
-      });
-  }
+    userId = req.body.userId;
+  User.findOneAndUpdate(
+    { _id: userId },
+    { $push: { friends: friend } },
+    { safe: true, upsert: true },
+    (err) => {
+      if (!err) {
+        res.json(
+          {
+            succ: 'Successful',
+            action: 'addfriend',
+            friendId: req.body.friend.userId
+          });
+      }
+    });
 };
 
 function isBigEnough(value) {
   return value >= 10;
 }
 
-var filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
+let filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
 
 exports.getFriends = (req, res) => {
   const hint = req.query.searchText;
@@ -51,9 +34,9 @@ exports.getFriends = (req, res) => {
       if (err) return res.jsonp({ error: '403' });
       if (!user) return res.jsonp({ error: '404' });
       const friends = user.friends;
-      var filterFriend = friends.filter(value =>
+      let filterFriend = friends.filter(value =>
         value.userName.toLowerCase().includes(hint.toLowerCase()));
-      res.jsonp(filterFriend);
+      res.send(filterFriend);
     }
     );
 };
@@ -85,6 +68,64 @@ exports.readNotification = (req, res) => {
           succ: 'Update Successfully'
         });
     });
+};
+
+exports.deleteInvite = (req, res) => {
+  const notifyId = req.query.noticeId;
+  Notification.findByIdAndRemove(notifyId, (err, notification) => {
+    res.send(notification.link);
+  });
+};
+
+exports.deleteFriend = (req, res) => {
+  const userId = req.query.userId;
+  const friend = req.query.friend;
+  User.findById(
+    { _id: userId }, (err, resFriend) => {
+      if (!err) {
+        let friendIndex = null;
+        resFriend.friends.forEach((friendId, index) => {
+          if (friendId.userId === JSON.parse(friend).userId) {
+            friendIndex = index;
+          } else {
+            friendIndex = -1;
+          }
+        });
+        if (friendIndex !== -1) {
+          resFriend.friends.splice(friendIndex, 1);
+          resFriend.save((error) => {
+            if (!error) {
+              res.send('success');
+            }
+          });
+        }
+      }
+    }
+    // { $pullAll: { friends: [friend] } },
+    // (err) => {
+    //   if (!err) {
+    //     res.json(
+    //       {
+    //         deleted: true,
+    //         friendName: friend.userName,
+    //         friendId: friend.userId
+    //       });
+    //   }
+    // }
+    );
+  // User.find(
+  //   { _id: userId },
+  //   { $pullAll: { friends: [friend] } },
+  //   (err) => {
+  //     if (!err) {
+  //       res.json(
+  //         {
+  //           deleted: true,
+  //           friendName: friend.userName,
+  //           friendId: friend.userId
+  //         });
+  //     }
+  //   });
 };
 
 exports.sendNotification = (req, res) => {

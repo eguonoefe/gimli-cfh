@@ -44,6 +44,8 @@ module.exports = function (app, passport, auth) {
     app.post('/notify', invite.sendNotification);
     app.get('/invites', invite.getInvites);
     app.post('/api/read', invite.readNotification);
+    app.get('/invite/delete', invite.deleteInvite);
+    app.get('/delete/friend', invite.deleteFriend);
 
     app.post('/users/session', passport.authenticate('local', {
         failureRedirect: '/signin',

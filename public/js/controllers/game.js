@@ -13,13 +13,13 @@ angular.module('mean.system')
     const makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
-    var windw = this;
+    let windw = this;
 
     $.fn.followTo = function (pos) {
-      var $this = this,
+      let $this = this,
         $window = $(windw);
 
-      $window.scroll(function (e) {
+      $window.scroll((e) => {
         if ($window.scrollTop() > pos) {
           $this.css({
             position: 'absolute',
@@ -142,29 +142,25 @@ angular.module('mean.system')
     };
 
     $scope.getFriends = () => {
-      $http.get('/friends', { params: { searchText: $scope.searchText, userId: window.user._id } })
-        .success((response) => {
-          $scope.userFriends = response;
-        }, (error) => {
-          console.log(error);
-        }
-        );
+      if ($scope.searchText === '') {
+        $scope.userFriends = [];
+      } else {
+        $http.get('/friends', { params: { searchText: $scope.searchText, userId: window.user._id } })
+          .success((response) => {
+            $scope.userFriends = response;
+          }, (error) => {
+            console.log(error);
+          }
+          );
+      }
     };
 
     $scope.addFriend = (friend, button) => {
-      const user = window.user;
-      const userId = user._id;
+      const userId = window.user._id;
       const url = button.target.baseURI;
-      const checkButton = 'Addfriend';
-      // if ($scope.userFriends.includes(friendId)) {
-      //   checkButton = 'Unfriend';
-      // } else {
-      //   checkButton = 'Addfriend';
-      // }
       $http.post('/friends',
         {
           userId,
-          checkButton,
           friend,
           url
         })
@@ -189,7 +185,7 @@ angular.module('mean.system')
 
     $scope.sendInvite = (friendId, event) => {
       const url = event.target.baseURI;
-      const userName = { userName: window.user.name, userId: window.user._id};
+      const userName = { userName: window.user.name, userId: window.user._id };
       $http.post('/notify',
         {
           userName,
@@ -199,6 +195,24 @@ angular.module('mean.system')
         .success((response) => {
           $scope.inviteMessage = response.status;
         });
+    };
+    $scope.deleteFriend = (friend, event) => {
+      event.preventDefault();
+      $http.get('/delete/friend', { params: { friend, userId: window.user._id } }).success((res) => {
+        if (res === 'success') {
+          let friendIndex = null;
+          $scope.userFriends.forEach((friendId, index) => {
+            if (friendId.userId === friend.userId) {
+              friendIndex = index;
+            } else {
+              friendIndex = -1;
+            }
+          });
+          if (friendIndex !== -1) {
+            $scope.userFriends.splice(friendIndex, 1);
+          }
+        }
+      });
     };
 
     $scope.sendPickedCards = () => {
@@ -254,20 +268,20 @@ angular.module('mean.system')
       !(/^\d+$/).test(game.gameID) && game.state === 'awaiting players'
     );
 
-    $scope.isPremium = ($index) => (
+    $scope.isPremium = $index => (
       game.players[$index].premium
     );
 
-    $scope.currentCzar = ($index) => (
+    $scope.currentCzar = $index => (
       $index === game.czar
     );
 
     $scope.winningColor = ($index) => {
       if (game.winningCardPlayer !== -1 && $index === game.winningCard) {
         return $scope.colors[game.players[game.winningCardPlayer].color];
-      } else {
-        return '#f9f9f9';
       }
+      return '#f9f9f9';
+
     };
 
     $scope.pickWinning = (winningSet) => {
@@ -318,7 +332,7 @@ angular.module('mean.system')
     $scope.showModal1 = () => {
       $('.modal').modal();
       $('#modal1').modal('open');
-    }
+    };
 
     /**
     * Opens modal when share button is clicked
@@ -328,7 +342,7 @@ angular.module('mean.system')
     $scope.showModal2 = () => {
       $('.modal').modal();
       $('#modal2').modal('open');
-    }
+    };
 
     /**
      * Opens modal when share button is clicked
@@ -338,6 +352,7 @@ angular.module('mean.system')
     $scope.showModal3 = () => {
       $('.modal').modal();
       $('#modal3').modal('open');
+      $scope.userFriends = [];
     };
 
     $scope.$watch('game.gameID', () => {
@@ -353,11 +368,11 @@ angular.module('mean.system')
           $location.search({ game: game.gameID });
           if (!$scope.modalShown) {
             setTimeout(() => {
-              var txt = '<i class="material-icons">insert_chart</i>';
+              let txt = '<i class="material-icons">insert_chart</i>';
               $('#lobby-how-to-play').hide();
               $('#oh-el').hide();
               $('#share-link')
-                .css({ 'text-align': 'left', 'display': 'block' });
+                .css({ 'text-align': 'left', display: 'block' });
               $('#copy-link').text(txt);
             }, 200);
             $scope.modalShown = true;
