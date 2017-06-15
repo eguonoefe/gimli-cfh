@@ -44,7 +44,9 @@
         <span class="btn">
          Invite at least  {{game.playerMinLimit - game.players.length }} 
          more {{ (game.playerMinLimit - game.players.length) < 2 ? 'person' : 'people'}} to start the game
-        </span>
+        </span><br/>
+        <span class="btn user-tour"> <a id="user-tour" ng-click="userTour()">Re-Take Tour</a></span>
+
         <div class="clear"></div>
       </div>
       <div class="clear"></div>

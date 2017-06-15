@@ -136,6 +136,70 @@ $location, MakeAWishFactsService, $dialog, $http) => {
         $scope.setCookie('username', 'user', 365);
         setTimeout(() => {
           const intro = introJs();
+          intro.onexit(function() {
+            intro.setOptions({
+            steps: [
+              {
+                intro: 'Hi, I\'m Jade. I\'m super excited to be onboarding' +
+                'you to this game. Click Next to get Started. You can ' +
+                'end the tour anytime by clicking Skip.'
+              }
+            ]
+            });
+            });
+          intro.setOptions({
+            steps: [
+              {
+                intro: 'Hi, I\'m Jade. I\'m super excited to be onboarding' +
+                'you to this game. Click Next to get Started. You can ' +
+                'end the tour anytime by clicking Skip.'
+              },
+              {
+                element: document.querySelector('#startGame'),
+                intro: 'Questions will appear here'
+              },
+              {
+                element: document.querySelector('#questions-bg'),
+                intro: 'Answer cards will appear here. Choose the best ' +
+                 'answer for the given question',
+                position: 'top'
+              },
+              {
+                element: document.querySelector('#time-wrap'),
+                intro: 'You\'ll have 20 seconds per question. ' +
+                'Your time will appear here.'
+              },
+              {
+                element: document.querySelector('#click-tag'),
+                intro: 'Use this link to invite users who HAVE CFH accounts'
+              },
+              {
+                element: document.querySelector('#click-tag2'),
+                intro: 'Use this link to invite users ' +
+                'who DO NOT HAVE CFH accounts'
+              },
+              {
+                element: document.querySelector('#player-bg'),
+                intro: 'This panel shows you the players in the game and ' +
+                'the number of questions answered by each player. ' +
+                'A player who answers 5 questions correctly WINS.'
+              },
+              {
+                element: document.querySelectorAll('#step2')[0],
+                intro: 'Ready? Get Started by inviting at least 3 ' +
+                'players.  Maximum number of players is 12',
+                position: 'right'
+              }
+            ]
+          });
+          intro.start();
+        }, 1000); 
+      }
+    };
+
+    $scope.userTour = () => {
+      setTimeout(() => {
+          const intro = introJs();
           intro.setOptions({
             steps: [
               {
@@ -183,8 +247,7 @@ $location, MakeAWishFactsService, $dialog, $http) => {
           });
           intro.start();
         }, 1000);
-      }
-    };
+      };
 
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {

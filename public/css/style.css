@@ -311,6 +311,15 @@ footer h5{
 #start-game{
   margin-top: 20px;
 }
+.user-tour{
+  margin-top: 8px;
+}
+.user-tour a{
+  color: #ffffff;
+}
+.user-tour a:hover{
+  color: #000000;
+}
 #start-game h5{
   margin-bottom: 25px;
 }
