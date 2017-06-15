@@ -15,7 +15,7 @@ $location, MakeAWishFactsService, $dialog, $http) => {
     $scope.makeAWishFact = makeAWishFacts.pop();
     const windw = this;
     $.fn.followTo = (pos) => {
-      const $this = this,
+      const $this = $(this),
         $window = $(windw);
 
       $window.scroll(() => {
