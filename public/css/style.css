@@ -318,7 +318,8 @@ footer h5{
    clear: both;
  }
 
-#modal1, #modal2, .modal-4, .modal-5 {
+
+#modal1, #modal2, .modal-4, .modal-5, #modal3 {
   color: black;
   background-color: transparent;
   border: none;

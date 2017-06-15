@@ -1,46 +1,52 @@
- <!-- Header -->
-  <div landing id="main-header">
-    <nav role="navigation">
-      <div class="nav-wrapper container-fluid">
-        <div class="brand-logo">
-          <a id="header-logo-container" href="#" >
+<!-- Header -->
+<div landing id="main-header">
+  <nav role="navigation">
+    <div class="nav-wrapper container-fluid">
+      <div class="brand-logo">
+        <a id="header-logo-container" href="#">
             <img src="/img/cfh-crop.png" alt="">
           </a>
-          <a 
-            class="btn waves-effect waves-light orange darken-2 hide"
-          >donate now</a>
-        </div>
-        <ul class="right hide-on-med-and-down" ng-controller="IndexController">       
-            <li><a href="/">Home</a></li>
-            <span ng-show="showOptions">
+        <a class="btn waves-effect waves-light orange darken-2 hide">donate now</a>
+      </div>
+      <ul class="right hide-on-med-and-down" ng-controller="IndexController">
+        <li><a href="/">Home</a></li>
+        <span ng-show="showOptions">
               <li><a href="#sign-in">SignIn</a></li>   
               <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1">
               SignUp</a></li> 
             </span>
-          <span ng-hide="showOptions">
+        <span ng-hide="showOptions">
+            <li ><span class="{{hasNotification}}" ng-click="showInvites()">
+              <i class="material-icons">notifications</i>{{notificationCounter}}</span>
+              <ul>
+                <li ng-repeat="invite in invites"><a href="{{invite.link}}">Play with {{invite.senderName}}</a></li>
+              </ul>
+            </li>
+
             <li><a href="/signout">Sign Out</a></li>           
           </span>
-          <span>
+        <span>
             <li>
               <a href="https://twitter.com/share" class="waves-effect waves-light btn twitter" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App"><i class="fa fa-twitter left"></i>Tweet</a>
             </li>
             <li ng-click="abandonGame()"><a class="btn waves-effect waves-light red darken-1">
               Abandon game</a></li> 
-          </span>                  
-        </ul>
+          </span>
+      </ul>
 
-        <!-- Mobile nav -->
-        <ul id="nav-mobile" class="side-nav">
-          <li><a href="#">Home</a></li>
-          <li><a href="#how-to-play">How to Play</a></li>
-          <li><a href="#charity">Charity</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#sign-in">SignIn</a></li>   
-          <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1">
-            SignUp</a></li>  
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse right">
+      <!-- Mobile nav -->
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="/" class="{{hasNotification}}"><i class="material-icons">archive</i>{{notificationCounter}}</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#how-to-play">How to Play</a></li>
+        <li><a href="#charity">Charity</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#sign-in">SignIn</a></li>
+        <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1">
+            SignUp</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse right">
           <i class="material-icons">menu</i></a>
-      </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
+</div>

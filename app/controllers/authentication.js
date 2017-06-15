@@ -11,10 +11,6 @@ var avatars = require('./avatars').all();
  */
 
 exports.verifyJWT = function (req, res) {
-<<<<<<< HEAD
-  console.log('came here', req);
-=======
->>>>>>> e404859e7e4e0b137f8220324af4d12085d0f050
   var jwt = req.headers['authorization'];
   return res.json({ 'jwt': jwt });
 }
@@ -25,11 +21,6 @@ exports.signup = function (req, res) {
     }).exec(function (err, existingUser) {
       if (!existingUser) {
         var user = new User(req.body);
-<<<<<<< HEAD
-        console.log(user);
-
-=======
->>>>>>> e404859e7e4e0b137f8220324af4d12085d0f050
         // Switch the user's avatar index to an actual avatar url
         user.avatar = avatars[user.avatar];
         user.provider = 'local';

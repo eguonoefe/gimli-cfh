@@ -10,7 +10,7 @@ var express = require('express'),
 module.exports = function(app, passport, mongoose) {
     app.set('showStackError', true);
 
-    //Should be placed before express.static
+    // Should be placed before express.static
     app.use(express.compress({
         filter: function(req, res) {
             return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
@@ -18,16 +18,16 @@ module.exports = function(app, passport, mongoose) {
         level: 9
     }));
 
-    //Setting the fav icon and static folder
+    // Setting the fav icon and static folder
     app.use(express.favicon());
     app.use(express.static(config.root + '/public'));
 
-    //Don't use logger for test env
+    // Don't use logger for test env
     if (process.env.NODE_ENV !== 'test') {
         app.use(express.logger('dev'));
     }
 
-    //Set views path, template engine and default layout
+    // Set views path, template engine and default layout
     app.set('views', config.root + '/app/views');
     app.set('view engine', 'jade');
 

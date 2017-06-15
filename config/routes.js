@@ -1,11 +1,11 @@
 var async = require('async'),
-mongoose = require('mongoose'),
-Game = mongoose.model('Game');
+    mongoose = require('mongoose'),
+    Game = mongoose.model('Game'),
+    invite = require('../app/controllers/invite');
 
-module.exports = function(app, passport, auth) {
-
-  // api authentication route
-  const authentication = require('../app/controllers/authentication');
+module.exports = function (app, passport, auth) {
+    // api authentication route
+    const authentication = require('../app/controllers/authentication');
     app.post('/api/auth/signin', authentication.signin);
     app.post('/api/auth/signup', authentication.signup);
 
@@ -24,21 +24,26 @@ module.exports = function(app, passport, auth) {
     app.post('/api/auth/signup', users.createJWT);
     app.post('/users/avatars', users.avatars);
 
-     // route to save game details , add jwt passport
+    // route to save game details , add jwt passport
     app.post('/api/games/:id/start', (req, res) => {
-      // create new game object
-      const newGame = new Game(req.body);
-      newGame.save()
-      .then(game =>
-        res.json({ status: 'success', game })
-      )
-      .catch(err =>
-        res.json({ status: 'fail', message: err })
-      );
+        // create new game object
+        const newGame = new Game(req.body);
+        newGame.save()
+            .then(game =>
+                res.json({ status: 'success', game })
+            )
+            .catch(err =>
+                res.json({ status: 'fail', message: err })
+            );
     });
 
     // Donation Routes
     app.post('/donations', users.addDonation);
+    app.post('/friends', invite.addFriend);
+    app.get('/friends', invite.getFriends);
+    app.post('/notify', invite.sendNotification);
+    app.get('/invites', invite.getInvites);
+    app.post('/api/read', invite.readNotification);
 
     app.post('/users/session', passport.authenticate('local', {
         failureRedirect: '/signin',

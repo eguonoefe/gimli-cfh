@@ -20,6 +20,7 @@ angular.module('mean.system')
             password: $scope.password
           };
           $http.post('/api/auth/signin', newuser).then((response) => {
+            window.user = response;
             if (response.data.signinStatus === 'success') {
               $window.localStorage.setItem('token', response.data.token);
            // $cookie.put('jwt',response.data.token);
@@ -74,6 +75,12 @@ angular.module('mean.system')
             $scope.message = err;
           });
         }
+      };
+
+      $scope.showInvites = () => {
+        $http.get('/invites', { params: { userId: window.user._id } }).success((response) => {
+          $scope.invites = response;
+        });
       };
 
       $scope.avatars = [];
