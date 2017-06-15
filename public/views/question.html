@@ -34,7 +34,7 @@
       </div>
 
 
-      <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
+      <div id="start-game-container" ng-click="showRegion()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
         <span class="btn">
           Start Game with {{game.players.length}} players
         </span>
@@ -136,6 +136,30 @@
     </div>
     <div class="clear"></div>
   </div>
+
+  <!-- Select Region modal -->
+  <div id="region-modal" class="modal" role="dialog">
+    <div class="modal-content center">
+      <h3>Please select a region to continue</h3>
+      <div id="modal-body-2">
+        <select ng-model="region" name="region" id="region">
+          <option value="" disabled>Choose a region</option>
+          <option value="NG">Nigeria</option>
+          <option value="GH">Ghana</option>
+          <option value="US">USA</option>
+          <option value="UK">United Kingdom</option>
+          <option value="KEN">Kenya</option>
+          <option value="UGH">Uganda</option>
+        </select>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="startGame()" class="btn modal-close" id="close" data-dismiss="modal">LET'S GO!</button>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+
   <!-- MODAL TO ASK THE CZAR TO PICK A CARD  -->
    <div id="shuffleModal" class="modal modal-6" role="dialog">
        <div class="modal-content">

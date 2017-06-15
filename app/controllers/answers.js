@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
     Answer = mongoose.model('Answer'),
     _ = require('underscore');
 
-
+let region;
 /**
  * Find answer by id
  */
@@ -24,6 +24,11 @@ exports.answer = function(req, res, next, id) {
  */
 exports.show = function(req, res) {
     res.jsonp(req.answer);
+};
+
+exports.saveRegion = (req, res) => {
+    region = req.params.region;
+    res.send('Yea');
 };
 
 /**
@@ -45,9 +50,9 @@ exports.all = function(req, res) {
  * List of Answers (for Game class)
  */
 exports.allAnswersForGame = function(cb) {
-    Answer.find({official:true}).select('-_id').exec(function(err, answers) {
+    Answer.find({official:true, region }).select('-_id').exec(function(err, answers) {
         if (err) {
-            console.log(err);
+            //
         } else {
             cb(answers);
         }
