@@ -40,7 +40,8 @@ $location, MakeAWishFactsService, $dialog, $http) => {
   // displays chat messages on client side
     const displayChatMessage = (senderName, senderAvatar,
     chatMessage, timeSent, self) => {
-      const chatHtml = $.parseHTML(chatMessage);
+      const textWithAmp = chatMessage.replace(/&amp;/g, '&');
+      const chatHtml = $.parseHTML(`${textWithAmp}`);
       if (chatMessage === '') {
         return null;
       }
