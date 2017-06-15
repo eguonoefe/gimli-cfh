@@ -19,7 +19,7 @@ $(document).ready(function() {
     <div class="section no-pad-bot">
       <div class="container-fluid">
         <br><br>
-        <a class="brand-logo">
+        <a class="brand-logo" href="/">
           <img src="/img/cfh.png" alt="">
         </a>
         <h1 class="header center blue-text text-lighten-1">Cards for Humanity</h1>
@@ -31,14 +31,18 @@ $(document).ready(function() {
       <div ng-hide="showOptions" id="start-game" class="container">
         <div class="row center">
           <h5>Play with</h5>
-          <p>
-            <a href="/play" class="btn-large waves-effect waves-light blue lighten-1" >
+          <ul>
+            <li>
+              <a href="/play" class="btn-large waves-effect waves-light blue lighten-1" >
               strangers
-            </a> or 
+            </a>
+            </li>
+            <li>
             <a href="/play?custom" class="btn-large waves-effect waves-light blue lighten-1" >
               friends
             </a>
-          </p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -46,104 +50,59 @@ $(document).ready(function() {
   </div>
 
   <!-- Header -->
-  <div id="main-header">
-    <nav role="navigation">
-      <div class="nav-wrapper container-fluid">
-        <div class="brand-logo">
-          <a id="header-logo-container" class="hide" href="#" >
-            <img src="/img/cfh-crop.png" alt="">
-          </a>
-          <a id="donate-btn"
-            class="btn waves-effect waves-light orange darken-2"
-            href="http://www.crowdrise.com/cfhio/fundraiser/cards4humanity"
-            title="Fundraising Websites on Crowdrise"
-          >
-            donate now
-            <script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/121142/?callback=userDonationCb"></script>
-          </a>
-        </div>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="/">Home</a></li>
-          <li><a href="#how-to-play">How to Play</a></li>
-          <li><a href="#charity">Charity</a></li>
-          <li><a href="#team">Team</a></li> 
-          <span ng-show="showOptions">
-            <li><a href="#sign-in" ng-click="showModal($event)">SignIn</a></li> 
-            <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1" ng-click="showModal($event)">
-              SignUp</a></li> 
-          </span>   
-          <span ng-hide="showOptions" class="btn waves-effect waves-light blue lighten-1">
-            <li><a ng-click="signout()">Sign Out</a></li>
-          </span>                  
-        </ul>
-
-        <!-- Mobile nav -->
-        <ul id="nav-mobile" class="side-nav">
-          <li><a href="#">Home</a></li>
-          <li><a href="#how-to-play">How to Play</a></li>
-          <li><a href="#charity">Charity</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#sign-in">SignIn</a></li>   
-          <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1">
-            SignUp</a></li>  
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse right">
-          <i class="material-icons">menu</i></a>
-      </div>
-    </nav>
-  </div>
+  <ng-include src="'./views/header.html'"></ng-include>
 
   <!--   How-to-play section  -->
   <div class="container-fluid">
     <div id="how-to-play" class="section scrollspy ">
       <div class="row">
-        <h3 class="header center blue-text text-lighten-1">How to Play</h3>      
+        <h3 class="header center blue-text text-lighten-1">How to Play</h3>
         <!-- Step1: choose an avatar -->
         <div class="col s12 m6">
           <div class="step">
             <h5 class="right-align">Choose an avatar</h5>
-              <a ng-click="slider($event, 1)" href="#one"><i class="fa fa-user-circle"></i> </a> 
-              <p class="right-align">Each player begins with, and will always 
-                have, 10 white answer cards.</p>          
+              <a ng-click="slider($event, 0)" href="#one"><i class="fa fa-user-circle"></i> </a>
+              <p class="right-align">Each player begins with, and will always
+                have, 10 white answer cards.</p>
           </div>
 
           <!-- Step2: invite your friends -->
           <div class="step">
             <h5 class="right-align">Invite your friends</h5>
-              <a ng-click="slider($event, 2)" href="#two"><i class="fa fa-group"></i> </a>  
-              <p class="right-align">For each round, one player is randomly 
-                chosen as the Card Czar.</p>                     
+              <a ng-click="slider($event, 1)" href="#two"><i class="fa fa-group"></i> </a>
+              <p class="right-align">For each round, one player is randomly
+                chosen as the Card Czar.</p>
           </div>
 
           <!-- Step3: choose your answer -->
           <div class="step">
             <h5 class="right-align">Choose an answer</h5>
-              <a ng-click="slider($event, 3)" href="#three"><i class="fa fa-search"></i> </a>  
-              <p class="right-align">Everyone else answers the black question 
-                card by clicking on the answer card they want to use.</p>       
+              <a ng-click="slider($event, 2)" href="#three"><i class="fa fa-search"></i> </a>
+              <p class="right-align">Everyone else answers the black question
+                card by clicking on the answer card they want to use.</p>
           </div>
 
           <!-- Step4: expect your results -->
           <div class="step">
             <h5 class="right-align">Expect your results</h5>
-              <a ng-click="slider($event, 4)" href="#four"><i class="fa fa-envelope"></i> </a>
+              <a ng-click="slider($event, 3)" href="#four"><i class="fa fa-envelope"></i> </a>
               <p class="right-align">The Card Czar then picks a favorite answer,
-                and whoever played that answer wins the round.</p>            
+                and whoever played that answer wins the round.</p>
           </div>
         </div>
 
         <!-- Carousel images -->
-        <div class="col s12 m6">
-          <div class="container">
+        <div id="slider-container" class="col s12 m6">
+          <div class="container slider-container">
             <div class="carousel carousel-slider">
               <a class="carousel-item" href="#one!">
-                <img src="/img/cfh-1.jpg"></a>
+                <img src="/img/choose-avatar.png"></a>
               <a class="carousel-item" href="#two!">
-                <img src="/img/cfh-3 v1.jpg"></a>
+                <img src="/img/send-invites.png"></a>
               <a class="carousel-item" href="#three!">
-                <img src="/img/cfh-charity.jpg"></a>
+                <img src="/img/choose-answer.png"></a>
               <a class="carousel-item" href="#four!">
-                <img src="/img/cfh-team.jpg"></a>
+                <img src="/img/expect-result.png"></a>
             </div>
           </div>
         </div>
@@ -169,11 +128,12 @@ $(document).ready(function() {
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
             <h4>Make a Donation Today</h4>
+
             <h6>
               "If you don't give back, no one will like you&trade;" - <a href="http://www.crowdrise.com/cfhio/fundraiser/cards4humanity">crowdrise.com</a>
             </h6>
           <p class="left-align light">
-            We're quite sure you feel the same way, so we've integrated donation widgets (via <a href="http://www.crowdrise.com/cfhio/fundraiser/cards4humanity">crowdrise.com</a>), along with some not-so-subtle reminders throughout the game to give you the opportunity to donate. If you're signed in when you donate, we'll even upgrade your account and place a crown on your avatar's head (to remind other players how much better you 
+            We're quite sure you feel the same way, so we've integrated donation widgets (via <a href="http://www.crowdrise.com/cfhio/fundraiser/cards4humanity">crowdrise.com</a>), along with some not-so-subtle reminders throughout the game to give you the opportunity to donate. If you're signed in when you donate, we'll even upgrade your account and place a crown on your avatar's head (to remind other players how much better you
           </p>
           <p>
             All donations go to the Make-a-Wish Foundation and benefit children in need.
@@ -181,6 +141,7 @@ $(document).ready(function() {
           <p>
             <a href="http://www.wish.org"><img src="img/make-a-wish-logo.png" id="wish"/></a>
           </p>
+
         </div>
       </div>
     </div>
@@ -191,7 +152,7 @@ $(document).ready(function() {
     <div id="team" class="section scrollspy no-pad-bot">
       <div class="container">
         <div class="row center">
-          <h1 class="header col s12 blue-text text-lighten-1">Meet the Team</h1>
+          <h1 class="header col s12 blue-text text-lighten-1">The CFH Team</h1>
         </div>
       </div>
     </div>
@@ -203,14 +164,24 @@ $(document).ready(function() {
       <div class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
-            <h4>Meet the CFH Team</h4>
+            <h4>Cards for Humanity was: </h4>
           <div class="left-align light">
             <p class="center">
-              Created with love and tenderness by: 
+              Originally created by:
               <a href="http://github.com/silversteez">Matt Silverstein</a>,
-              <a href="http://github.com/mrngoitall">Will Ngo</a>,              
+              <a href="http://github.com/mrngoitall">Will Ngo</a>,
               <a href="http://github.com/tylermcginnis33">Tyler McGinnis</a>, and
               <a href="http://github.com/davegonzalez">David Gonzalez</a>
+            </p>
+            <p class="center">
+              And redesigned with love and tenderness by:
+              <a href="http://github.com/sandela-dbamidele">Daniel Bamidele</a>,
+              <a href="http://github.com/andela-ookoro">Okwudiri Okoro</a>,
+              <a href="http://github.com/andela-dhaniabelega">Dhani Abelega</a>,
+              <a href="http://github.com/andela-mugochukwu">Mazi Ugochukwu</a>,
+              <a href="http://github.com/andela-efalayi">Esther Falayi</a>,
+              <a href="http://github.com/andela-aanchirinah">Audax Anchirinah</a>, and
+              <a href="http://github.com/andela-moe">Mark Edomwande</a>
             </p>
           </div>
         </div>
@@ -218,6 +189,8 @@ $(document).ready(function() {
     </div>
   </div>
 
+
+  <!-- Modals -->
   <!-- Index page modals -->
   <div ng-controller="IndexController">
     <!-- Sign in -->
@@ -230,19 +203,19 @@ $(document).ready(function() {
             <ul>
               <li >
                 <a href="/auth/facebook" class="waves-effect waves-light btn facebook">
-                  <i class="fa fa-facebook-f left"></i></a>
+                  <i class="fa fa-facebook-f"></i></a>
               </li>
               <li>
                 <a href="/auth/twitter" class="waves-effect waves-light btn twitter">
-                  <i class="fa fa-twitter left"></i></a>
+                  <i class="fa fa-twitter"></i></a>
               </li>
               <li>
                 <a href="/auth/github" class="waves-effect waves-light btn github">
-                  <i class="fa fa-github left"></i></a>
+                  <i class="fa fa-github"></i></a>
               </li>
               <li>
                 <a href="/auth/google" class="waves-effect waves-light btn googleplus">
-                  <i class="fa fa-google-plus left"></i></a>
+                  <i class="fa fa-google-plus"></i></a>
               </li>
             </ul>
           </div>
@@ -265,7 +238,7 @@ $(document).ready(function() {
                   <label for="password"></label>
                 </div>
                 <div class="right">
-                  <button id="sign-up-btn-other" 
+                  <button id="sign-up-btn-other"
                   class="btn waves-effect waves-light blue lighten-1" type='submit' ng-click="signin()">
                   Sign In</button>
                 </div>
@@ -284,19 +257,19 @@ $(document).ready(function() {
           <ul>
             <li >
               <a href="/auth/facebook" class="waves-effect waves-light btn facebook">
-                <i class="fa fa-facebook-f left"></i></a>
+                <i class="fa fa-facebook-f"></i></a>
             </li>
             <li>
               <a href="/auth/twitter" class="waves-effect waves-light btn twitter">
-                <i class="fa fa-twitter left"></i></a>
+                <i class="fa fa-twitter"></i></a>
             </li>
             <li>
               <a href="/auth/github" class="waves-effect waves-light btn github">
-                <i class="fa fa-github left"></i></a>
+                <i class="fa fa-github"></i></a>
             </li>
             <li>
               <a href="/auth/google" class="waves-effect waves-light btn googleplus">
-                <i class="fa fa-google-plus left"></i></a>
+                <i class="fa fa-google-plus "></i></a>
             </li>
           </ul>
         </div>
@@ -325,7 +298,7 @@ $(document).ready(function() {
                   <label for="password"></label>
                 </div>
                 <div class="input-field col s12">
-                  <h6>Choose an avatar</h6>                  
+                  <h6>Choose an avatar</h6>
                   <div ng-repeat="avatar in avatars" class="ng-scope">
                     <p class="col s2">
                       <input name="avatars" type="radio" id="{{avatar}}" ng-model="playerAvatar" value="{{$index}}" class="with-gap"/>
@@ -337,7 +310,7 @@ $(document).ready(function() {
                 </div>
 
                 <div class="input-field right">
-                  <button id="sign-up-btn-other" 
+                  <button id="sign-up-btn-other"
                   class="btn waves-effect waves-light blue lighten-1" type='submit' ng-click="signup()">
                   Sign Up</button>
                 </div>
@@ -351,38 +324,39 @@ $(document).ready(function() {
   <footer id="footer" class="page-footer">
     <div class="container-fluid">
       <div class="row ">
-        <div class="col l4 s12">
+        <div class="col l4 m4 s6">
           <h5 class="white-text">Cards for Humanity</h5>
           <p class="grey-text text-lighten-4">&copy; 2017</p>
         </div>
-        <div class="col l4 s12">
-           <div class="center">
-             <img src="/img/cfh.png" alt="">
+        <div class="col l4 m4 s6">
+           <div>
+             <img src="/img/cfh.png" alt="cfh-logo">
            </div>
         </div>
-        <div class="col l4 s12">
+        <div class="col l4 m4 s12">
           <h5 class="white-text center">Connect With Us</h5>
 
           <!-- Social icons -->
           <ul class="social-icons">
             <li class="facebook">
               <a class="white-text" href="#!">
-                <i class="fa fa-facebook-f"></i> 
+                <i class="fa fa-facebook-f"></i>
               </a>
             </li>
             <li class="twitter">
-              <a class="white-text" href="#!">
-                <i class="fa fa-twitter"></i> 
+              <a class="white-text" href="https://twitter.com/cfh_app">
+                <i class="fa fa-twitter"></i>
+
               </a>
             </li>
              <li class="github">
               <a class="white-text" href="#!">
-                <i class="fa fa-github"></i> 
+                <i class="fa fa-github"></i>
               </a>
             </li>
              <li class="instagram">
               <a class="white-text" href="#!">
-                <i class="fa fa-instagram"></i> 
+                <i class="fa fa-instagram"></i>
               </a>
             </li>
           </ul>

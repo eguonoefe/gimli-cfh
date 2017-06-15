@@ -102,6 +102,16 @@ gulp.task('copyMaterializeJs', () => {
   .pipe(gulp.dest('public/lib/materialize/js/'));
 });
 
+// jquery-emoji-picker
+gulp.task('copyEmojiOneAreaCss', () => {
+  gulp.src('bower_components/emojionearea/dist/emojionearea.min.css')
+  .pipe(gulp.dest('public/lib/emojionearea/css/'));
+});
+gulp.task('copyEmojiOneAreaJs', () => {
+  gulp.src('bower_components/emojionearea/dist/emojionearea.min.js')
+  .pipe(gulp.dest('public/lib/emojionearea/js/'));
+});
+
 gulp.task('mochaTest', () => {
   gulp.src(['test/**/*.js'])
     .pipe(mocha({
@@ -114,4 +124,5 @@ gulp.task('install', ['bower']);
 gulp.task('default', ['nodemon', 'watch', 'sass',
   'copyBootstrap', 'copyAngularUtilsRoute', 'copyAngular',
   'copyJquery', 'copyUnderscore', 'copyAngularBootstrap',
-  'copyMaterializeCss', 'copyMaterializeJs']);
+  'copyMaterializeCss', 'copyMaterializeJs', 'copyEmojiOneAreaCss',
+  'copyEmojiOneAreaJs']);

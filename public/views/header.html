@@ -1,21 +1,42 @@
 <!-- Header -->
-<div landing id="main-header">
-  <nav role="navigation">
-    <div class="nav-wrapper container-fluid">
-      <div class="brand-logo">
-        <a id="header-logo-container" href="#">
+  <div id="main-header" ng-controller="materializeInit">
+    <nav role="navigation">
+      <div class="nav-wrapper container-fluid">
+        <div class="brand-logo">
+          <a id="header-logo-container" class="hide" href="/" >
             <img src="/img/cfh-crop.png" alt="">
           </a>
-        <a class="btn waves-effect waves-light orange darken-2 hide">donate now</a>
-      </div>
-      <ul class="right hide-on-med-and-down" ng-controller="IndexController" ng-init="init()">
-        <li><a href="/">Home</a></li>
-        <span ng-show="showOptions">
-              <li><a href="#sign-in">SignIn</a></li>   
-              <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1">
-              SignUp</a></li> 
+          <a id="donate-btn"
+            class="btn waves-effect waves-light orange darken-2"
+            href="http://www.crowdrise.com/cfhio/fundraiser/cards4humanity"
+            title="Fundraising Websites on Crowdrise"
+          >
+            donate now
+            <script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/121142/?callback=userDonationCb"></script>
+          </a>
+        </div>
+        <ul class="right hide-on-med-and-down" ng-controller="IndexController" ng-init="init()">
+          <li><a href="/">Home</a></li>
+          <span ng-show="isLandingPage">
+            <li><a href="#how-to-play">How to Play</a></li>
+            <li><a href="#charity">Charity</a></li>
+            <li><a href="#team">Team</a></li>
+          </span>
+          <span ng-show="showOptions">
+            <li><a href="#sign-in" ng-click="showModal($event)">SignIn</a></li>
+            <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1" ng-click="showModal($event)">
+              SignUp</a></li>
+          </span>
+          <span ng-hide="showOptions">
+            <span ng-show="isAppPage">
+              <li>
+                <a href="https://twitter.com/share" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App"><i class="fa fa-twitter"></i>Tweet</a>
+              </li>
+              <li ng-click="abandonGame()"><a class="red-text darken-1">
+                Abandon game</a></li> 
             </span>
-        <span ng-hide="showOptions">
+            <li><a href="#!/dashboard" class="blue-text lighten-1">Dashboard</a></li>
+            <li id="signout"><a ng-click="signout()" class="btn waves-effect waves-light blue lighten-1" title="Sign Out">{{username}}<i class="fa fa-sign-out"></i></a></li>
             <li class="notice">
               <a href="/" ng-click="showInvites($event)">
               <i class="material-icons red-text notice">notifications</i>
@@ -25,31 +46,45 @@
                 <li ng-repeat="invite in invites" ><a ng-href="/" ng-click="goToGame(invite._id, $event)">Play with {{invite.senderName}}</a></li>
               </ul>
             </li>
-
-            <li><a href="/signout">Sign Out</a></li>           
           </span>
-        <span>
-            <li>
-              <a href="https://twitter.com/share" class="waves-effect waves-light btn twitter" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App"><i class="fa fa-twitter left"></i>Tweet</a>
+        </ul>
+
+        <!-- Mobile nav -->
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="/">Home</a></li>
+          <span ng-show="isLandingPage">
+            <li><a href="#how-to-play">How to Play</a></li>
+            <li><a href="#charity">Charity</a></li>
+            <li><a href="#team">Team</a></li>
+          </span>
+          <span ng-show="showOptions">
+            <li><a href="#sign-in" ng-click="showModal($event)">SignIn</a></li>
+            <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1" ng-click="showModal($event)">
+              SignUp</a></li>
+          </span>
+          <span ng-hide="showOptions">
+            <span ng-show="isAppPage">
+              <li>
+                <a href="https://twitter.com/share" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App"><i class="fa fa-twitter"></i>Tweet</a>
+              </li>
+              <li ng-click="abandonGame()"><a class="red-text darken-1">
+                Abandon game</a></li> 
+            </span>
+            <li><a href="#!/dashboard" class="blue-text lighten-1">Dashboard</a></li>
+            <li id="signout"><a ng-click="signout()" class="btn waves-effect waves-light blue lighten-1" title="Sign Out">{{username}}<i class="fa fa-sign-out"></i></a></li>
+            <li class="notice">
+              <a href="/" ng-click="showInvites($event)">
+              <i class="material-icons red-text notice">notifications</i>
+              <span>{{notificationCounter}}</span>
+              </a>
+              <ul class="liststyle">
+                <li ng-repeat="invite in invites" ><a ng-href="/" ng-click="goToGame(invite._id, $event)">Play with {{invite.senderName}}</a></li>
+              </ul>
             </li>
-            <li ng-click="abandonGame()"><a class="btn waves-effect waves-light red darken-1">
-              Abandon game</a></li> 
           </span>
-      </ul>
-
-      <!-- Mobile nav -->
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="/" class="{{hasNotification}}"><i class="material-icons">archive</i>{{notificationCounter}}</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#how-to-play">How to Play</a></li>
-        <li><a href="#charity">Charity</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#sign-in">SignIn</a></li>
-        <li><a href="#sign-up" class="btn waves-effect waves-light blue lighten-1">
-            SignUp</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse right">
-          <i class="material-icons">menu</i></a>
-    </div>
-  </nav>
-</div>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse right">
+          <i class="material-icons blue-text lighten-1">menu</i></a>
+      </div>
+    </nav>
+  </div>

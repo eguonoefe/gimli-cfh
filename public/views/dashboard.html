@@ -1,0 +1,95 @@
+</script>
+<div id="app-container" ng-controller="IndexController">
+  <ng-include src="'./views/header.html'"></ng-include>
+  <div class="main-bg">
+    <div class="main-content">
+      <div class="row pt-40 eq-height">
+        <!-- Timer -->
+        <div class="col s2">
+          <div class="row">
+
+          </div>
+          <div class="row hide-on-small-only">
+            <div class="fixed-card" id="card-bg">
+              <div class="img-holder">
+                <img src="img/cfh-2.png" alt="">
+              </div>
+              <span>
+                Help in our mission to save the world!
+              </span>
+              <span class="btn waves-effect waves-light orange darken-2 ">Donate</span>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <!-- Timer -->
+<!--DASHBOARD STARTS HERE  -->
+        <div class="col s8">
+          <div class="center-block" >
+    <div class="center-block">
+      <h3 class="center" style="color:#3e7293;">
+         Welcome  Dashboard
+      </h3>
+     <div>
+         <br>
+         <br>
+         <div class="tab">
+           <div class= "row">
+             <div class ="col-sm-10 col-sm-offset-1">
+           <ul class="nav nav-tabs" role="tablist" id="dashboard-nav">
+             <li class="col-xs-12 col-sm-4 ">
+               <a href="#game-history" data-toggle="tab">
+                 Your Game History
+               </a>
+             </li>
+              <li class="col-xs-12 col-sm-4 active">
+               <a href="#dash-leaderboard"  data-toggle="tab">
+                 Leaderboard
+               </a>
+             </li>
+
+             <li class="col-xs-12 col-sm-4">
+               <a href="#your-donations"  data-toggle="tab">
+                 Your Donations
+               </a>
+             </li>
+
+
+           </ul>
+           </div>
+           </div>
+
+
+
+           <div class="tab-content">
+             <div  role="tabpanel" class="tab-pane fade in active" id="dash-leaderboard" leaderboard>
+             </div>
+
+             <div class="tab-pane fade" id="game-history" history>
+             </div>
+
+             <div class="tab-pane fade" id="your-donations" donations>
+             </div>
+
+           </div>
+          </div>
+           </div>
+    </div>
+  </div>
+        </div>
+
+        <!-- players -->
+        <div class="col s3">
+
+          <div class="clear"></div>
+        </div>
+        <!-- players -->
+
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<ng-include src="'./views/footer.html'"></ng-include>

@@ -9,6 +9,7 @@ module.exports = function (app, passport, auth) {
     app.post('/api/auth/signin', authentication.signin);
     app.post('/api/auth/signup', authentication.signup);
 
+
     //User Routes
     var users = require('../app/controllers/users');
     app.get('/signin', users.signin);
@@ -18,6 +19,13 @@ module.exports = function (app, passport, auth) {
     app.get('/signup', users.signup);
     app.get('/chooseavatars', users.checkAvatar);
     app.get('/signout', users.signout);
+
+    // route to save game details , add jwt passport
+    app.post('/api/games/:id/start', users.saveGameDetails);
+
+    // api endpoint for game wins
+    app.get('/api/leaderboard', users.fetchLeaderBoard);
+    app.get('/api/games/history', users.fetchGameHistory);
 
     //Setting up the users api
     app.post('/users', users.create);
@@ -39,6 +47,7 @@ module.exports = function (app, passport, auth) {
 
     // Donation Routes
     app.post('/donations', users.addDonation);
+    app.get('/api/donations', users.fetchDonations);
     app.post('/friends', invite.addFriend);
     app.get('/friends', invite.getFriends);
     app.post('/notify', invite.sendNotification);

@@ -3,7 +3,8 @@
  */
 let mongoose = require('mongoose'),
   jwt = require('jsonwebtoken'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  Game = mongoose.model('Game');
 const avatars = require('./avatars').all();
 const helper = require('sendgrid').mail;
 const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
@@ -282,13 +283,13 @@ exports.sendMail = (req, res) => {
   const html = `
     <h5>Hey yo!</h5>
     <p>You have been invited to play Card For Humanity (CFH). </p>
-    <p>Card For Humanity is a game tailored towards making the world 
+    <p>Card For Humanity is a game tailored towards making the world
       a better place for all. We ensure your donation is channeled towards
       providing comfort to people of lesser priviledge around
-      the world</p><br /> 
+      the world</p><br />
     <p>Your friends are waiting! <a href="${url}">
       Get in the game now.</a></p>
-      <p>Copyright &copy; 2017 
+      <p>Copyright &copy; 2017
       <a href="https://staging-gimli.herokuapp.com">GIMLI CFH</a>
   `;
   const content = new helper.Content('text/html', html);
@@ -304,3 +305,100 @@ exports.sendMail = (req, res) => {
     return res.jsonp(response);
   });
 };
+
+// Audax edited here
+exports.updateUserGameLog = (req, res) => {
+  const userID = req.body.userID;
+  User
+    .findOne({
+      _id: userID
+    })
+    .exec((err, user) => {
+      if (user) {
+        user.gamesPlayed += 1;
+        user.totalGamePoints += req.body.points;
+        if (req.body.isWinner) {
+          user.gamesWon += 1;
+        }
+        user.save((err) => {
+          if (err) {
+            return res.jsonp(err);
+          }
+          console.log('current user', req.body);
+          return res.json({ status: 200 });
+        });
+      }
+    });
+};
+
+exports.saveGameDetails = (req, res) => {
+  // save details of users in the game
+  // AUDAX STARTS HERE
+  const tempList = [];
+  req.body.players.forEach((player) => {
+    if (tempList.indexOf(player.userID) > -1) {
+      return;
+    }
+    User
+      .findOne({
+        _id: player.userID
+      })
+      .exec((err, user) => {
+        if (user) {
+          user.gamesPlayed += 1;
+          user.totalGamePoints += player.points;
+          if (req.body.winner.userID === player.userID) {
+            user.gamesWon += 1;
+          }
+          tempList.push(player.userID);
+          user.save((err) => {
+            if (err) {
+              res.json({ status: 'fail', message: err })
+            }
+             console.log('current user', player);
+             res.json({ status: 200, message: player });
+          });
+        }
+      });
+  });
+    // AUDAX ENDS HERE
+            // create new game object
+            const newGame = new Game(req.body);
+            newGame.save()
+            .then(game =>
+              res.json({ status: 'success', game })
+            )
+            .catch(err =>
+              res.json({ status: 'fail', message: err })
+            );
+};
+
+  // Gets leadeeboard
+exports.fetchLeaderBoard = (req, res) => {
+// res.send('succes  : true')
+  User.find({})
+ .sort({ totalGamePoints: -1 })
+ .limit(30)
+ .exec((err, records) => {
+   res.send(records);
+ });
+};
+
+exports.fetchDonations = (req, res) => {
+  User.find({})
+ .sort({ donations: -1 })
+ .limit(30)
+ .exec((err, records) => {
+   res.send(records);
+ });
+};
+
+exports.fetchGameHistory = (req, res) => {
+  Game.find({})
+ .sort({ dateplayed: -1 })
+ .limit(30)
+ .exec((err, records) => {
+   res.send(records);
+ });
+};
+// Audax ends here

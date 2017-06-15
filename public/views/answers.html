@@ -3,31 +3,37 @@
 
     <span ng-show="winnerPicked()"></span>
 
-    <div ng-style="{'cursor':'pointer'}" class="col20" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
+    <div ng-style="{'cursor':'pointer'}" class="col20 p-2" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
     ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
-      <div class="cfh-card valign-wrapper p-5">
-        <span ng-bind-html-unsafe="card.text"></span>
+      <div class="cfh-card valign-wrapper p-5 center">
+        <span ng-bind-html-unsafe="card.text" class="m-center"></span>
         <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
         <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
       </div>
     </div>
 
-    <span ng-repeat="answer in game.table">
-        <div class="cfh-card valign-wrapper col20 p-5" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
+    <span ng-repeat="answer in game.table" class="col20 p-2">
+        <div class="cfh-card valign-wrapper p-5" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()"
         ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}"
         style="background-color:{{winningColor($parent.$index)}}">
-            <span ng-bind-html-unsafe="card.text"></span>
+            <span ng-bind-html-unsafe="card.text" class="m-center"></span>
             <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
             <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
         </div>
     </span>
-    <div class="clear"></div>
+
   </div>
 </div>
 
-<div class="waiting" ng-show="game.state === 'awaiting players'">
+<div class="waiting" id="questions-bg" ng-show="game.state === 'awaiting players'">
   <img src="img/p-cards.png" alt="" />
   <p>Cards will appear here when game starts</p>
+</div>
+
+<div ng-show="game.state === 'czar pick card' && !isCzar()" class="czar-waiting valign-wrapper">
+  <div><img src="/img/loading-2.gif" alt="waiting for czar to pick a card" /> <br /></div>
+  <h5>Please wait....</h5>
+  <div class="clear"></div>
 </div>
 
 <div id="game-end-container" ng-show="game.state === 'game ended' || game.state ==='game dissolved'" class="center">
@@ -51,6 +57,7 @@
         </span>
       </a>
     </div>
+    <div class="clear"></div>
   </div>
 
   <div id="charity-widget-container" class="center" style="text-align: center !important">
@@ -61,6 +68,7 @@
       <!-- <a href="http://www.crowdrise.com" id="crowdriseStaticLink-project-36715" title="Fundraising Websites on Crowdrise">Fundraising Websites - Crowdrise</a> -->
       <!-- <script type="text/javascript" src="https://apisandbox.crowdrise.com/widgets/donate/project/36715/?callback=userDonationCb"></script> -->
   </div>
+  div.clear
 </div>
 <div id="czar-blank-container" ng-show="isCzar() && game.table.length===0 && game.state !== 'game dissolved' && game.state !== 'awaiting players'" class="center">
   <div id="czar-blank-inner" style="margin-bottom: 20px;">
@@ -77,6 +85,8 @@
     <div id='charity-logo-container'>
       <img src='/img/make-a-wish-logo-white-large.png'/>
     </div>
-
+<div class="clear"></div>
   </div>
+<div class="clear"></div>
+</div>
 </div>

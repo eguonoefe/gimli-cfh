@@ -1,30 +1,34 @@
 </script>
-<div id="app-container" ng-controller="GameController">
+<div id="app-container" ng-controller="GameController" ng-init="checkCookie()">
   <ng-include src="'./views/header.html'"></ng-include>
   <div class="main-bg">
     <div class="main-content">
       <div class="row pt-40 eq-height">
         <!-- Timer -->
-        <div class="col s2">
+        <div class="col s12 m2">
           <div class="row">
             <timer></timer>
           </div>
-          <div class="row">
-            <div class="fixed-card">
+          <div class="row hide-on-small-only">
+            <div class="fixed-card" id="card-bg">
               <div class="img-holder">
                 <img src="img/cfh-2.png" alt="">
               </div>
               <span>
                 Help in our mission to save the world!
               </span>
-              <span class="btn waves-effect waves-light orange darken-2 ">Donate</span>
+              <a 
+                class="btn waves-effect waves-light orange darken-2 ">
+                Donate
+                <script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/121142/?callback=userDonationCb"></script>  
+              </a>
             </div>
           </div>
           <div class="clear"></div>
         </div>
         <!-- Timer -->
 
-        <div class="col s7">
+        <div class="col s12 m7">
           <!-- questions -->
           <div class="row question-cont">
             <question></question>
@@ -42,7 +46,7 @@
         </div>
 
         <!-- players -->
-        <div class="col s3">
+        <div class="col s12 m3">
           <player></player>
 
           <!--Chat begins-->
@@ -52,16 +56,13 @@
             </div>
             <div class="chat-body">
               <div class="chat-holder">
-                <ul>
-                  <li>Hello</li>
-                  <li>How are you</li>
-                  <li>I'm fine</li>
-                  <li>Great to know</li>
+                <ul class="messages">
                 </ul>
                 <div class="clear"></div>
               </div>
-              <div class="chat-input">
-                <input type="text" name="chats" placeholder="Type your message and hit enter" />
+              <div class="input-field chat-input">
+                <input type="text" class="inputMessage" name="chats" placeholder="Type your message and hit enter"/>
+                <p id="chat-status">{{chatStatus}}</p>
               </div>
               <div class="clear"></div>
             </div>

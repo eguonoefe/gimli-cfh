@@ -2,14 +2,18 @@ angular.module('mean.system')
   .controller('IndexController',
   ['$scope', 'Global', '$location', '$route',
     '$window', '$http', 'socket', 'game', 'AvatarService',
-    function ($scope, Global, $location, $route, $window,
-      $http, socket, game, AvatarService) {
+    ($scope, Global, $location, $route, $window,
+      $http, socket, game, AvatarService) => {
       $scope.global = Global;
 
       $scope.playAsGuest = () => {
         game.joinGame();
         $location.path('/app');
       };
+
+      $('#dashboard-nav a').on('click', (event) => {
+        event.preventDefault();
+      });
 
       $scope.signin = () => {
         if (!$scope.email || !$scope.password) {

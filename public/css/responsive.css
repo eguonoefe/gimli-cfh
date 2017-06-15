@@ -1,0 +1,103 @@
+/* media queries for CFH app */
+@media only screen and (max-width: 600px){
+  nav .brand-logo{
+    left: 28%;
+  }
+  #index-banner .section {
+    top: 0;
+  }
+  #footer div.col:nth-child(2){
+    text-align: right;
+  }
+  #index-banner h1{
+    margin-top: 5rem;
+  }
+  #players{
+    height: 40vh;
+  }
+  #start-game-container{
+    margin-top: 20px;
+  }
+  #start-game-container .btn{
+    white-space: normal;
+    height: auto;
+    line-height: 18px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+  .no-data{
+    height: 350px !important;
+  }
+}
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  #index-banner{
+    height: 92.5vh;
+  }
+  #index-banner .section {
+    top: 10%;
+  }
+}
+@media only screen and (min-width: 601px){
+  #footer div.col:nth-child(2){
+    text-align: center;
+  }
+  #index-banner h1{
+    margin-top: 10rem;
+  }
+
+}
+
+@media only screen and (min-width: 601px) and (max-width: 991px) {
+  nav .brand-logo{
+    left: 25%;
+  }
+  #sign-in .modal-content li a.btn, 
+  #sign-up .modal-content li a.btn{
+    width: 82px;
+  }
+  #timer-header .icon{
+    padding-left: 0px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+  .players-count{
+    padding-top: 10px;
+  }
+  .players-count h5{
+    font-size: 16px;
+    line-height: 25px;
+  }
+  /*.player-cont img{
+    height: 40px;
+    width: 40px;
+  }
+
+  .player-cont #player-info span:nth-child(1){
+    font-size: 13px;
+    margin-top: 5px;
+  }*/
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px){
+  nav .brand-logo{
+    left: 8%;
+  }
+  #sign-in .modal-content li a.btn, 
+  #sign-up .modal-content li a.btn{
+    width: 102px;
+  }
+}
+
+@media only screen and (min-width: 1200px){ 
+  #index-banner{
+    height: 92vh;
+  }
+  #sign-in .modal-content li a.btn, 
+  #sign-up .modal-content li a.btn{
+    width: 122px;
+  }
+}
