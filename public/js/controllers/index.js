@@ -100,7 +100,9 @@ angular.module('mean.system')
       };
 
       $scope.init = () => {
-        fetchInviteFromServer();
+        $http.get('/invites', { params: { userId: window.user._id } }).success((res) => {
+          $scope.notificationCounter = res.length === 0 ? null : res.length;
+        });
       };
 
       $scope.avatars = [];
