@@ -100,8 +100,8 @@ angular.module('mean.system')
       };
 
       $scope.init = () => {
-        $http.get('/invites', { params: { userId: window.user._id } }).success((res) => {
-          $scope.notificationCounter = res.length === 0 ? null : res.length;
+        $http.get('/invites', { params: { userId: window.user._id } }).success((response) => {
+          $scope.notificationCounter = response.length === 0 ? null : response.length;
         });
       };
 
