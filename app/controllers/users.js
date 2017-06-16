@@ -385,11 +385,17 @@ exports.fetchLeaderBoard = (req, res) => {
 };
 
 exports.fetchDonations = (req, res) => {
+  let pocket = [];
   User.find({})
  .sort({ donations: -1 })
  .limit(30)
  .exec((err, records) => {
-   res.send(records);
+   records.forEach((record) => {
+     if (record.donations.length > 0) {
+       pocket.push(record);
+     }
+   });
+   res.send(pocket);
  });
 };
 

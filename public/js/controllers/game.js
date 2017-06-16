@@ -220,7 +220,7 @@ $location, MakeAWishFactsService, $dialog, $http, $q) => {
    */
     $scope.searchUser = () => {
       const searchString = $scope.searchString || ' ';
-      $http.get(`http://localhost:3000/api/search/users/${searchString}/`)
+      $http.get(`/api/search/users/${searchString}/`)
       .success((response) => {
         $scope.users = response;
       });
