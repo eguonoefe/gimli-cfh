@@ -347,11 +347,19 @@ footer h5{
 .notice{
   cursor:pointer;
 }
+
+.notification{
+  color:white;
+  position: absolute;
+  margin-top: -75px;
+  margin-left:17px;
+}
+
 .liststyle li {
   background-color: rgba(0, 0, 0, 0.5);
   display: inline;
 }
-#modal1, #modal2, .modal-4, .modal-5, .modal-6, #kickout-modal {
+#modal1, #modal2, #modal3, .modal-4, .modal-5, .modal-6, #kickout-modal {
   color: black;
   background-color: transparent;
   border: none;

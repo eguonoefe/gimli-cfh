@@ -80,12 +80,15 @@ angular.module('mean.system')
           });
         }
       };
-
+      const fetchInviteFromServer = () => {
+        $http.get('/invites', { params: { userId: window.user._id } }).success((response) => {
+          $scope.invites = response;
+          $scope.notificationCounter = $scope.invites.length === 0 ? null : $scope.invites.length;
+        });
+      };
       $scope.showInvites = (event) => {
         event.preventDefault();
-        // $http.get('/invites', { params: { userId: window.user._id } }).success((response) => {
-        //   $scope.invites = response;
-        // });
+        fetchInviteFromServer();
       };
 
       $scope.goToGame = (noticeId, event) => {
@@ -97,10 +100,7 @@ angular.module('mean.system')
       };
 
       $scope.init = () => {
-        $http.get('/invites', { params: { userId: window.user._id } }).success((response) => {
-          $scope.invites = response;
-          $scope.notificationCounter = $scope.invites.length === 0 ? null : $scope.invites.length;
-        });
+        fetchInviteFromServer();
       };
 
       $scope.avatars = [];
