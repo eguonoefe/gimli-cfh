@@ -341,7 +341,11 @@ footer h5{
    clear: both;
  }
 
-#modal1, #modal2, .modal-4, .modal-5, .modal-6, #kickout-modal {
+select {
+  display: block;
+}
+
+#modal1, #modal2, .modal-4, .modal-5, .modal-6, #kickout-modal, #region-modal {
   color: black;
   background-color: transparent;
   border: none;
@@ -354,6 +358,10 @@ footer h5{
 #modal-body {
   height: 350px !important;
   overflow: scroll;
+}
+
+#modal-body2 {
+  height: 200px !important;
 }
 
 
@@ -679,6 +687,10 @@ footer h5{
 
 #kickout-modal p {
   font-size: 18px;
+}
+
+#region-modal {
+  color: black;
 }
 
 .m-center {
